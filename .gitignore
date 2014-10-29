@@ -1,0 +1,30 @@
+# Apple bugs: 15564624 - what does the xccheckout file in Xcode5 do? Where's the documentation?
+
+.idea/
+
+.DS_Store
+.Trashes
+*.swp
+*.lock
+
+*~.nib
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcuserdata
+*.moved-aside
+
+DerivedData/
+build/
+Pods/
+<<<<<<< HEAD
+GUGameUpSDK/Pods
+GUGameUpSDKDemo/Pods
+=======
+gameupsdk/Pods/
+>>>>>>> 7d72f3d... Initial structure for the GameUp iOS SDK Static Cocoa Touch Library with a Resource Bundle, using Cocoapods for Dependency Management - Merged #1
