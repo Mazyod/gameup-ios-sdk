@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "30C5A5E3BF5F4B86AA59A369"
+               BlueprintIdentifier = "4DAD95A71549BD8154737228"
                BuildableName = "libPods-GUGameUpSDK.a"
                BlueprintName = "Pods-GUGameUpSDK"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

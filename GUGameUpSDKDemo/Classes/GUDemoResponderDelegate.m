@@ -49,8 +49,6 @@
 - (void)retrievedGameData:(GUGame*)game
 {
     [_viewController setResultText:@"Retrieved details: \n"];
-
-    [self printDictionary:[game toDictionary]];
     
     NSLog(@"Game Name: %@",[game name]);
     NSLog(@"Game Description: %@",[game description]);
@@ -70,8 +68,6 @@
 - (void)retrievedGamerProfile:(GUGamer*)gamer
 {
     [_viewController setResultText:@"Retrieved gamer profile: \n"];
-    
-    [self printDictionary:[gamer toDictionary]];
     
     NSLog(@"\n\nGamer Nick Name: %@",[gamer nickname]);
     NSLog(@"Gamer Given Name: %@",[gamer givenName]);

@@ -36,8 +36,8 @@ typedef NS_ENUM(NSInteger, GURequest)
     LOGIN
 };
 
-static NSString *const GAMEUP_VERSION=@"0.2.0";
-static NSString *const AFN_VERSION=@"AFN1.3.4";
+static NSString *const GAMEUP_VERSION=@"0.3.0";
+static NSString *const AFN_VERSION=@"AFN2.5.0";
 
 static NSString *const USER_AGENT_NAME=@"gameup-ios-sdk";
 static NSString *const GAMEUP_LOGIN_URL = @"https://login.gameup.io";
@@ -49,12 +49,14 @@ static NSString *USER_AGENT;
 {
     id<GUResponderProtocol> responseDelegate;
     NSDictionary *requestUrls;
+    AFHTTPRequestOperationManager *networkManager;
 }
 
 - (id) initWithResponder:(id<GUResponderProtocol>)responder
 {
     self = [super init];
     if (self) {
+        networkManager = [AFHTTPRequestOperationManager manager];
         USER_AGENT = [[NSString alloc] initWithString:[self setupUserAgent]];
         
         responseDelegate = responder;
@@ -206,10 +208,11 @@ static NSString *USER_AGENT;
 {
     NSMutableString *loginUrlPath = [[NSMutableString alloc] initWithString:GAMEUP_LOGIN_URL];
     [loginUrlPath appendString:[requestUrls objectForKey:@(LOGIN)]];
-    GULoginViewController *controller = [[GULoginViewController alloc]initWithResponder:responseDelegate
-                                                                     withLoginServerUrl:loginUrlPath
-                                                                             withApiKey:apiKey
-                                                                          withUserAgent:USER_AGENT];
+    
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"GULoginStoryboard" bundle: nil];
+    
+    GULoginViewController *controller = (GULoginViewController *)[loginStoryboard instantiateViewControllerWithIdentifier:@"GULoginViewController"];
+    [controller initWithResponder:responseDelegate withLoginServerUrl:loginUrlPath withApiKey:apiKey withUserAgent:USER_AGENT];
     return controller;
 }
 
@@ -246,13 +249,15 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
         [request setHTTPBody:[self serialiseDictionaryToData:entity]];
     }
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    op.responseSerializer = [AFJSONResponseSerializer serializer];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
         [self listenerCallback:endpoint withStatusCode:200 withAppendedUrlPath:appendedUrlPath withRequestEntity:entity withResponseEntity:JSON];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response,  NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSHTTPURLResponse *response = [operation response];
         [self listenerCallback:endpoint withStatusCode:[response statusCode] withAppendedUrlPath:appendedUrlPath withRequestEntity:entity withResponseEntity:error];
     }];
-    [operation start];
-
+    [networkManager.operationQueue addOperation:op];
 }
 
 - (void)listenerCallback:(enum GURequest)requestKey

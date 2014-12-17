@@ -1,897 +1,389 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>28A644842E1123A7144B66BA</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>2B3528C38630ADB888B447E7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>93AB2EB3A0364DE4A27BBA0F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>331A0787077BBEE13A3525DB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5A291B3BE6ECF22612493D00</string>
-				<string>4ED0E3979879255ACD5142C6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4ED0E3979879255ACD5142C6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5A291B3BE6ECF22612493D00</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods/Pods.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>75B6805776E356DBE7E1D525</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>93AB2EB3A0364DE4A27BBA0F</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>CD0C0AEF1986547D0043A665</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>GUDataHolder.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CD0C0AF01986547D0043A665</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>GUDataHolder.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CD0C0AF11986547D0043A665</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CD0C0AF01986547D0043A665</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CD77CF8E197F20D4006ACC0D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>GUDemoResponderDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CD77CF8F197F20D4006ACC0D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>GUDemoResponderDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CD77CF90197F20D4006ACC0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CD77CF8F197F20D4006ACC0D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDC0F6C4196FDA4B00670565</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CDC0F6D6196FDA4B00670565</string>
-				<string>CDC0F6CF196FDA4B00670565</string>
-				<string>CDC0F6CE196FDA4B00670565</string>
-				<string>331A0787077BBEE13A3525DB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6C5196FDA4B00670565</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>CLASSPREFIX</key>
-				<string>GU</string>
-				<key>LastUpgradeCheck</key>
-				<string>0510</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>GameUp</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>CDC0F6C8196FDA4B00670565</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>CDC0F6C4196FDA4B00670565</string>
-			<key>productRefGroup</key>
-			<string>CDC0F6CE196FDA4B00670565</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>CDC0F6CC196FDA4B00670565</string>
-			</array>
-		</dict>
-		<key>CDC0F6C8196FDA4B00670565</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>CDC0F6F7196FDA4B00670565</string>
-				<string>CDC0F6F8196FDA4B00670565</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>CDC0F6C9196FDA4B00670565</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CDF995E119857D3100A0CF24</string>
-				<string>CDF995E519857D6400A0CF24</string>
-				<string>CD0C0AF11986547D0043A665</string>
-				<string>CD77CF90197F20D4006ACC0D</string>
-				<string>CDC0F6DD196FDA4B00670565</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CDC0F6CA196FDA4B00670565</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CDC0F6D3196FDA4B00670565</string>
-				<string>CDC0F6D5196FDA4B00670565</string>
-				<string>CDC0F6D1196FDA4B00670565</string>
-				<string>2B3528C38630ADB888B447E7</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CDC0F6CB196FDA4B00670565</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CDC0F6DB196FDA4B00670565</string>
-				<string>CDC0F6E3196FDA4B00670565</string>
-				<string>CDF995E219857D3100A0CF24</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CDC0F6CC196FDA4B00670565</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>CDC0F6F9196FDA4B00670565</string>
-			<key>buildPhases</key>
-			<array>
-				<string>75B6805776E356DBE7E1D525</string>
-				<string>CDC0F6C9196FDA4B00670565</string>
-				<string>CDC0F6CA196FDA4B00670565</string>
-				<string>CDC0F6CB196FDA4B00670565</string>
-				<string>28A644842E1123A7144B66BA</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>GUGameUpSDKDemo</string>
-			<key>productName</key>
-			<string>GUGameUpSDKDemo</string>
-			<key>productReference</key>
-			<string>CDC0F6CD196FDA4B00670565</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>CDC0F6CD196FDA4B00670565</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>GUGameUpSDKDemo.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>CDC0F6CE196FDA4B00670565</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CDC0F6CD196FDA4B00670565</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6CF196FDA4B00670565</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CDC0F6D0196FDA4B00670565</string>
-				<string>CDC0F6D2196FDA4B00670565</string>
-				<string>CDC0F6D4196FDA4B00670565</string>
-				<string>CDC0F6E9196FDA4B00670565</string>
-				<string>93AB2EB3A0364DE4A27BBA0F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6D0196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>CDC0F6D1196FDA4B00670565</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDC0F6D0196FDA4B00670565</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDC0F6D2196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>CDC0F6D3196FDA4B00670565</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDC0F6D2196FDA4B00670565</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDC0F6D4196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>CDC0F6D5196FDA4B00670565</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDC0F6D4196FDA4B00670565</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDC0F6D6196FDA4B00670565</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CD0C0AEF1986547D0043A665</string>
-				<string>CD0C0AF01986547D0043A665</string>
-				<string>CDF995E319857D6400A0CF24</string>
-				<string>CDF995E419857D6400A0CF24</string>
-				<string>CD77CF8E197F20D4006ACC0D</string>
-				<string>CD77CF8F197F20D4006ACC0D</string>
-				<string>CDF995DE19857D3100A0CF24</string>
-				<string>CDF995DF19857D3100A0CF24</string>
-				<string>CDF995E019857D3100A0CF24</string>
-				<string>CDC0F6E2196FDA4B00670565</string>
-				<string>CDC0F6D7196FDA4B00670565</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Classes</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6D7196FDA4B00670565</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CDC0F6D8196FDA4B00670565</string>
-				<string>CDC0F6D9196FDA4B00670565</string>
-				<string>CDC0F6DC196FDA4B00670565</string>
-				<string>CDC0F6DE196FDA4B00670565</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6D8196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>GUGameUpSDKDemo-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6D9196FDA4B00670565</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CDC0F6DA196FDA4B00670565</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6DA196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6DB196FDA4B00670565</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDC0F6D9196FDA4B00670565</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDC0F6DC196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6DD196FDA4B00670565</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDC0F6DC196FDA4B00670565</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDC0F6DE196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>GUGameUpSDKDemo-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6E2196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDC0F6E3196FDA4B00670565</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDC0F6E2196FDA4B00670565</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDC0F6E9196FDA4B00670565</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>XCTest.framework</string>
-			<key>path</key>
-			<string>Library/Frameworks/XCTest.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>CDC0F6F7196FDA4B00670565</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>CDC0F6F8196FDA4B00670565</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.0</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>CDC0F6F9196FDA4B00670565</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>CDC0F6FA196FDA4B00670565</string>
-				<string>CDC0F6FB196FDA4B00670565</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>CDC0F6FA196FDA4B00670565</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>5A291B3BE6ECF22612493D00</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string></string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Classes/GUGameUpSDKDemo-Prefix.pch</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(BUILT_PRODUCTS_DIR)</string>
-					<string>"${PODS_ROOT}/Headers"</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>Classes/GUGameUpSDKDemo-Info.plist</string>
-				<key>LIBRARY_SEARCH_PATHS</key>
-				<string>$(inherited)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>CDC0F6FB196FDA4B00670565</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>4ED0E3979879255ACD5142C6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string></string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Classes/GUGameUpSDKDemo-Prefix.pch</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(BUILT_PRODUCTS_DIR)</string>
-					<string>"${PODS_ROOT}/Headers"</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>Classes/GUGameUpSDKDemo-Info.plist</string>
-				<key>LIBRARY_SEARCH_PATHS</key>
-				<string>$(inherited)</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>CDF995DE19857D3100A0CF24</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>GUViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDF995DF19857D3100A0CF24</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>GUViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDF995E019857D3100A0CF24</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.xib</string>
-			<key>path</key>
-			<string>GUViewController.xib</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDF995E119857D3100A0CF24</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDF995DF19857D3100A0CF24</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDF995E219857D3100A0CF24</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDF995E019857D3100A0CF24</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CDF995E319857D6400A0CF24</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>GUAppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDF995E419857D6400A0CF24</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>GUAppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDF995E519857D6400A0CF24</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDF995E419857D6400A0CF24</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>CDC0F6C5196FDA4B00670565</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B3528C38630ADB888B447E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AB2EB3A0364DE4A27BBA0F /* libPods.a */; };
+		8A2815CE1A41E4050032D3E2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A2815CD1A41E4050032D3E2 /* MainStoryboard.storyboard */; };
+		CD0C0AF11986547D0043A665 /* GUDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0C0AF01986547D0043A665 /* GUDataHolder.m */; };
+		CD77CF90197F20D4006ACC0D /* GUDemoResponderDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD77CF8F197F20D4006ACC0D /* GUDemoResponderDelegate.m */; };
+		CDC0F6D1196FDA4B00670565 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC0F6D0196FDA4B00670565 /* Foundation.framework */; };
+		CDC0F6D3196FDA4B00670565 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC0F6D2196FDA4B00670565 /* CoreGraphics.framework */; };
+		CDC0F6D5196FDA4B00670565 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC0F6D4196FDA4B00670565 /* UIKit.framework */; };
+		CDC0F6DB196FDA4B00670565 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDC0F6D9196FDA4B00670565 /* InfoPlist.strings */; };
+		CDC0F6DD196FDA4B00670565 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC0F6DC196FDA4B00670565 /* main.m */; };
+		CDC0F6E3196FDA4B00670565 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDC0F6E2196FDA4B00670565 /* Images.xcassets */; };
+		CDF995E119857D3100A0CF24 /* GUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF995DF19857D3100A0CF24 /* GUViewController.m */; };
+		CDF995E519857D6400A0CF24 /* GUAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF995E419857D6400A0CF24 /* GUAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4ED0E3979879255ACD5142C6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5A291B3BE6ECF22612493D00 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8A2815CD1A41E4050032D3E2 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		93AB2EB3A0364DE4A27BBA0F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD0C0AEF1986547D0043A665 /* GUDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUDataHolder.h; sourceTree = "<group>"; };
+		CD0C0AF01986547D0043A665 /* GUDataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUDataHolder.m; sourceTree = "<group>"; };
+		CD77CF8E197F20D4006ACC0D /* GUDemoResponderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUDemoResponderDelegate.h; sourceTree = "<group>"; };
+		CD77CF8F197F20D4006ACC0D /* GUDemoResponderDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUDemoResponderDelegate.m; sourceTree = "<group>"; };
+		CDC0F6CD196FDA4B00670565 /* GUGameUpSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GUGameUpSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDC0F6D0196FDA4B00670565 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CDC0F6D2196FDA4B00670565 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CDC0F6D4196FDA4B00670565 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CDC0F6D8196FDA4B00670565 /* GUGameUpSDKDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GUGameUpSDKDemo-Info.plist"; sourceTree = "<group>"; };
+		CDC0F6DA196FDA4B00670565 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDC0F6DC196FDA4B00670565 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CDC0F6DE196FDA4B00670565 /* GUGameUpSDKDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GUGameUpSDKDemo-Prefix.pch"; sourceTree = "<group>"; };
+		CDC0F6E2196FDA4B00670565 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CDC0F6E9196FDA4B00670565 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CDF995DE19857D3100A0CF24 /* GUViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUViewController.h; sourceTree = "<group>"; };
+		CDF995DF19857D3100A0CF24 /* GUViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUViewController.m; sourceTree = "<group>"; };
+		CDF995E319857D6400A0CF24 /* GUAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUAppDelegate.h; sourceTree = "<group>"; };
+		CDF995E419857D6400A0CF24 /* GUAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CDC0F6CA196FDA4B00670565 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDC0F6D3196FDA4B00670565 /* CoreGraphics.framework in Frameworks */,
+				CDC0F6D5196FDA4B00670565 /* UIKit.framework in Frameworks */,
+				CDC0F6D1196FDA4B00670565 /* Foundation.framework in Frameworks */,
+				2B3528C38630ADB888B447E7 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		331A0787077BBEE13A3525DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5A291B3BE6ECF22612493D00 /* Pods.debug.xcconfig */,
+				4ED0E3979879255ACD5142C6 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CDC0F6C4196FDA4B00670565 = {
+			isa = PBXGroup;
+			children = (
+				CDC0F6D6196FDA4B00670565 /* Classes */,
+				CDC0F6CF196FDA4B00670565 /* Frameworks */,
+				CDC0F6CE196FDA4B00670565 /* Products */,
+				331A0787077BBEE13A3525DB /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		CDC0F6CE196FDA4B00670565 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDC0F6CD196FDA4B00670565 /* GUGameUpSDKDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CDC0F6CF196FDA4B00670565 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDC0F6D0196FDA4B00670565 /* Foundation.framework */,
+				CDC0F6D2196FDA4B00670565 /* CoreGraphics.framework */,
+				CDC0F6D4196FDA4B00670565 /* UIKit.framework */,
+				CDC0F6E9196FDA4B00670565 /* XCTest.framework */,
+				93AB2EB3A0364DE4A27BBA0F /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDC0F6D6196FDA4B00670565 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CD0C0AEF1986547D0043A665 /* GUDataHolder.h */,
+				CD0C0AF01986547D0043A665 /* GUDataHolder.m */,
+				CDF995E319857D6400A0CF24 /* GUAppDelegate.h */,
+				CDF995E419857D6400A0CF24 /* GUAppDelegate.m */,
+				CD77CF8E197F20D4006ACC0D /* GUDemoResponderDelegate.h */,
+				CD77CF8F197F20D4006ACC0D /* GUDemoResponderDelegate.m */,
+				CDF995DE19857D3100A0CF24 /* GUViewController.h */,
+				CDF995DF19857D3100A0CF24 /* GUViewController.m */,
+				8A2815CD1A41E4050032D3E2 /* MainStoryboard.storyboard */,
+				CDC0F6E2196FDA4B00670565 /* Images.xcassets */,
+				CDC0F6D7196FDA4B00670565 /* Supporting Files */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CDC0F6D7196FDA4B00670565 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDC0F6D8196FDA4B00670565 /* GUGameUpSDKDemo-Info.plist */,
+				CDC0F6D9196FDA4B00670565 /* InfoPlist.strings */,
+				CDC0F6DC196FDA4B00670565 /* main.m */,
+				CDC0F6DE196FDA4B00670565 /* GUGameUpSDKDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CDC0F6CC196FDA4B00670565 /* GUGameUpSDKDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDC0F6F9196FDA4B00670565 /* Build configuration list for PBXNativeTarget "GUGameUpSDKDemo" */;
+			buildPhases = (
+				75B6805776E356DBE7E1D525 /* Check Pods Manifest.lock */,
+				CDC0F6C9196FDA4B00670565 /* Sources */,
+				CDC0F6CA196FDA4B00670565 /* Frameworks */,
+				CDC0F6CB196FDA4B00670565 /* Resources */,
+				28A644842E1123A7144B66BA /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GUGameUpSDKDemo;
+			productName = GUGameUpSDKDemo;
+			productReference = CDC0F6CD196FDA4B00670565 /* GUGameUpSDKDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CDC0F6C5196FDA4B00670565 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GU;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = GameUp;
+			};
+			buildConfigurationList = CDC0F6C8196FDA4B00670565 /* Build configuration list for PBXProject "GUGameUpSDKDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CDC0F6C4196FDA4B00670565;
+			productRefGroup = CDC0F6CE196FDA4B00670565 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDC0F6CC196FDA4B00670565 /* GUGameUpSDKDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CDC0F6CB196FDA4B00670565 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDC0F6DB196FDA4B00670565 /* InfoPlist.strings in Resources */,
+				CDC0F6E3196FDA4B00670565 /* Images.xcassets in Resources */,
+				8A2815CE1A41E4050032D3E2 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		28A644842E1123A7144B66BA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+		};
+		75B6805776E356DBE7E1D525 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CDC0F6C9196FDA4B00670565 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDF995E119857D3100A0CF24 /* GUViewController.m in Sources */,
+				CDF995E519857D6400A0CF24 /* GUAppDelegate.m in Sources */,
+				CD0C0AF11986547D0043A665 /* GUDataHolder.m in Sources */,
+				CD77CF90197F20D4006ACC0D /* GUDemoResponderDelegate.m in Sources */,
+				CDC0F6DD196FDA4B00670565 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CDC0F6D9196FDA4B00670565 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDC0F6DA196FDA4B00670565 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CDC0F6F7196FDA4B00670565 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CDC0F6F8196FDA4B00670565 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CDC0F6FA196FDA4B00670565 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A291B3BE6ECF22612493D00 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Classes/GUGameUpSDKDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)",
+					"\"${PODS_ROOT}/Headers\"",
+				);
+				INFOPLIST_FILE = "Classes/GUGameUpSDKDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CDC0F6FB196FDA4B00670565 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4ED0E3979879255ACD5142C6 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Classes/GUGameUpSDKDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)",
+					"\"${PODS_ROOT}/Headers\"",
+				);
+				INFOPLIST_FILE = "Classes/GUGameUpSDKDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CDC0F6C8196FDA4B00670565 /* Build configuration list for PBXProject "GUGameUpSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDC0F6F7196FDA4B00670565 /* Debug */,
+				CDC0F6F8196FDA4B00670565 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDC0F6F9196FDA4B00670565 /* Build configuration list for PBXNativeTarget "GUGameUpSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDC0F6FA196FDA4B00670565 /* Debug */,
+				CDC0F6FB196FDA4B00670565 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CDC0F6C5196FDA4B00670565 /* Project object */;
+}

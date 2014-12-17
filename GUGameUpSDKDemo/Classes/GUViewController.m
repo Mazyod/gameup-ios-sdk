@@ -17,9 +17,6 @@
 #import "GUViewController.h"
 #import "GUAchievementUpdate.h"
 
-@interface GUViewController ()
-@end
-
 @implementation GUViewController
 {
     UIViewController *loginController;
@@ -27,31 +24,27 @@
     NSInteger currentlySelectedRowInPicker;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)awakeFromNib
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.picker.dataSource = self;
-        self.picker.delegate = self;
-        currentlySelectedRowInPicker = 0;
-
-        pickerData = [NSArray arrayWithObjects:
-            @"Ping",
-            @"Server Info",
-            @"Game Info",
-            @"Game Achievements",
-            @"Login",
-            @"Gamer Info",
-            @"PUT Storage",
-            @"GET Storage",
-            @"DEL Storage",
-            @"Gamer Achievements",
-            @"Update Achievements",
-            nil
-        ];
-    }
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+    currentlySelectedRowInPicker = 0;
     
-    return self;
+    pickerData = [NSArray arrayWithObjects:
+                  @"Ping",
+                  @"Server Info",
+                  @"Game Info",
+                  @"Game Achievements",
+                  @"Login",
+                  @"Gamer Info",
+                  @"PUT Storage",
+                  @"GET Storage",
+                  @"DEL Storage",
+                  @"Gamer Achievements",
+                  @"Update Achievements",
+                  nil
+                  ];
+
 }
 
 - (IBAction)onGoButtonClick:(id)sender
@@ -156,6 +149,11 @@
 {
     [super viewDidLoad];
     [[self apiKeyTextField] setText:[_dataHolder apiKey]];
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning

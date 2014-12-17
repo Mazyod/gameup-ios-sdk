@@ -23,7 +23,7 @@
 @interface GUViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property(setter = setGameUpController:) GUGameUp *gameup;
-    @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) IBOutlet UITextField *apiKeyTextField;
 @property (strong, nonatomic) IBOutlet UITextView *resultTextView;
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;

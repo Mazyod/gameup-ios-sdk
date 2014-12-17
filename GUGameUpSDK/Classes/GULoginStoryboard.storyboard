@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--GULoginViewController-->
+        <scene sceneID="q4q-oW-snN">
+            <objects>
+                <viewController storyboardIdentifier="GULoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jFc-pa-GVN" userLabel="GULoginViewController" customClass="GULoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rMx-Mc-aTA"/>
+                        <viewControllerLayoutGuide type="bottom" id="qbV-Va-qNB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E90-jD-Ef6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EmY-dw-3jJ" userLabel="GULoginViewNavBar">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Social Login" id="eGt-8N-wCO" userLabel="GULoginViewNavBarTitle">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="WJp-Kq-fX3" userLabel="GULoginViewNavBarCancelButton"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleAspectFit" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xY-AJ-8Qr" userLabel="GULoginWebView">
+                                <rect key="frame" x="0.0" y="44" width="600" height="536"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EmY-dw-3jJ" firstAttribute="leading" secondItem="E90-jD-Ef6" secondAttribute="leading" id="7Gw-7X-YLo"/>
+                            <constraint firstItem="EmY-dw-3jJ" firstAttribute="leading" secondItem="7xY-AJ-8Qr" secondAttribute="leading" id="9TO-TN-8zO"/>
+                            <constraint firstItem="EmY-dw-3jJ" firstAttribute="bottom" secondItem="7xY-AJ-8Qr" secondAttribute="top" id="Gzu-hC-dWk"/>
+                            <constraint firstItem="qbV-Va-qNB" firstAttribute="top" secondItem="7xY-AJ-8Qr" secondAttribute="bottom" id="Mh5-xG-MtZ"/>
+                            <constraint firstAttribute="centerX" secondItem="EmY-dw-3jJ" secondAttribute="centerX" id="SIW-9Z-EEe"/>
+                            <constraint firstItem="EmY-dw-3jJ" firstAttribute="trailing" secondItem="7xY-AJ-8Qr" secondAttribute="trailing" id="dTi-7j-vk7"/>
+                            <constraint firstItem="EmY-dw-3jJ" firstAttribute="top" secondItem="rMx-Mc-aTA" secondAttribute="bottom" id="tKw-r7-4PS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginRootView" destination="E90-jD-Ef6" id="wn3-KP-8Y0"/>
+                        <outlet property="loginViewNavBar" destination="EmY-dw-3jJ" id="CQV-Jk-sgT"/>
+                        <outlet property="loginViewNavBarCancelButton" destination="WJp-Kq-fX3" id="Lu0-Fp-FpZ"/>
+                        <outlet property="loginViewNavBarTitle" destination="eGt-8N-wCO" id="Hal-wz-jwx"/>
+                        <outlet property="loginWebView" destination="7xY-AJ-8Qr" id="GEj-9I-2yd"/>
+                        <outlet property="view" destination="E90-jD-Ef6" id="cSd-XT-EuA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MX5-0p-JQd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="173" y="373"/>
+        </scene>
+    </scenes>
+</document>

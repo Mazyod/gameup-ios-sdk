@@ -31,6 +31,6 @@
     __weak IBOutlet UIWebView *loginWebView;
 }
 
-- (id)initWithResponder:(id<GUResponderProtocol>)guResponder withLoginServerUrl:(NSString*)guUrlPath withApiKey:(NSString*)guApiKey withUserAgent:(NSString*)guUserAgent;
+- (void)initWithResponder:(id<GUResponderProtocol>)guResponder withLoginServerUrl:(NSString*)guUrlPath withApiKey:(NSString*)guApiKey withUserAgent:(NSString*)guUserAgent;
 
 @end

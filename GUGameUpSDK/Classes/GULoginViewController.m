@@ -26,16 +26,12 @@ static NSString *const SUCCESS_SUB_URL = @"success";
     NSString* userAgent;
 }
 
-- (id)initWithResponder:(id<GUResponderProtocol>)guResponder withLoginServerUrl:(NSString*)guUrlPath withApiKey:(NSString*)guApiKey withUserAgent:(NSString*)guUserAgent
-{   
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
-        responder = guResponder;
-        urlPath = guUrlPath;
-        apiKey = guApiKey;
-        userAgent = guUserAgent;
-    }
-    return self;
+- (void)initWithResponder:(id<GUResponderProtocol>)guResponder withLoginServerUrl:(NSString*)guUrlPath withApiKey:(NSString*)guApiKey withUserAgent:(NSString*)guUserAgent
+{
+    responder = guResponder;
+    urlPath = guUrlPath;
+    apiKey = guApiKey;
+    userAgent = guUserAgent;
 }
 
 - (void)viewDidLoad
@@ -89,6 +85,9 @@ static NSString *const SUCCESS_SUB_URL = @"success";
 {
     
     [responder failedToLoginWithError:error];
+}
+- (BOOL)shouldAutorotate {
+    return YES;
 }
 
 

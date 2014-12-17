@@ -23,8 +23,11 @@
 @implementation GUAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.viewController = [[GUViewController alloc] initWithNibName:@"GUViewController" bundle:nil];
+    // if you do this, the window won't rotate anymore...
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    self.viewController = [storyboard instantiateViewControllerWithIdentifier:@"GUViewController"];
     self.window.rootViewController = self.viewController;
 
     GUDataHolder *dataHolder = [[GUDataHolder alloc] init];
