@@ -17,7 +17,11 @@
 #import <AFNetworking/AFNetworking.h>
 #import <Base64.h>
 #import "GUGameUp.h"
+#import "GUAchievement.h"
 #import "GUAchievementUpdate.h"
+#import "GULeaderboard.h"
+#import "GULeaderboardRank.h"
+#import "GULeaderboardUpdate.h"
 #import "GUJSONSerialisableProtocol.h"
 #import "GUResponderProtocol.h"
 #import "GURequestRetryHandlerProtocol.h"
@@ -35,10 +39,13 @@ typedef NS_ENUM(NSInteger, GURequest)
     ACHIEVEMENTS_GAME,
     ACHIEVEMENTS_GAMER,
     ACHIEVEMENT_POST,
+    LEADERBOARD_GAME,
+    LEADERBOARD_GAMER,
+    LEADERBOARD_POST,
     LOGIN
 };
 
-static NSString *const GAMEUP_VERSION=@"0.3.0";
+static NSString *const GAMEUP_VERSION=@"0.4.0";
 static NSString *const AFN_VERSION=@"AFN2.5.0";
 
 static NSString *const USER_AGENT_NAME=@"gameup-ios-sdk";
@@ -80,6 +87,9 @@ static NSInteger REQUEST_TIMEOUT=30; //seconds
             @(ACHIEVEMENTS_GAME) : @"/v0/game/achievement/",
             @(ACHIEVEMENTS_GAMER) : @"/v0/game/achievement/",
             @(ACHIEVEMENT_POST) : @"/v0/gamer/achievement/",
+            @(LEADERBOARD_GAME) : @"/v0/game/leaderboard/",
+            @(LEADERBOARD_GAMER) : @"/v0/gamer/leaderboard/",
+            @(LEADERBOARD_POST) : @"/v0/gamer/leaderboard/",
             @(LOGIN) : @"/v0/gamer/login/"
         };
         
@@ -223,6 +233,34 @@ static NSInteger REQUEST_TIMEOUT=30; //seconds
            withEntity:[achievementUpdate toDictionary]];
 }
 
+-(void)requestToGetLeaderboardData:(id)apiKey withLeaderboardId:(id)leaderboardId
+{
+    [self sendRequest:LEADERBOARD_GAME
+  withAppendedUrlPath:leaderboardId
+           withMethod:@"GET"
+           withApiKey:apiKey
+            withToken:@""
+           withEntity:@""];
+}
+-(void)requestToGetLeaderboardDataAndRank:(id)apiKey withToken:(id)token withLeaderboardId:(id)leaderboardId
+{
+    [self sendRequest:LEADERBOARD_GAMER
+  withAppendedUrlPath:leaderboardId
+           withMethod:@"GET"
+           withApiKey:apiKey
+            withToken:token
+           withEntity:@""];
+}
+-(void)requestToUpdateLeaderboardRank:(id)apiKey withToken:(id)token withLeaderboardUpdate:(GULeaderboardUpdate*)leaderboardUpdate
+{
+    [self sendRequest:LEADERBOARD_POST
+  withAppendedUrlPath:[leaderboardUpdate leaderboardId]
+           withMethod:@"POST"
+           withApiKey:apiKey
+            withToken:token
+           withEntity:[leaderboardUpdate toDictionary]];
+}
+
 - (UIViewController*)requestSocialLogin:(NSString*)apiKey
 {
     NSMutableString *loginUrlPath = [[NSMutableString alloc] initWithString:GAMEUP_LOGIN_URL];
@@ -345,6 +383,21 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
         case ACHIEVEMENT_POST:
             if (statusCode == 200 || statusCode == 204) { [responseDelegate successfullyUpdatedAchievement:urlPath]; }
             else { [responseDelegate failedToUpdateAchievement:statusCode withError:responseEntity withAchievementUid:urlPath]; }
+            break;
+        case LEADERBOARD_GAME:
+            if (statusCode == 200) { [responseDelegate retrievedLeaderboardData:[[GULeaderboard alloc] initWithDictionary:responseEntity]]; }
+            else { [responseDelegate failedToRetrieveLeaderboardData:statusCode withError:responseEntity]; }
+            break;
+        case LEADERBOARD_GAMER:
+            if (statusCode == 200) {
+                GULeaderboard* leaderboard = [[GULeaderboard alloc] initWithDictionary:[responseEntity objectForKey:@"leaderboard"]];
+                GULeaderboardRank* rank = [[GULeaderboardRank alloc] initWithDictionary:[responseEntity objectForKey:@"rank"]];
+                [responseDelegate retrievedLeaderboardData:leaderboard andRank:rank];
+            } else { [responseDelegate failedToRetrieveLeaderboardDataAndRank:statusCode withError:responseEntity]; }
+            break;
+        case LEADERBOARD_POST:
+            if (statusCode == 200 || statusCode == 204) { [responseDelegate successfullyUpdatedLeaderboardRank:urlPath]; }
+            else { [responseDelegate failedToUpdateLeaderboardRank:statusCode withError:responseEntity withLeaderboardUid:urlPath]; }
             break;
         default:
             break;

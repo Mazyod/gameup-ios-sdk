@@ -16,8 +16,28 @@
 
 #import "GUDemoResponderDelegate.h"
 #import "GUAppDelegate.h"
+#import "GUAchievement.h"
+#import "GUAchievementUpdate.h"
+#import "GULeaderboard.h"
+#import "GULeaderboardRank.h"
+#import "GULeaderboardUpdate.h"
 
 @implementation GUDemoResponderDelegate
+
+- (void)printDictionary:(NSDictionary*) data
+{
+    [_viewController appendResultText:@"!!Only showing NSString values"];
+    
+    for(id key in data) {
+        NSMutableString *value = [[NSMutableString alloc] initWithString:key];
+        [value appendString:@"="];
+        id dicValue = [data objectForKey:key];
+        if ([dicValue isKindOfClass:[NSString class]]) {
+            [value appendString:dicValue];
+            [_viewController appendResultText:value];
+        }
+    }
+}
 
 - (void)successfulPing
 {
@@ -143,21 +163,6 @@
     NSLog(@"failed to delete stored data %ld key=%@ error=%@", (long)statusCode, storageKey, [error localizedRecoverySuggestion]);
 }
 
-- (void)printDictionary:(NSDictionary*) data
-{
-    [_viewController appendResultText:@"!!Only showing NSString values"];
-    
-    for(id key in data) {
-        NSMutableString *value = [[NSMutableString alloc] initWithString:key];
-        [value appendString:@"="];
-        id dicValue = [data objectForKey:key];
-        if ([dicValue isKindOfClass:[NSString class]]) {
-            [value appendString:dicValue];
-            [_viewController appendResultText:value];
-        }
-    }
-}
-
 - (void)retrievedGameAchievements:(NSArray*)achievements
 {
     [_viewController setResultText:@"!!Only showing Game Achievement Names"];
@@ -218,6 +223,57 @@
     [_viewController appendResultText:@"\n"];
     [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"Failed to update achievement data for %@ %ld error=%@", achievementUid, (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)retrievedLeaderboardData:(GULeaderboard*)leaderboard
+{
+    [_viewController setResultText:@"Successfully retrieved leaderboard"];
+    [_viewController appendResultText:[leaderboard name]];
+    [_viewController appendResultText:@"\n"];
+    NSLog(@"Successfully retrieved leaderboard %@", [leaderboard name]);
+}
+- (void)failedToRetrieveLeaderboardData:(NSInteger)statusCode
+                              withError:(NSError *)error
+{
+    [_viewController setResultText:@"Failed to retrieve leaderboard: \n"];
+    [_viewController appendResultText:[error localizedDescription]];
+    NSLog(@"Failed to retrieve leaderboard %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
+
+}
+
+- (void)retrievedLeaderboardData:(GULeaderboard *)leaderboard andRank:(GULeaderboardRank*)leaderboardRank
+{
+    [_viewController setResultText:@"Successfully retrieved leaderboard and rank"];
+    [_viewController appendResultText:[leaderboard name]];
+    [_viewController appendResultText:@"\n"];
+    [_viewController appendResultText:@"current rank: \n"];
+    [_viewController appendResultText:[@([leaderboardRank rank]) stringValue]];
+    [_viewController appendResultText:@" @ : \n"];
+    [_viewController appendResultText:[@([leaderboardRank rankAt]) stringValue]];
+    NSLog(@"Successfully retrieved leaderboard and rank %@ %ld", [leaderboard name], (long)[leaderboardRank rank]);
+}
+- (void)failedToRetrieveLeaderboardDataAndRank:(NSInteger)statusCode
+                                     withError:(NSError *)error
+{
+    [_viewController setResultText:@"Failed to retrieve leaderboard and rank: \n"];
+    [_viewController appendResultText:[error localizedDescription]];
+    NSLog(@"Failed to retrieve leaderboard and rank %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)successfullyUpdatedLeaderboardRank:(NSString*)leaderboardId
+{
+    [_viewController setResultText:@"Successfully updated leaderboard ranking"];
+    [_viewController appendResultText:leaderboardId];
+    NSLog(@"Successfully updated leaderboard ranking %@", leaderboardId);
+
+}
+- (void)failedToUpdateLeaderboardRank:(NSInteger)statusCode
+                            withError:(NSError*)error
+                   withLeaderboardUid:(NSString*)leaderboardUid
+{
+    [_viewController setResultText:@"Failed to update leaderboard ranking: \n"];
+    [_viewController appendResultText:[error localizedDescription]];
+    NSLog(@"Failed to update leaderboard ranking %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)successfullyLoggedinWithGamerToken:(NSString*)gamerToken

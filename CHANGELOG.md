@@ -1,6 +1,13 @@
 Changelog
 =========
 
+### v0.4.0
+
+* Added support for `/v0/game/leaderboard` endpoint.
+* Added support for `/v0/gamer/leaderboard` endpoint.
+
+---
+
 ### v0.3.0
 
 * *BREAKING CHANGES:* No longer supporting iOS5. Min supported version iOS 6.0

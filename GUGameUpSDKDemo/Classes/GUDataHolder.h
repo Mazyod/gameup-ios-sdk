@@ -23,4 +23,5 @@
 @property(readonly) NSString* storageKey;
 @property(readonly) NSArray* achievementUids;
 @property GUAchievement* achievement;
+@property NSString* leaderboardId;
 @end

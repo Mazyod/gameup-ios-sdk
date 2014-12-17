@@ -19,6 +19,8 @@
 #import "GUGamer.h"
 #import "GUServer.h"
 #import "GUAchievement.h"
+#import "GULeaderboard.h"
+#import "GULeaderboardRank.h"
 
 /**
  Callback protocol to be called upon completion / failure of GameUp Requests
@@ -165,6 +167,51 @@
 - (void)failedToUpdateAchievement:(NSInteger)statusCode
                         withError:(NSError*)error
                withAchievementUid:(NSString*)achievementUid;
+
+/**
+ Invoked when successfully retrieved leaderboard
+
+ @param leaderboard Leaderboard metadata
+ */
+- (void)retrievedLeaderboardData:(GULeaderboard*)leaderboard;
+/**
+ Invoked when retrieving gamer leaderboard metadata failed
+ @param error Error object associated with this failure
+ */
+- (void)failedToRetrieveLeaderboardData:(NSInteger)statusCode
+                              withError:(NSError *)error;
+
+
+/**
+ Invoked when successfully retrieved leaderboard,
+ including gamer's standing in the leaderboard
+
+ @param leaderboard Leaderboard metadata
+ @param leaderboardRank gamer's rank in the leaderboard
+ */
+- (void)retrievedLeaderboardData:(GULeaderboard *)leaderboard andRank:(GULeaderboardRank*)leaderboardRank;
+/**
+ Invoked when retrieving gamer leaderboard ranking failed
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ */
+- (void)failedToRetrieveLeaderboardDataAndRank:(NSInteger)statusCode
+                                     withError:(NSError *)error;
+
+/**
+ Invoked when successfully updated leaderboard score
+ @param leaderboardId ID of the updated leaderboard
+ */
+- (void)successfullyUpdatedLeaderboardRank:(NSString*)leaderboardId;
+/**
+ Invoked when updating leaderboard score failed
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ @param leaderboardUid ID of the Leaderboard
+ */
+- (void)failedToUpdateLeaderboardRank:(NSInteger)statusCode
+                            withError:(NSError*)error
+                   withLeaderboardUid:(NSString*)leaderboardUid;
 
 /**
  Invoked when the gamer has successfully logged into their Social Provider

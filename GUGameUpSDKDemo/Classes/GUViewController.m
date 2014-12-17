@@ -29,12 +29,13 @@
     self.picker.dataSource = self;
     self.picker.delegate = self;
     currentlySelectedRowInPicker = 0;
-    
+
     pickerData = [NSArray arrayWithObjects:
                   @"Ping",
                   @"Server Info",
                   @"Game Info",
                   @"Game Achievements",
+                  @"Game Leaderboard",
                   @"Login",
                   @"Gamer Info",
                   @"PUT Storage",
@@ -42,6 +43,8 @@
                   @"DEL Storage",
                   @"Gamer Achievements",
                   @"Update Achievements",
+                  @"Gamer Leaderboard",
+                  @"Update Leaderboard",
                   nil
                   ];
 
@@ -64,26 +67,35 @@
             [_gameup requestToGetAllAchievements:[_dataHolder apiKey]];
             break;
         case 4:
+            [_gameup requestToGetLeaderboardData:[_dataHolder apiKey] withLeaderboardId:[_dataHolder leaderboardId]];
+            break;
+        case 5:
             loginController = [_gameup requestSocialLogin:[_dataHolder apiKey]];
             [_window setRootViewController:loginController];
             break;
-        case 5:
+        case 6:
             [_gameup requestToGetGamerProfile:[_dataHolder apiKey] withToken:[_dataHolder gamerToken]];
             break;
-        case 6:
+        case 7:
             [self storeData];
             break;
-        case 7:
+        case 8:
             [_gameup requestToGetStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
             break;
-        case 8:
+        case 9:
             [_gameup requestToDeleteStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
             break;
-        case 9:
+        case 10:
             [_gameup requestToGetAllAchievements:[_dataHolder apiKey] withToken:[_dataHolder gamerToken]];
             break;
-        case 10:
+        case 11:
             [self updateAchievement];
+            break;
+        case 12:
+            [_gameup requestToGetLeaderboardDataAndRank:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] withLeaderboardId:[_dataHolder leaderboardId]];
+            break;
+        case 13:
+            [self updateLeaderboard];
             break;
         default:
             break;
@@ -110,6 +122,14 @@
     NSString* uid = [[_dataHolder achievementUids] objectAtIndex:0];
     GUAchievementUpdate* update = [[GUAchievementUpdate alloc] initWithAchievementUid:uid andCount:1];
     [_gameup requestToUpdateAchievement:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] withAchievementUpdate:update];
+}
+
+- (void)updateLeaderboard
+{
+    NSString* uid = [_dataHolder leaderboardId];
+    long currentTime = (long)(NSTimeInterval)([[NSDate date] timeIntervalSince1970]);
+    GULeaderboardUpdate* update = [[GULeaderboardUpdate alloc] initWithLeaderboardUid:uid andScore:currentTime];
+    [_gameup requestToUpdateLeaderboardRank:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] withLeaderboardUpdate:update];
 }
 
 /////////////

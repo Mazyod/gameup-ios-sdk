@@ -18,6 +18,7 @@
 #import "GUResponderProtocol.h"
 #import "GULoginViewController.h"
 #import "GUAchievementUpdate.h"
+#import "GULeaderboardUpdate.h"
 
 /**
  Represents interface for interacting with the GameUp service
@@ -124,6 +125,33 @@
  @param achievementUpdate An achievement update to be sent to the GameUp server
  */
 -(void)requestToUpdateAchievement:(id)apiKey withToken:(id)token withAchievementUpdate:(GUAchievementUpdate*)achievementUpdate;
+
+/**
+ Get the metadata including leaderboard enteries for given leaderboard.
+
+ @param apiKey The API key to use.
+ @param leaderboardId The Leadeboard ID to use.
+ */
+-(void)requestToGetLeaderboardData:(id)apiKey withLeaderboardId:(id)leaderboardId;
+
+/**
+ Get the metadata including leaderboard enteries for given leaderboard. 
+ This also retrieves the current gamer's leaderboard standing
+
+ @param apiKey The API key to use.
+ @param token The gamer token to use.
+ @param leaderboardId The Leadeboard ID to use.
+ */
+-(void)requestToGetLeaderboardDataAndRank:(id)apiKey withToken:(id)token withLeaderboardId:(id)leaderboardId;
+
+/**
+ Update the gamer's stand in the leaderboard with a new score
+
+ @param apiKey The API key to use.
+ @param token The gamer token to use.
+ @param leaderboardUpdate A Leaderboard update to be sent to the GameUp server
+ */
+-(void)requestToUpdateLeaderboardRank:(id)apiKey withToken:(id)token withLeaderboardUpdate:(GULeaderboardUpdate*)leaderboardUpdate;
 
 /**
  Prepares a GULoginStoryboard and attaches it to a GULoginViewController

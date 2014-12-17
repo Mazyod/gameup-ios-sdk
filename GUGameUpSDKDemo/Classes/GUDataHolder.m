@@ -21,7 +21,6 @@
 {
     self = [super init];
     if (self) {
-        
         _apiKey = @"6fb004d4289748199cb858ab0905f657";
         //for demo purposes, let's hardcode the storage key!
         _storageKey = @"profile_info";
@@ -32,6 +31,7 @@
                            @"ed8b639a8ab74aedaa0de7d182ca9175", // secret, 10, normal
                            @"468044087b5d45f2839e18537b4ddbe7", // hidden, 10, normal
                            nil];
+        _leaderboardId = @"6ded1e8dbf104faba384bb659069ea69";
     }
     return self;
 }
