@@ -10,15 +10,15 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://www.gameup.io"
-  s.license      = { :type => "Apache License, Version 2.0", :file => "LICENCE" }
+  s.license      = { :type => "Apache License, Version 2.0", :file => "GUGameUpSDK/LICENCE" }
   s.authors      = { "Mo Firouz" => "mo@gameup.io", "Chris Molozian" => "chris@gameup.io", "Andrei Mihu" => "andrei@gameuo.io" }
   s.social_media_url   = "http://twitter.com/gameupio"
   s.platform     = :ios, "5.0"
   s.source       = { :git => "https://github.com/gameup-io/gameup-ios-sdk.git", :tag => "0.2.0"}
   #s.source       = { :path => "."}
-  s.source_files  = "Classes/*.{h,m}"
-  s.public_header_files = "Classes/*.h"
-  s.resources  = "Classes/*.xib"
+  s.source_files  = "GUGameUpSDK/Classes/*.{h,m}"
+  s.public_header_files = "GUGameUpSDK/Classes/*.h"
+  s.resources  = "GUGameUpSDK/Classes/*.xib"
   s.requires_arc = true  
   s.ios.deployment_target = "5.0"
   s.frameworks    = 'SystemConfiguration', 'MobileCoreServices'
