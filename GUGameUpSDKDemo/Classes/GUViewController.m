@@ -15,26 +15,147 @@
  */
 
 #import "GUViewController.h"
+#import "GUAchievementUpdate.h"
 
 @interface GUViewController ()
-
 @end
 
 @implementation GUViewController
 {
     UIViewController *loginController;
+    NSArray* pickerData;
+    NSInteger currentlySelectedRowInPicker;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.picker.dataSource = self;
+        self.picker.delegate = self;
+        currentlySelectedRowInPicker = 0;
+
+        pickerData = [NSArray arrayWithObjects:
+            @"Ping",
+            @"Server Info",
+            @"Game Info",
+            @"Game Achievements",
+            @"Login",
+            @"Gamer Info",
+            @"PUT Storage",
+            @"GET Storage",
+            @"DEL Storage",
+            @"Gamer Achievements",
+            @"Update Achievements",
+            nil
+        ];
+    }
+    
     return self;
 }
+
+- (IBAction)onGoButtonClick:(id)sender
+{
+    // case number correspond to the index of the pickerData array
+    switch (currentlySelectedRowInPicker) {
+        case 0:
+            [_gameup ping:[_dataHolder apiKey]];
+            break;
+        case 1:
+            [_gameup requestServerInfo:[_dataHolder apiKey]];
+            break;
+        case 2:
+            [_gameup requestToGetGameDetails:[_dataHolder apiKey]];
+            break;
+        case 3:
+            [_gameup requestToGetAllAchievements:[_dataHolder apiKey]];
+            break;
+        case 4:
+            loginController = [_gameup requestSocialLogin:[_dataHolder apiKey]];
+            [_window setRootViewController:loginController];
+            break;
+        case 5:
+            [_gameup requestToGetGamerProfile:[_dataHolder apiKey] withToken:[_dataHolder gamerToken]];
+            break;
+        case 6:
+            [self storeData];
+            break;
+        case 7:
+            [_gameup requestToGetStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
+            break;
+        case 8:
+            [_gameup requestToDeleteStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
+            break;
+        case 9:
+            [_gameup requestToGetAllAchievements:[_dataHolder apiKey] withToken:[_dataHolder gamerToken]];
+            break;
+        case 10:
+            [self updateAchievement];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)storeData
+{
+    NSDictionary *storageValue = @{
+       @"level" : @4,
+       @"level_name" : @"boomrang",
+       @"bosses_killed" : @[@"mo", @"chris", @"andrei"],
+       @"coins_collected" : @2302,
+       @"meters_jumped" : @1.24,
+       @"meters_jumped" : @1.24,
+       @"killed" : @5
+    };
+    
+    [_gameup requestToStoreData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storeWithKey:[_dataHolder storageKey] withValue:storageValue];
+}
+
+- (void)updateAchievement
+{
+    NSString* uid = [[_dataHolder achievementUids] objectAtIndex:0];
+    GUAchievementUpdate* update = [[GUAchievementUpdate alloc] initWithAchievementUid:uid andCount:1];
+    [_gameup requestToUpdateAchievement:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] withAchievementUpdate:update];
+}
+
+/////////////
+
+- (void)backToMainView
+{
+    [_window setRootViewController:self];
+}
+
+- (void)enableLoginDependantButtons
+{
+    [[self goButton] setEnabled:true];
+}
+
+- (void)disableLoginDependantButtons
+{
+    [[self goButton] setEnabled:false];
+}
+
+- (void)setResultText:(NSString*) text
+{
+    [[self resultTextView] setText:text];
+}
+
+- (void)appendResultText:(NSString*) text
+{
+    NSMutableString *newText = [[NSMutableString alloc] initWithString:[[self resultTextView] text]];
+    [newText appendString:@"\n"];
+    [newText appendString:text];
+    
+    [[self resultTextView] setText:newText];
+}
+
+/////////////
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [apiKeyTextField setText:[_dataHolder apiKey]];
+    [[self apiKeyTextField] setText:[_dataHolder apiKey]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,92 +163,30 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setResultText:(NSString*) text
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    [resultTextView setText:text];
+    return 1;
 }
 
-- (void)appendResultText:(NSString*) text
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
 {
-    NSMutableString *newText = [[NSMutableString alloc] initWithString:[resultTextView text]];
-    [newText appendString:@"\n"];
-    [newText appendString:text];
-    
-    [resultTextView setText:newText];
+    return pickerData.count;
 }
 
-- (IBAction)onPingClick:(id)sender
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    [_gameup ping:[_dataHolder apiKey]];
+    return [pickerData objectAtIndex:row];
 }
 
-- (IBAction)onGameClick:(id)sender
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [_gameup requestToGetGameDetails:[_dataHolder apiKey]];
-}
-
-- (IBAction)onLoginClick:(id)sender
-{
-    loginController = [_gameup requestSocialLogin:[_dataHolder apiKey]];
-    [_window setRootViewController:loginController];
-}
-
-- (IBAction)onGamerClick:(id)sender
-{
-    [_gameup requestToGetGamerProfile:[_dataHolder apiKey] withToken:[_dataHolder gamerToken]];
-}
-
-- (IBAction)onStoreDataClick:(id)sender
-{
-    NSDictionary *storageValue = @{
-       @"level" : @4,
-       @"level_name" : @"boomrang",
-       @"bosses_killed" : @[@"mo", @"chris", @"dre"],
-       @"coins_collected" : @2302,
-       @"meters_jumped" : @1.24,
-       @"meters_jumped" : @1.24,
-       @"killed" : @5
-   };
-    
-    [_gameup requestToStoreData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storeWithKey:[_dataHolder storageKey] withValue:storageValue];
-}
-
-- (IBAction)onGetDataClick:(id)sender
-{
-    [_gameup requestToGetStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
-
-}
-
-- (IBAction)onDeleteDataClick:(id)sender
-{
-    [_gameup requestToDeleteStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
+        currentlySelectedRowInPicker = row;
 }
 
 - (IBAction)onApiKeyUpdate:(id)sender
 {
-    [_dataHolder setApiKey:[apiKeyTextField text]];
+    [_dataHolder setApiKey:[[self apiKeyTextField] text]];
 }
-
-- (void)backToMainView
-{
-    [_window setRootViewController:self];
-    
-}
-
-- (void)enableLoginDependantButtons
-{
-    [gamerButton setHidden:false];
-    [storagePutButton setHidden:false];
-    [storageGetButton setHidden:false];
-    [storageDeleteButton setHidden:false];
-}
-
-- (void)disableLoginDependantButtons
-{
-    [gamerButton setHidden:true];
-    [storagePutButton setHidden:true];
-    [storageGetButton setHidden:true];
-    [storageDeleteButton setHidden:true];
-}
-
 @end

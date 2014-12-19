@@ -15,8 +15,9 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <GUResponderProtocol.h>
-#import <GULoginViewController.h>
+#import "GUResponderProtocol.h"
+#import "GULoginViewController.h"
+#import "GUAchievementUpdate.h"
 
 @interface GUGameUp : NSObject
 
@@ -25,6 +26,8 @@
 -(void)ping:(NSString*)apiKey;
 
 -(void)ping:(id)apiKey withToken:(id)token;
+
+-(void)requestServerInfo:(NSString*)apiKey;
 
 -(void)requestToGetGameDetails:(id)apiKey;
 
@@ -35,6 +38,12 @@
 -(void)requestToStoreData:(id)apiKey withToken:(id)token storeWithKey:(NSString*)storageKey withValue:(NSDictionary*)value;
 
 -(void)requestToDeleteStoredData:(id)apiKey withToken:(id)token storedWithKey:(NSString*)storageKey;
+
+-(void)requestToGetAllAchievements:(id)apiKey;
+
+-(void)requestToGetAllAchievements:(id)apiKey withToken:(id)token;
+
+-(void)requestToUpdateAchievement:(id)apiKey withToken:(id)token withAchievementUpdate:(GUAchievementUpdate*)achievementUpdate;
 
 -(UIViewController*)requestSocialLogin:(id)apiKey;
 @end

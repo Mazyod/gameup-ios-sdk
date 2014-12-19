@@ -17,11 +17,34 @@
 #import <Foundation/Foundation.h>
 #import "GUJSONSerialisableProtocol.h"
 
-@interface GUGame : NSObject <GUJSONSerialisableProtocol>
+@interface GUAchievement : NSObject <GUJSONSerialisableProtocol>
 
-@property(readonly) NSString* name;
+
+typedef NS_ENUM(NSInteger, GUAchievementType)
+{
+    NORMAL,
+    INCREMENTAL
+};
+
+typedef NS_ENUM(NSInteger, GUAchievementState)
+{
+    VISIBLE,
+    SECRET,
+    HIDDEN
+};
+
+@property(readonly) NSString* publicId;
 @property(readonly) NSString* desc;
-@property(readonly) NSInteger createdAt;
-@property(readonly) NSInteger updatedAt;
+@property(readonly) NSString* name;
+@property(readonly) GUAchievementType type;
+@property(readonly) NSInteger points;
+@property(readonly) GUAchievementState state;
+@property(readonly) NSInteger requiredCount;
+@property(readonly) NSInteger progressAt;
+@property(readonly) NSInteger completedAt;
+@property(readonly) NSInteger count;
+
+- (BOOL)isAchievementUnlocked;
 
 @end
+

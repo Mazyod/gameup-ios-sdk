@@ -17,6 +17,8 @@
 #import <Foundation/Foundation.h>
 #import "GUGame.h"
 #import "GUGamer.h"
+#import "GUServer.h"
+#import "GUAchievement.h"
 
 @protocol GUResponderProtocol
 @required
@@ -24,30 +26,48 @@
 - (void)failedPing:(NSInteger)statusCode
          withError:(NSError*) error;
 
+- (void)retrievedServerData:(GUServer*)serverData;
+- (void)failedToRetrieveServerData:(NSInteger)statusCode
+                         withError:(NSError*) error;
+
 - (void)retrievedGameData:(GUGame*)game;
-- (void)failedToRetrievedGameData:(NSInteger)statusCode
-                        withError:(NSError*) error;
+- (void)failedToRetrieveGameData:(NSInteger)statusCode
+                       withError:(NSError*) error;
 
 - (void)retrievedGamerProfile:(GUGamer*)gamer;
-- (void)failedToRetrievedGamerProfile:(NSInteger)statusCode
-                            withError:(NSError*) error;
+- (void)failedToRetrieveGamerProfile:(NSInteger)statusCode
+                           withError:(NSError*) error;
 
 - (void)successfullyStoredData:(id)storageKey;
-- (void)failedtoStoreData:(NSInteger)statusCode
+- (void)failedToStoreData:(NSInteger)statusCode
                 withError:(NSError*)error
            withStorageKey:(NSString*)storageKey
                  withData:(NSDictionary*)data;
 
-- (void)retrievedStoredData:(NSString*)storageKey withData:(NSDictionary*)data;
-- (void)failedtoRetrieveStoredData:(NSInteger)statusCode
+- (void)retrievedStoredData:(NSString*)storageKey
+                   withData:(NSDictionary*)data;
+- (void)failedToRetrieveStoredData:(NSInteger)statusCode
                          withError:(NSError*)error
                     withStorageKey:(NSString*)storageKey;
 
 - (void)successfullyDeletedData:(NSString*)storageKey;
-- (void)failedtoDeleteStoredData:(NSInteger)statusCode
+- (void)failedToDeleteStoredData:(NSInteger)statusCode
                        withError:(NSError*)error
                   withStorageKey:(NSString*)storageKey
                         withData:(NSDictionary*)data;
+
+- (void)retrievedGameAchievements:(NSArray*)achievements;
+- (void)failedToRetrieveGameAchievements:(NSInteger)statusCode
+                               withError:(NSError *)error;
+
+- (void)retrievedGamerAchievements:(NSArray*)gamerAchievements;
+- (void)failedToRetrieveGamerAchievements:(NSInteger)statusCode
+                                withError:(NSError *)error;
+
+- (void)successfullyUpdatedAchievement:(NSString*)achievementUid;
+- (void)failedToUpdateAchievement:(NSInteger)statusCode
+                        withError:(NSError*)error
+               withAchievementUid:(NSString*)achievementUid;
 
 - (void)successfullyLoggedinWithGamerToken:(NSString*)gamerToken;
 - (void)failedToLoginWithError:(NSError*) error;

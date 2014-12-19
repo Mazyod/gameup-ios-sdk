@@ -15,37 +15,30 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <GUGameUp.h>
-#import <GULoginViewController.h>
+#import "GUGameUp.h"
+#import "GULoginViewController.h"
+#import "GUAchievementUpdate.h"
 #import "GUDataHolder.h"
 
-@interface GUViewController : UIViewController
-{
-    __weak IBOutlet UITextView *resultTextView;
-    __weak IBOutlet UITextField *apiKeyTextField;
-    __weak IBOutlet UIButton *gamerButton;
-    __weak IBOutlet UIButton *storagePutButton;
-    __weak IBOutlet UIButton *storageGetButton;
-    __weak IBOutlet UIButton *storageDeleteButton;
-}
+@interface GUViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property(setter = setGameUpController:) GUGameUp *gameup;
-@property (strong, nonatomic) UIWindow *window;
+    @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) IBOutlet UITextField *apiKeyTextField;
+@property (strong, nonatomic) IBOutlet UITextView *resultTextView;
+@property (strong, nonatomic) IBOutlet UIPickerView *picker;
+@property (strong, nonatomic) IBOutlet UIButton *goButton;
+
 @property GUDataHolder *dataHolder;
 
 - (void)setResultText:(NSString*) text;
 - (void)appendResultText:(NSString*) text;
+
 - (void)enableLoginDependantButtons;
 - (void)disableLoginDependantButtons;
 
-- (IBAction)onGameClick:(id)sender;
-- (IBAction)onPingClick:(id)sender;
-- (IBAction)onGamerClick:(id)sender;
-- (IBAction)onStoreDataClick:(id)sender;
-- (IBAction)onGetDataClick:(id)sender;
-- (IBAction)onDeleteDataClick:(id)sender;
-- (IBAction)onLoginClick:(id)sender;
 - (IBAction)onApiKeyUpdate:(id)sender;
+- (IBAction)onGoButtonClick:(id)sender;
 
 - (void)backToMainView;
 

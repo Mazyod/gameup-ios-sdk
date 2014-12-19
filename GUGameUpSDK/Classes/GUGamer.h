@@ -15,7 +15,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <GUJSONSerialisableProtocol.h>
+#import "GUJSONSerialisableProtocol.h"
 
 @interface GUGamer : NSObject <GUJSONSerialisableProtocol>
 

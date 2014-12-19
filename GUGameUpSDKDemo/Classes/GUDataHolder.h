@@ -15,9 +15,12 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "GUAchievement.h"
 
 @interface GUDataHolder : NSObject
 @property NSString* apiKey;
 @property NSString* gamerToken;
 @property(readonly) NSString* storageKey;
+@property(readonly) NSArray* achievementUids;
+@property GUAchievement* achievement;
 @end

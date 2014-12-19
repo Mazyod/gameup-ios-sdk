@@ -14,24 +14,29 @@
  * limitations under the License.
  */
 
-#import "GUGame.h"
+#import "GUAchievementUpdate.h"
 
-@implementation GUGame
+@implementation GUAchievementUpdate
 
-- (id)initWithDictionary:(NSDictionary*) dictionary
+- (id)initWithAchievementUid:(NSString*) achievementId andCount:(NSInteger)count
 {
     self = [super init];
     if (self) {
-        _name = [dictionary objectForKey:@"name"];
-        _desc = [dictionary objectForKey:@"description"];
-        _createdAt = [[dictionary objectForKey:@"created_at"] integerValue];
-        _updatedAt = [[dictionary objectForKey:@"updated_at"] integerValue];
+        _achievementId = achievementId;
+        _count = count;
     }
     return self;
 }
-- (NSDictionary*)toDictionary
+
+- (id)initWithDictionary:(NSDictionary*) dictionary
 {
-    [NSException raise:@"Cannot be converted to NSDictionary" format:nil];
+    [NSException raise:@"Cannot instantiate using NSDictionary" format:nil];
     return nil;
 }
+
+- (NSDictionary*)toDictionary
+{
+    return @{@"count" : [NSNumber numberWithInt:(int)_count]};
+}
+
 @end

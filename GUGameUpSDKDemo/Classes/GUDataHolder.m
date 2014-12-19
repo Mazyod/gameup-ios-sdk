@@ -21,8 +21,17 @@
 {
     self = [super init];
     if (self) {
+        
+        _apiKey = @"6fb004d4289748199cb858ab0905f657";
         //for demo purposes, let's hardcode the storage key!
         _storageKey = @"profile_info";
+        // we need to hardcode the Achievement Uid
+        _achievementUids = [NSArray arrayWithObjects:
+                            @"68d84ecd7c804f9ead0337cfc2babe63", // visible, 10, normal
+                           @"70c99a8e6dff4a6fac7e517a8dd4e83f", // visible, 10, incremental (10)
+                           @"ed8b639a8ab74aedaa0de7d182ca9175", // secret, 10, normal
+                           @"468044087b5d45f2839e18537b4ddbe7", // hidden, 10, normal
+                           nil];
     }
     return self;
 }

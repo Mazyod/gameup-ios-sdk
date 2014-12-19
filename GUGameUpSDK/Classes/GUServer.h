@@ -14,24 +14,12 @@
  * limitations under the License.
  */
 
-#import "GUGame.h"
+#import <Foundation/Foundation.h>
+#import "GUJSONSerialisableProtocol.h"
 
-@implementation GUGame
+@interface GUServer : NSObject <GUJSONSerialisableProtocol>
 
-- (id)initWithDictionary:(NSDictionary*) dictionary
-{
-    self = [super init];
-    if (self) {
-        _name = [dictionary objectForKey:@"name"];
-        _desc = [dictionary objectForKey:@"description"];
-        _createdAt = [[dictionary objectForKey:@"created_at"] integerValue];
-        _updatedAt = [[dictionary objectForKey:@"updated_at"] integerValue];
-    }
-    return self;
-}
-- (NSDictionary*)toDictionary
-{
-    [NSException raise:@"Cannot be converted to NSDictionary" format:nil];
-    return nil;
-}
+@property(readonly) NSInteger time;
+
 @end
+

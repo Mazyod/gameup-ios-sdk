@@ -14,24 +14,29 @@
  * limitations under the License.
  */
 
-#import <GUGameUp.h>
-#import <GUJSONSerialisableProtocol.h>
-#import <GUResponderProtocol.h>
 #import <AFNetworking/AFNetworking.h>
 #import <Base64.h>
+#import "GUGameUp.h"
+#import "GUJSONSerialisableProtocol.h"
+#import "GUResponderProtocol.h"
+#import "GUAchievementUpdate.h"
 
 typedef NS_ENUM(NSInteger, GURequest)
 {
     PING,
+    SERVER,
     GAME,
     GAMER,
     STORAGE_PUT,
     STORAGE_GET,
     STORAGE_DELETE,
+    ACHIEVEMENTS_GAME,
+    ACHIEVEMENTS_GAMER,
+    ACHIEVEMENT_POST,
     LOGIN
 };
 
-static NSString *const GAMEUP_VERSION=@"0.1.1";
+static NSString *const GAMEUP_VERSION=@"0.2.0";
 static NSString *const AFN_VERSION=@"AFN1.3.4";
 
 static NSString *const USER_AGENT_NAME=@"gameup-ios-sdk";
@@ -55,11 +60,15 @@ static NSString *USER_AGENT;
         responseDelegate = responder;
         requestUrls = @{
             @(PING) : @"/v0/",
+            @(SERVER) : @"/v0/server/",
             @(GAME) : @"/v0/game/",
             @(GAMER) : @"/v0/gamer/",
             @(STORAGE_PUT) : @"/v0/gamer/storage/",
             @(STORAGE_GET) : @"/v0/gamer/storage/",
             @(STORAGE_DELETE) : @"/v0/gamer/storage/",
+            @(ACHIEVEMENTS_GAME) : @"/v0/game/achievement/",
+            @(ACHIEVEMENTS_GAMER) : @"/v0/game/achievement/",
+            @(ACHIEVEMENT_POST) : @"/v0/gamer/achievement/",
             @(LOGIN) : @"/v0/gamer/login/"
         };
     }
@@ -99,6 +108,16 @@ static NSString *USER_AGENT;
            withMethod:@"HEAD"
            withApiKey:apiKey
             withToken:token
+           withEntity:@""];
+}
+
+- (void)requestServerInfo:(NSString *)apiKey
+{
+    [self sendRequest:SERVER
+  withAppendedUrlPath:@""
+           withMethod:@"GET"
+           withApiKey:apiKey
+            withToken:@""
            withEntity:@""];
 }
 
@@ -152,6 +171,36 @@ static NSString *USER_AGENT;
            withEntity:@""];
 }
 
+-(void)requestToGetAllAchievements:(id)apiKey
+{
+    [self sendRequest:ACHIEVEMENTS_GAME
+  withAppendedUrlPath:@""
+           withMethod:@"GET"
+           withApiKey:apiKey
+            withToken:@""
+           withEntity:@""];
+}
+
+-(void)requestToGetAllAchievements:(id)apiKey withToken:(id)token
+{
+    [self sendRequest:ACHIEVEMENTS_GAMER
+  withAppendedUrlPath:@""
+           withMethod:@"GET"
+           withApiKey:apiKey
+            withToken:token
+           withEntity:@""];
+}
+
+-(void)requestToUpdateAchievement:(id)apiKey withToken:(id)token
+            withAchievementUpdate:(GUAchievementUpdate*)achievementUpdate
+{
+    [self sendRequest:ACHIEVEMENT_POST
+  withAppendedUrlPath:[achievementUpdate achievementId]
+           withMethod:@"POST"
+           withApiKey:apiKey
+            withToken:token
+           withEntity:[achievementUpdate toDictionary]];
+}
 
 - (UIViewController*)requestSocialLogin:(NSString*)apiKey
 {
@@ -163,7 +212,6 @@ static NSString *USER_AGENT;
                                                                           withUserAgent:USER_AGENT];
     return controller;
 }
-
 
 - (void)sendRequest:(enum GURequest)endpoint
 withAppendedUrlPath:(NSString*)appendedUrlPath
@@ -218,25 +266,41 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
             if (statusCode == 200) { [responseDelegate successfulPing]; }
             else { [responseDelegate failedPing:statusCode withError:responseEntity]; }
             break;
+        case SERVER:
+            if (statusCode == 200) { [responseDelegate retrievedServerData:[[GUServer alloc] initWithDictionary:responseEntity]]; }
+            else { [responseDelegate failedToRetrieveServerData:statusCode withError:responseEntity]; }
+            break;
         case GAME:
             if (statusCode == 200) { [responseDelegate retrievedGameData:[[GUGame alloc] initWithDictionary:responseEntity]]; }
-            else { [responseDelegate failedToRetrievedGameData:statusCode withError:responseEntity]; }
+            else { [responseDelegate failedToRetrieveGameData:statusCode withError:responseEntity]; }
             break;
         case GAMER:
-            if (statusCode == 200) { [responseDelegate retrievedGamerProfile:[[GUGamer alloc] initWithDictionary:responseEntity]]; }
-            else { [responseDelegate failedToRetrievedGamerProfile:statusCode withError:responseEntity]; }
+            if (statusCode == 200) { [responseDelegate retrievedGamerProfile:[[GUGamer alloc] initWithDictionary:responseEntity]];}
+            else { [responseDelegate failedToRetrieveGamerProfile:statusCode withError:responseEntity]; }
             break;
         case STORAGE_GET:
             if (statusCode == 200) { [responseDelegate retrievedStoredData:urlPath withData:[self parseStorageDataToDictionary:responseEntity]]; }
-            else { [responseDelegate failedtoRetrieveStoredData:statusCode withError:responseEntity withStorageKey:urlPath]; }
+            else { [responseDelegate failedToRetrieveStoredData:statusCode withError:responseEntity withStorageKey:urlPath]; }
             break;
         case STORAGE_PUT:
             if (statusCode == 200) { [responseDelegate successfullyStoredData:urlPath]; }
-            else { [responseDelegate failedtoStoreData:statusCode withError:responseEntity withStorageKey:urlPath withData:requestEntity ]; }
+            else { [responseDelegate failedToStoreData:statusCode withError:responseEntity withStorageKey:urlPath withData:requestEntity ]; }
             break;
         case STORAGE_DELETE:
             if (statusCode == 200) { [responseDelegate successfullyDeletedData:urlPath]; }
-            else { [responseDelegate failedtoDeleteStoredData:statusCode withError:responseEntity withStorageKey:urlPath withData:requestEntity]; }
+            else { [responseDelegate failedToDeleteStoredData:statusCode withError:responseEntity withStorageKey:urlPath withData:requestEntity]; }
+            break;
+        case ACHIEVEMENTS_GAME:
+            if (statusCode == 200) { [responseDelegate retrievedGameAchievements:[self convertDictionaryToAchievementArray:responseEntity]]; }
+            else { [responseDelegate failedToRetrieveGameAchievements:statusCode withError:responseEntity]; }
+            break;
+        case ACHIEVEMENTS_GAMER:
+            if (statusCode == 200) { [responseDelegate retrievedGamerAchievements:[self convertDictionaryToAchievementArray:responseEntity]]; }
+            else { [responseDelegate failedToRetrieveGamerAchievements:statusCode withError:responseEntity]; }
+            break;
+        case ACHIEVEMENT_POST:
+            if (statusCode == 200 || statusCode == 204) { [responseDelegate successfullyUpdatedAchievement:urlPath]; }
+            else { [responseDelegate failedToUpdateAchievement:statusCode withError:responseEntity withAchievementUid:urlPath]; }
             break;
         default:
             break;
@@ -252,11 +316,23 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
 
 - (NSDictionary*)parseStorageDataToDictionary:(NSDictionary*)dict
 {
-    
     NSString* jsonString = [dict objectForKey:@"value"];
     NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
     return [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+}
+
+- (NSArray*)convertDictionaryToAchievementArray:(NSDictionary*)dict {
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+
+    NSArray* achievements = [dict objectForKey:@"achievements"];
+    for (id jsonAchievement in achievements) {
+        //NSDictionary* jsonAchievement = [NSJSONSerialization JSONObjectWithData:object options:0 error:nil];
+        GUAchievement* achievement = [[GUAchievement alloc] initWithDictionary:jsonAchievement];
+        [result addObject:achievement];
+    }
+    
+    return [[NSArray alloc] initWithArray:result];
 }
 
 @end

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GUGameUpSDK"
-  s.version      = "0.1.1"
+  s.version      = "0.2.0"
   s.summary      = "GameUp iOS SDK for GameUp.io"
   s.description  = <<-DESC
                    The iOS SDK for GameUp.io gaming backend server. 
@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
   s.authors      = { "Mo Firouz" => "mo@gameup.io", "Chris Molozian" => "chris@gameup.io", "Andrei Mihu" => "andrei@gameuo.io" }
   s.social_media_url   = "http://twitter.com/gameupio"
   s.platform     = :ios, "5.0"
-  #s.source       = { :git => "https://github.com/gameup-io/gameup-ios-sdk.git", :tag => "0.1.1"}
-  s.source       = { :path => "."}
+  s.source       = { :git => "https://github.com/gameup-io/gameup-ios-sdk.git", :tag => "0.2.0"}
+  #s.source       = { :path => "."}
   s.source_files  = "Classes/*.{h,m}"
   s.public_header_files = "Classes/*.h"
   s.resources  = "Classes/*.xib"

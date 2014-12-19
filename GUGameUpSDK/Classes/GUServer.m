@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-#import "GUGame.h"
+#import "GUServer.h"
 
-@implementation GUGame
+@implementation GUServer
 
 - (id)initWithDictionary:(NSDictionary*) dictionary
 {
     self = [super init];
     if (self) {
-        _name = [dictionary objectForKey:@"name"];
-        _desc = [dictionary objectForKey:@"description"];
-        _createdAt = [[dictionary objectForKey:@"created_at"] integerValue];
-        _updatedAt = [[dictionary objectForKey:@"updated_at"] integerValue];
+        _time = [[dictionary objectForKey:@"time"] integerValue];
     }
     return self;
 }

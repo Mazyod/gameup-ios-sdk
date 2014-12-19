@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-#import <GUGameUp.h>
+#import "GUGameUp.h"
 #import "GUAppDelegate.h"
 #import "GUViewController.h"
 #import "GUDemoResponderDelegate.h"
 #import "GUDataHolder.h"
-
-static NSString *const APIKEY = @"";
 
 @implementation GUAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -30,7 +28,6 @@ static NSString *const APIKEY = @"";
     self.window.rootViewController = self.viewController;
 
     GUDataHolder *dataHolder = [[GUDataHolder alloc] init];
-    [dataHolder setApiKey:APIKEY]; //setup initial ApiKey for testing purposes...
     
     GUDemoResponderDelegate *delegate = [GUDemoResponderDelegate alloc];
     [delegate setViewController:self.viewController];

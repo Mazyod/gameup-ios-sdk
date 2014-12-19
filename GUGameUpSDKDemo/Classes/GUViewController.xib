@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GUViewController">
             <connections>
-                <outlet property="apiKeyTextField" destination="JRU-ZG-2Cl" id="E82-hL-JYZ"/>
-                <outlet property="gamerButton" destination="Thy-Po-zUl" id="G5u-Ct-zHc"/>
-                <outlet property="resultTextView" destination="m0o-BM-icd" id="hdf-Hg-v8j"/>
-                <outlet property="storageDeleteButton" destination="fXI-mI-4yp" id="D72-NY-sce"/>
-                <outlet property="storageGetButton" destination="lch-cd-9JO" id="oxV-ck-ief"/>
-                <outlet property="storagePutButton" destination="PqI-z0-dmI" id="aq3-jb-ONC"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="apiKeyTextField" destination="JRU-ZG-2Cl" id="KPP-3T-1ag"/>
+                <outlet property="goButton" destination="xnT-Mi-vV5" id="f0q-Cb-Rme"/>
+                <outlet property="picker" destination="9Il-DR-eYd" id="vwY-l2-ECu"/>
+                <outlet property="resultTextView" destination="m0o-BM-icd" id="Qig-WC-g3o"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="7NE-o7-NCs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+            <rect key="frame" x="0.0" y="20" width="320" height="548"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" id="OAe-Ni-9tq">
@@ -28,83 +26,13 @@
                         <navigationItem title="GameUp SDK Demo" id="0L8-OC-af8"/>
                     </items>
                 </navigationBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="f63-y7-E55" userLabel="pingButton">
-                    <rect key="frame" x="20" y="103" width="120" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Ping">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onPingClick:" destination="-1" eventType="touchUpInside" id="HAa-Au-Rh9"/>
-                    </connections>
-                </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" indicatorStyle="black" keyboardDismissMode="onDrag" editable="NO" id="m0o-BM-icd" userLabel="resultTextView">
-                    <rect key="frame" x="20" y="312" width="280" height="128"/>
+                    <rect key="frame" x="8" y="362" width="304" height="173"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Frd-HI-GDD" userLabel="gameButton">
-                    <rect key="frame" x="182" y="103" width="118" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Game Info">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onGameClick:" destination="-1" eventType="touchUpInside" id="5tS-Vt-dYZ"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Thy-Po-zUl" userLabel="gamerButton">
-                    <rect key="frame" x="20" y="205" width="120" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Gamer Profile">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onGamerClick:" destination="-1" eventType="touchUpInside" id="Dod-Ca-Pl4"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PqI-z0-dmI" userLabel="storagePutButton">
-                    <rect key="frame" x="182" y="205" width="118" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Store Data">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onStoreDataClick:" destination="-1" eventType="touchUpInside" id="smA-SY-gZc"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lch-cd-9JO" userLabel="storageGetButton">
-                    <rect key="frame" x="20" y="256" width="120" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Get Data">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onGetDataClick:" destination="-1" eventType="touchUpInside" id="FoL-pV-0Ck"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fXI-mI-4yp" userLabel="storageDeleteButton">
-                    <rect key="frame" x="182" y="256" width="118" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Delete Data">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onDeleteDataClick:" destination="-1" eventType="touchUpInside" id="d0j-xi-1QV"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZFf-OL-Jku" userLabel="loginButton">
-                    <rect key="frame" x="98" y="154" width="125" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Login">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onLoginClick:" destination="-1" eventType="touchUpInside" id="AYi-Zu-rv4"/>
-                    </connections>
-                </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" highlighted="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ApiKey" minimumFontSize="17" id="JRU-ZG-2Cl" userLabel="apiKeyField">
                     <rect key="frame" x="21" y="65" width="279" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,10 +42,35 @@
                         <action selector="onApiKeyUpdate:" destination="-1" eventType="editingChanged" id="St5-fg-6Ha"/>
                     </connections>
                 </textField>
+                <pickerView multipleTouchEnabled="YES" contentMode="scaleToFill" id="9Il-DR-eYd" userLabel="taskPicker">
+                    <rect key="frame" x="8" y="109" width="304" height="162"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <bool key="isElement" value="YES"/>
+                    </accessibility>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="BJ8-HG-KD7"/>
+                        <outlet property="delegate" destination="-1" id="soN-i5-EBT"/>
+                    </connections>
+                </pickerView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xnT-Mi-vV5" userLabel="goButton">
+                    <rect key="frame" x="234" y="279" width="72" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Go!">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onGoButtonClick:" destination="-1" eventType="touchUpInside" id="22D-Gp-cRx"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="394" y="396"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

@@ -32,6 +32,20 @@
     [_viewController appendResultText:[error localizedDescription]];
 }
 
+- (void)retrievedServerData:(GUServer*)serverData
+{
+    NSString *inStr = [NSString stringWithFormat: @"Server Time: %ld", (long)[serverData time]];
+    [_viewController setResultText:inStr];
+}
+- (void)failedToRetrieveServerData:(NSInteger)statusCode
+                          withError:(NSError*) error
+{
+    NSLog(@"ServerTime failed with error %@", error);
+    [_viewController setResultText:@"ServerTime failed: \n"];
+    [_viewController appendResultText:[error localizedDescription]];
+}
+
+
 - (void)retrievedGameData:(GUGame*)game
 {
     [_viewController setResultText:@"Retrieved details: \n"];
@@ -40,17 +54,17 @@
     
     NSLog(@"Game Name: %@",[game name]);
     NSLog(@"Game Description: %@",[game description]);
-    NSLog(@"Game CreatedAt: %ld",[game createdAt]);
-    NSLog(@"Game UpdatedAt: %ld",[game updatedAt]);
+    NSLog(@"Game CreatedAt: %ld",(long)[game createdAt]);
+    NSLog(@"Game UpdatedAt: %ld",(long)[game updatedAt]);
 }
-- (void)failedToRetrievedGameData:(NSInteger)statusCode
+- (void)failedToRetrieveGameData:(NSInteger)statusCode
                         withError:(NSError*) error
 {
     
     [_viewController setResultText:@"Game retrieval failed: \n"];
     [_viewController appendResultText:[error localizedDescription]];
 
-    NSLog(@"Game failed with error %ld %@", statusCode, error);
+    NSLog(@"Game failed with error %ld %@", (long)statusCode, error);
 }
 
 - (void)retrievedGamerProfile:(GUGamer*)gamer
@@ -64,16 +78,16 @@
     NSLog(@"Gamer Family Name: %@",[gamer familyName]);
     NSLog(@"Gamer timezone: %@",[gamer timezone]);
     NSLog(@"Gamer location: %@",[gamer location]);
-    NSLog(@"Gamer createdAt: %ld",[gamer createdAt]);
+    NSLog(@"Gamer createdAt: %ld",(long)[gamer createdAt]);
 }
-- (void)failedToRetrievedGamerProfile:(NSInteger)statusCode
+- (void)failedToRetrieveGamerProfile:(NSInteger)statusCode
                             withError:(NSError*) error
 {
     
     [_viewController setResultText:@"Game profile retrieval failed: \n"];
     [_viewController appendResultText:[error localizedDescription]];
     
-    NSLog(@"Gamer failed with error %ld %@", statusCode, [error localizedRecoverySuggestion]);
+    NSLog(@"Gamer failed with error %ld %@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)successfullyStoredData:(id)storageKey
@@ -83,7 +97,7 @@
 
     NSLog(@"Successfully stored data %@", storageKey);
 }
-- (void)failedtoStoreData:(NSInteger)statusCode
+- (void)failedToStoreData:(NSInteger)statusCode
                 withError:(NSError*)error
            withStorageKey:(NSString*)storageKey
                  withData:(NSDictionary*)data
@@ -92,7 +106,7 @@
     [_viewController setResultText:@"Failed to store data: \n"];
     [_viewController appendResultText:[error localizedDescription]];
     
-    NSLog(@"failed to stored data with error %ld %@", statusCode, [error localizedRecoverySuggestion]);
+    NSLog(@"failed to stored data with error %ld %@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)retrievedStoredData:(NSString*)storageKey withData:(NSDictionary*)data
@@ -106,14 +120,14 @@
     NSLog(@"Successfully retrieved stored data key=%@ data=%@", storageKey, data);
 }
 
-- (void)failedtoRetrieveStoredData:(NSInteger)statusCode
+- (void)failedToRetrieveStoredData:(NSInteger)statusCode
                          withError:(NSError*)error
                     withStorageKey:(NSString*)storageKey
 {
     [_viewController setResultText:@"Failed to retrieve stored data: \n"];
     [_viewController appendResultText:[error localizedDescription]];
     
-    NSLog(@"failed to retrieve stored data %ld key=%@ error=%@", statusCode, storageKey, [error localizedRecoverySuggestion]);
+    NSLog(@"failed to retrieve stored data %ld key=%@ error=%@", (long)statusCode, storageKey, [error localizedRecoverySuggestion]);
 }
 
 - (void)successfullyDeletedData:(NSString*)storageKey
@@ -123,7 +137,7 @@
     
     NSLog(@"Successfully deleted data %@", storageKey);
 }
-- (void)failedtoDeleteStoredData:(NSInteger)statusCode
+- (void)failedToDeleteStoredData:(NSInteger)statusCode
                        withError:(NSError*)error
                   withStorageKey:(NSString*)storageKey
                         withData:(NSDictionary*)data
@@ -131,7 +145,7 @@
     [_viewController setResultText:@"Failed to deleted stored data: \n"];
     [_viewController appendResultText:[error localizedDescription]];
     
-    NSLog(@"failed to delete stored data %ld key=%@ data=%@ error=%@", statusCode, storageKey, data, [error localizedRecoverySuggestion]);
+    NSLog(@"failed to delete stored data %ld key=%@ data=%@ error=%@", (long)statusCode, storageKey, data, [error localizedRecoverySuggestion]);
 }
 
 - (void)printDictionary:(NSDictionary*) data
@@ -149,6 +163,68 @@
     }
 }
 
+- (void)retrievedGameAchievements:(NSArray*)achievements
+{
+    [_viewController setResultText:@"!!Only showing Game Achievement Names"];
+    NSMutableString *value = [[NSMutableString alloc] initWithString:@""];
+    for(id achievement in achievements) {
+        [value appendString:[achievement name]];
+        [value appendString:@"-"];
+    }
+    
+    [_viewController appendResultText:value];
+    NSLog(@"Successfully retrieved game achievements %@", value);
+}
+- (void)failedToRetrieveGameAchievements:(NSInteger)statusCode
+                               withError:(NSError *)error
+{
+    [_viewController setResultText:@"Failed to retrieve game achievements: \n"];
+    [_viewController appendResultText:[error localizedDescription]];
+    NSLog(@"Failed to retrieve game achievements %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)retrievedGamerAchievements:(NSArray*)gamerAchievements
+{
+    if ([gamerAchievements count] > 0) {
+        [_dataHolder setAchievement:[gamerAchievements objectAtIndex:0]];
+    }
+    
+    [_viewController setResultText:@"!!Only showing Gamer Achievement Names"];
+    NSMutableString *value = [[NSMutableString alloc] initWithString:@""];
+    for(id achievement in gamerAchievements) {
+        [value appendString:[achievement name]];
+        [value appendString:@"-"];
+    }
+    
+    [_viewController appendResultText:value];
+    NSLog(@"Successfully retrieved game achievements %@", value);
+    
+}
+- (void)failedToRetrieveGamerAchievements:(NSInteger)statusCode
+                                withError:(NSError *)error
+{
+    [_viewController setResultText:@"Failed to retrieve gamer achievements: \n"];
+    [_viewController appendResultText:[error localizedDescription]];
+    NSLog(@"Failed to retrieve gamer achievements %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)successfullyUpdatedAchievement:(NSString*)achievementUid
+{
+    [_viewController setResultText:@"!!Updated achievement with ID "];
+    [_viewController appendResultText:achievementUid];
+    NSLog(@"Successfully updated gamer achievement with id %@", achievementUid);
+}
+- (void)failedToUpdateAchievement:(NSInteger)statusCode
+                        withError:(NSError*)error
+               withAchievementUid:(NSString*)achievementUid
+{
+    [_viewController setResultText:@"Failed to update achievement data with id:"];
+    [_viewController appendResultText:achievementUid];
+    [_viewController appendResultText:@"\n"];
+    [_viewController appendResultText:[error localizedDescription]];
+    NSLog(@"Failed to update achievement data for %@ %ld error=%@", achievementUid, (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
 - (void)successfullyLoggedinWithGamerToken:(NSString*)gamerToken
 {
     [_dataHolder setGamerToken:gamerToken];
@@ -156,15 +232,14 @@
     NSLog(@"Successfully logged in with token: %@", gamerToken);
     
     [_viewController backToMainView];
-    [_viewController enableLoginDependantButtons];
-    [_viewController appendResultText:@"Successfully logged in. Gamer Token:"];
+    [_viewController setResultText:@"Successfully logged in. Gamer Token:"];
     [_viewController appendResultText:gamerToken];
 }
 - (void)failedToLoginWithError:(NSError*) error
 {
     [_viewController backToMainView];
     
-    [_viewController appendResultText:@"Failed to logged in"];
+    [_viewController setResultText:@"Failed to logged in"];
     [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"failed to login with error =%@", [error localizedDescription]);
 }
@@ -172,6 +247,6 @@
 {
     [_viewController backToMainView];
     
-    [_viewController appendResultText:@"User cancelled login"];
+    [_viewController setResultText:@"User cancelled login"];
 }
 @end

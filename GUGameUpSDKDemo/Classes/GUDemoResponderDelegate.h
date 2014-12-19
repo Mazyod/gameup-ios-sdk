@@ -15,7 +15,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <GUResponderProtocol.h>
+#import "GUResponderProtocol.h"
 #import "GUViewController.h"
 #import "GUDataHolder.h"
 

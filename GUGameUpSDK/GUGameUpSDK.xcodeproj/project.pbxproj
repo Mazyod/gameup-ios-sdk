@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A018FB31A2F7DEF007EF85E /* GUAchievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A018FB01A2F7DEF007EF85E /* GUAchievement.m */; };
+		8A018FB41A2F7DEF007EF85E /* GUServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A018FB21A2F7DEF007EF85E /* GUServer.m */; };
+		8A018FB51A2F7E0A007EF85E /* GUServer.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A018FB11A2F7DEF007EF85E /* GUServer.h */; };
+		8A018FB61A2F7E0E007EF85E /* GUAchievement.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A018FAF1A2F7DEF007EF85E /* GUAchievement.h */; };
+		8A018FB71A2F7E8A007EF85E /* GUGame.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD0742F41969FDF1003F0BE8 /* GUGame.h */; };
+		8A38B40B1A31FC3B002FC7B0 /* GUAchievementUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A38B40A1A31FC3B002FC7B0 /* GUAchievementUpdate.m */; };
+		8A38B40C1A3202A6002FC7B0 /* GUAchievementUpdate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A38B4091A31FC1B002FC7B0 /* GUAchievementUpdate.h */; };
 		CD0742F01969FDF1003F0BE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0742EF1969FDF1003F0BE8 /* Foundation.framework */; };
 		CD0742F71969FDF1003F0BE8 /* GUGame.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0742F61969FDF1003F0BE8 /* GUGame.m */; };
 		CD1D2AB21979190A009D1D4D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1D2AB11979190A009D1D4D /* libPods.a */; };
@@ -15,7 +22,6 @@
 		CD8828AF19910818009E8D10 /* GUGamer.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD77CF85197F1B13006ACC0D /* GUGamer.h */; };
 		CD8828B21991083D009E8D10 /* GUGameUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8828B11991083D009E8D10 /* GUGameUp.m */; };
 		CD8828B319910860009E8D10 /* GUGameUp.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD8828B01991083D009E8D10 /* GUGameUp.h */; };
-		CD8828B41991086D009E8D10 /* GUGame.m in Copy Files */ = {isa = PBXBuildFile; fileRef = CD0742F61969FDF1003F0BE8 /* GUGame.m */; };
 		CDEF31401987A12E00480139 /* GULoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEF313E1987A12E00480139 /* GULoginViewController.m */; };
 		CDEF31451987A6CB00480139 /* GULoginViewController.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CDEF313D1987A12E00480139 /* GULoginViewController.h */; };
 		CDFA81691983A3990017F277 /* GUResponderProtocol.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD77CF91197F27BA006ACC0D /* GUResponderProtocol.h */; };
@@ -29,8 +35,11 @@
 			dstPath = include;
 			dstSubfolderSpec = 16;
 			files = (
-				CD8828B41991086D009E8D10 /* GUGame.m in Copy Files */,
+				8A018FB61A2F7E0E007EF85E /* GUAchievement.h in Copy Files */,
+				8A38B40C1A3202A6002FC7B0 /* GUAchievementUpdate.h in Copy Files */,
+				8A018FB51A2F7E0A007EF85E /* GUServer.h in Copy Files */,
 				CD8828B319910860009E8D10 /* GUGameUp.h in Copy Files */,
+				8A018FB71A2F7E8A007EF85E /* GUGame.h in Copy Files */,
 				CD8828AF19910818009E8D10 /* GUGamer.h in Copy Files */,
 				CDEF31451987A6CB00480139 /* GULoginViewController.h in Copy Files */,
 				CDFA81691983A3990017F277 /* GUResponderProtocol.h in Copy Files */,
@@ -43,6 +52,12 @@
 
 /* Begin PBXFileReference section */
 		61E67FDF41755CF42A5D99C9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8A018FAF1A2F7DEF007EF85E /* GUAchievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUAchievement.h; sourceTree = "<group>"; };
+		8A018FB01A2F7DEF007EF85E /* GUAchievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUAchievement.m; sourceTree = "<group>"; };
+		8A018FB11A2F7DEF007EF85E /* GUServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUServer.h; sourceTree = "<group>"; };
+		8A018FB21A2F7DEF007EF85E /* GUServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUServer.m; sourceTree = "<group>"; };
+		8A38B4091A31FC1B002FC7B0 /* GUAchievementUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUAchievementUpdate.h; sourceTree = "<group>"; };
+		8A38B40A1A31FC3B002FC7B0 /* GUAchievementUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUAchievementUpdate.m; sourceTree = "<group>"; };
 		8AB0CBDE1982ADEC004E243D /* GUJSONSerialisableProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUJSONSerialisableProtocol.h; sourceTree = "<group>"; };
 		99A12952ADFE5319676D3E93 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD0742EC1969FDF1003F0BE8 /* libGUGameUpSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGUGameUpSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,10 +136,16 @@
 			children = (
 				CD8828B01991083D009E8D10 /* GUGameUp.h */,
 				CD8828B11991083D009E8D10 /* GUGameUp.m */,
+				8A018FAF1A2F7DEF007EF85E /* GUAchievement.h */,
+				8A018FB01A2F7DEF007EF85E /* GUAchievement.m */,
+				8A38B4091A31FC1B002FC7B0 /* GUAchievementUpdate.h */,
+				8A38B40A1A31FC3B002FC7B0 /* GUAchievementUpdate.m */,
 				CD0742F41969FDF1003F0BE8 /* GUGame.h */,
 				CD0742F61969FDF1003F0BE8 /* GUGame.m */,
 				CD77CF85197F1B13006ACC0D /* GUGamer.h */,
 				CD77CF86197F1B13006ACC0D /* GUGamer.m */,
+				8A018FB11A2F7DEF007EF85E /* GUServer.h */,
+				8A018FB21A2F7DEF007EF85E /* GUServer.m */,
 				CD77CF91197F27BA006ACC0D /* GUResponderProtocol.h */,
 				8AB0CBDE1982ADEC004E243D /* GUJSONSerialisableProtocol.h */,
 				CDEF313D1987A12E00480139 /* GULoginViewController.h */,
@@ -241,9 +262,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A018FB31A2F7DEF007EF85E /* GUAchievement.m in Sources */,
 				CD8828B21991083D009E8D10 /* GUGameUp.m in Sources */,
+				8A018FB41A2F7DEF007EF85E /* GUServer.m in Sources */,
 				CD8828AD199107A4009E8D10 /* GUGamer.m in Sources */,
 				CD0742F71969FDF1003F0BE8 /* GUGame.m in Sources */,
+				8A38B40B1A31FC3B002FC7B0 /* GUAchievementUpdate.m in Sources */,
 				CDEF31401987A12E00480139 /* GULoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -37,12 +37,7 @@
 }
 - (NSDictionary*)toDictionary
 {
-    NSDictionary *dict =   @{@"nickname" : _nickname,
-                            @"given_name" : _givenName,
-                            @"family_name" : _familyName,
-                            @"timezone" : _timezone,
-                            @"location" : _location,
-                            @"created_at" : [NSString stringWithFormat: @"%d", (int)_createdAt]};
-    return dict;
+    [NSException raise:@"Cannot be converted to NSDictionary" format:nil];
+    return nil;
 }
 @end
