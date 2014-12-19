@@ -180,12 +180,6 @@ To do this, you need to follow this [Stackoverflow Question](http://stackoverflo
 * To install dependencies (only needed when changing/updating Podfile):
 `pod install`
 
-#### Building the Quickstart Guide
-
-The documentation source for the [Quickstart Guide](#quickstart) is in the `www` folder.
-
-The documentation can be built with [Middleman](http://middlemanapp.com/). To run the local server for viewing use `middleman server` and to build compiled code for deployment use `middleman build`.
-
 ### Contribute
 
 All contributions to the documentation and the codebase are very welcome and feel free to open issues on the tracker wherever the documentation needs improving.

@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, GURequest)
     LOGIN
 };
 
-static NSString *const GAMEUP_VERSION=@"0.1.0";
+static NSString *const GAMEUP_VERSION=@"0.1.1";
 static NSString *const AFN_VERSION=@"AFN1.3.4";
 
 static NSString *const USER_AGENT_NAME=@"gameup-ios-sdk";
@@ -57,9 +57,9 @@ static NSString *USER_AGENT;
             @(PING) : @"/v0/",
             @(GAME) : @"/v0/game/",
             @(GAMER) : @"/v0/gamer/",
-            @(STORAGE_PUT) : @"/v0/storage/",
-            @(STORAGE_GET) : @"/v0/storage/",
-            @(STORAGE_DELETE) : @"/v0/storage/",
+            @(STORAGE_PUT) : @"/v0/gamer/storage/",
+            @(STORAGE_GET) : @"/v0/gamer/storage/",
+            @(STORAGE_DELETE) : @"/v0/gamer/storage/",
             @(LOGIN) : @"/v0/gamer/login/"
         };
     }
