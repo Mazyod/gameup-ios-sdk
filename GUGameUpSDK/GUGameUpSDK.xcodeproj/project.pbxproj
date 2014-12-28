@@ -17,6 +17,13 @@
 		CD0742F01969FDF1003F0BE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0742EF1969FDF1003F0BE8 /* Foundation.framework */; };
 		CD0742F71969FDF1003F0BE8 /* GUGame.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0742F61969FDF1003F0BE8 /* GUGame.m */; };
 		CD1D2AB21979190A009D1D4D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1D2AB11979190A009D1D4D /* libPods.a */; };
+		CD33F2201A5027F400275061 /* GUDefaultRequestRetryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CD33F21F1A5027F400275061 /* GUDefaultRequestRetryHandler.m */; };
+		CD33F2221A50282800275061 /* GUDefaultRequestRetryHandler.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD33F2211A50280000275061 /* GUDefaultRequestRetryHandler.h */; };
+		CD33F2231A50282D00275061 /* GURequestRetryHandlerProtocol.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD33F21E1A50208600275061 /* GURequestRetryHandlerProtocol.h */; };
+		CD34E7DB1A50995200A253E0 /* GUNoRequestRetryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CD34E7DA1A50995200A253E0 /* GUNoRequestRetryHandler.m */; };
+		CD34E7DE1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CD34E7DD1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m */; };
+		CD34E7DF1A50AFC600A253E0 /* NSURLRequest+GUURLRequest.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD34E7DC1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.h */; };
+		CD34E7E01A50AFE500A253E0 /* GUNoRequestRetryHandler.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD34E7D91A50992D00A253E0 /* GUNoRequestRetryHandler.h */; };
 		CD8828AD199107A4009E8D10 /* GUGamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD77CF86197F1B13006ACC0D /* GUGamer.m */; };
 		CD8828AF19910818009E8D10 /* GUGamer.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD77CF85197F1B13006ACC0D /* GUGamer.h */; };
 		CD8828B21991083D009E8D10 /* GUGameUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8828B11991083D009E8D10 /* GUGameUp.m */; };
@@ -44,6 +51,10 @@
 				CDEF31451987A6CB00480139 /* GULoginViewController.h in Copy Files */,
 				CDFA81691983A3990017F277 /* GUResponderProtocol.h in Copy Files */,
 				CDFA816A1983A3990017F277 /* GUJSONSerialisableProtocol.h in Copy Files */,
+				CD33F2231A50282D00275061 /* GURequestRetryHandlerProtocol.h in Copy Files */,
+				CD33F2221A50282800275061 /* GUDefaultRequestRetryHandler.h in Copy Files */,
+				CD34E7E01A50AFE500A253E0 /* GUNoRequestRetryHandler.h in Copy Files */,
+				CD34E7DF1A50AFC600A253E0 /* NSURLRequest+GUURLRequest.h in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,6 +78,13 @@
 		CD0742F61969FDF1003F0BE8 /* GUGame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GUGame.m; sourceTree = "<group>"; };
 		CD0742FD1969FDF1003F0BE8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CD1D2AB11979190A009D1D4D /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../GUGameUpSDKDemo/Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		CD33F21E1A50208600275061 /* GURequestRetryHandlerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GURequestRetryHandlerProtocol.h; sourceTree = "<group>"; };
+		CD33F21F1A5027F400275061 /* GUDefaultRequestRetryHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUDefaultRequestRetryHandler.m; sourceTree = "<group>"; };
+		CD33F2211A50280000275061 /* GUDefaultRequestRetryHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUDefaultRequestRetryHandler.h; sourceTree = "<group>"; };
+		CD34E7D91A50992D00A253E0 /* GUNoRequestRetryHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUNoRequestRetryHandler.h; sourceTree = "<group>"; };
+		CD34E7DA1A50995200A253E0 /* GUNoRequestRetryHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUNoRequestRetryHandler.m; sourceTree = "<group>"; };
+		CD34E7DC1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+GUURLRequest.h"; sourceTree = "<group>"; };
+		CD34E7DD1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+GUURLRequest.m"; sourceTree = "<group>"; };
 		CD77CF85197F1B13006ACC0D /* GUGamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUGamer.h; sourceTree = "<group>"; };
 		CD77CF86197F1B13006ACC0D /* GUGamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUGamer.m; sourceTree = "<group>"; };
 		CD77CF91197F27BA006ACC0D /* GUResponderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUResponderProtocol.h; sourceTree = "<group>"; };
@@ -146,8 +164,15 @@
 				CD77CF86197F1B13006ACC0D /* GUGamer.m */,
 				8A018FB11A2F7DEF007EF85E /* GUServer.h */,
 				8A018FB21A2F7DEF007EF85E /* GUServer.m */,
+				CD34E7DC1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.h */,
+				CD34E7DD1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m */,
 				CD77CF91197F27BA006ACC0D /* GUResponderProtocol.h */,
 				8AB0CBDE1982ADEC004E243D /* GUJSONSerialisableProtocol.h */,
+				CD33F21E1A50208600275061 /* GURequestRetryHandlerProtocol.h */,
+				CD33F2211A50280000275061 /* GUDefaultRequestRetryHandler.h */,
+				CD33F21F1A5027F400275061 /* GUDefaultRequestRetryHandler.m */,
+				CD34E7D91A50992D00A253E0 /* GUNoRequestRetryHandler.h */,
+				CD34E7DA1A50995200A253E0 /* GUNoRequestRetryHandler.m */,
 				CDEF313D1987A12E00480139 /* GULoginViewController.h */,
 				CDEF313E1987A12E00480139 /* GULoginViewController.m */,
 				CD8D1DE71A4E3713002B6AF9 /* GULoginStoryboard.storyboard */,
@@ -269,6 +294,9 @@
 				CD0742F71969FDF1003F0BE8 /* GUGame.m in Sources */,
 				8A38B40B1A31FC3B002FC7B0 /* GUAchievementUpdate.m in Sources */,
 				CDEF31401987A12E00480139 /* GULoginViewController.m in Sources */,
+				CD33F2201A5027F400275061 /* GUDefaultRequestRetryHandler.m in Sources */,
+				CD34E7DE1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m in Sources */,
+				CD34E7DB1A50995200A253E0 /* GUNoRequestRetryHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

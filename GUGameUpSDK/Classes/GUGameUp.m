@@ -17,9 +17,11 @@
 #import <AFNetworking/AFNetworking.h>
 #import <Base64.h>
 #import "GUGameUp.h"
+#import "GUAchievementUpdate.h"
 #import "GUJSONSerialisableProtocol.h"
 #import "GUResponderProtocol.h"
-#import "GUAchievementUpdate.h"
+#import "GURequestRetryHandlerProtocol.h"
+#import "GUDefaultRequestRetryHandler.h"
 
 typedef NS_ENUM(NSInteger, GURequest)
 {
@@ -44,22 +46,29 @@ static NSString *const GAMEUP_LOGIN_URL = @"https://login.gameup.io";
 static NSString *const GAMEUP_API_URL = @"https://api.gameup.io";
 
 static NSString *USER_AGENT;
+static NSInteger REQUEST_TIMEOUT=30; //seconds
 
 @implementation GUGameUp
 {
     id<GUResponderProtocol> responseDelegate;
+    id<GURequestRetryHandlerProtocol> retryHandler;
     NSDictionary *requestUrls;
     AFHTTPRequestOperationManager *networkManager;
 }
 
 - (id) initWithResponder:(id<GUResponderProtocol>)responder
 {
+    GUDefaultRequestRetryHandler *handler = [[GUDefaultRequestRetryHandler alloc] initWithDefaultRetryAttempts];
+    return [self initWithResponder:responder withRetryHandler:handler];
+}
+
+- (id) initWithResponder:(id<GUResponderProtocol>)responder withRetryHandler:(id<GURequestRetryHandlerProtocol>)handler
+{
     self = [super init];
     if (self) {
-        networkManager = [AFHTTPRequestOperationManager manager];
-        USER_AGENT = [[NSString alloc] initWithString:[self setupUserAgent]];
-        
         responseDelegate = responder;
+        retryHandler = handler;
+
         requestUrls = @{
             @(PING) : @"/v0/",
             @(SERVER) : @"/v0/server/",
@@ -73,8 +82,18 @@ static NSString *USER_AGENT;
             @(ACHIEVEMENT_POST) : @"/v0/gamer/achievement/",
             @(LOGIN) : @"/v0/gamer/login/"
         };
+        
+        USER_AGENT = [[NSString alloc] initWithString:[self setupUserAgent]];
+        networkManager = [self setupNetworkManager];
     }
     return self;
+}
+
+- (AFHTTPRequestOperationManager*) setupNetworkManager
+{
+    NSURL *baseURL = [NSURL URLWithString:GAMEUP_API_URL];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    return manager;
 }
 
 - (NSString*) setupUserAgent
@@ -230,7 +249,7 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:stringUrl]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                       timeoutInterval:30.0];
+                                                       timeoutInterval:REQUEST_TIMEOUT];
     
     NSMutableString *authorization = [[NSMutableString alloc] initWithString:apikey];
     [authorization appendString:@":"];
@@ -249,13 +268,33 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
         [request setHTTPBody:[self serialiseDictionaryToData:entity]];
     }
     
+    [self sendRequest:request withEndpoint:endpoint withAppendedUrlPath:appendedUrlPath withEntity:entity];
+}
+
+- (void)sendRequest:(NSURLRequest*)request
+       withEndpoint:(enum GURequest)endpoint
+withAppendedUrlPath:(NSString*)appendedUrlPath
+         withEntity:(id)entity
+{
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
+        [retryHandler requestSucceed:request];
         [self listenerCallback:endpoint withStatusCode:200 withAppendedUrlPath:appendedUrlPath withRequestEntity:entity withResponseEntity:JSON];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSHTTPURLResponse *response = [operation response];
-        [self listenerCallback:endpoint withStatusCode:[response statusCode] withAppendedUrlPath:appendedUrlPath withRequestEntity:entity withResponseEntity:error];
+        
+        if ([response statusCode] >= 500) {
+            [retryHandler requestFailed:request];
+            if ([retryHandler shouldRetryRequest:request]) {
+                [self sendRequest:request withEndpoint:endpoint withAppendedUrlPath:appendedUrlPath withEntity:entity];
+            } else {
+                [self listenerCallback:endpoint withStatusCode:[response statusCode] withAppendedUrlPath:appendedUrlPath withRequestEntity:entity withResponseEntity:error];
+            }
+        } else {
+            [retryHandler requestSucceed:request];
+            [self listenerCallback:endpoint withStatusCode:[response statusCode] withAppendedUrlPath:appendedUrlPath withRequestEntity:entity withResponseEntity:error];
+        }
     }];
     [networkManager.operationQueue addOperation:op];
 }
@@ -332,7 +371,6 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
 
     NSArray* achievements = [dict objectForKey:@"achievements"];
     for (id jsonAchievement in achievements) {
-        //NSDictionary* jsonAchievement = [NSJSONSerialization JSONObjectWithData:object options:0 error:nil];
         GUAchievement* achievement = [[GUAchievement alloc] initWithDictionary:jsonAchievement];
         [result addObject:achievement];
     }
