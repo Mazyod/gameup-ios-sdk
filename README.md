@@ -10,14 +10,14 @@ The service provides the features and functionality provided by game servers tod
 For the full list of features check out our [main documentation](https://gameup.io/docs/).
 
 ### Setup
-The client SDK is available on [CocoaPods](http://cocoadocs.org/docsets/GUGameUpSDK/0.1.0)
+The client SDK is available on [CocoaPods](http://cocoadocs.org/docsets/GUGameUpSDK/0.3.0)
 
-It is fully compatible with iOS 5 and XCode 4.4+.
+It is fully compatible with iOS 6 and XCode 4.4+.
 
 ### Using [CocoaPods](http://http://cocoapods.org/)
 
 ```cocoapods
-pod 'GUGameUpSDK', '~> 0.1.0'
+pod 'GUGameUpSDK', '~> 0.3.0'
 ```
 
 ### Getting Started
