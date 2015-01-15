@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://www.gameup.io"
-  s.license      = { :type => "Apache License, Version 2.0", :file => "GUGameUpSDK/LICENCE" }
+  s.license      = { :type => "Apache License, Version 2.0", :file => "LICENCE" }
   s.authors      = { "Mo Firouz" => "mo@gameup.io", "Chris Molozian" => "chris@gameup.io", "Andrei Mihu" => "andrei@gameuo.io" }
   s.social_media_url   = "http://twitter.com/gameupio"
   s.platform     = :ios, "6.0"
