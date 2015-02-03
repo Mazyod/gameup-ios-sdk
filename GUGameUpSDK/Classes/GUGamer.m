@@ -22,8 +22,7 @@
     self = [super init];
     if (self) {
         _nickname = [dictionary objectForKey:@"nickname"];
-        _givenName = [dictionary objectForKey:@"given_name"];
-        _familyName = [dictionary objectForKey:@"family_name"];
+        _name = [dictionary objectForKey:@"name"];
         _timezone = [dictionary objectForKey:@"timezone"];
         _location = [dictionary objectForKey:@"location"];
         _createdAt = [[dictionary objectForKey:@"created_at"] integerValue];

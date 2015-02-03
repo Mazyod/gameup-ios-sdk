@@ -20,6 +20,8 @@
 @interface GUDataHolder : NSObject
 @property NSString* apiKey;
 @property NSString* gamerToken;
+@property NSString* facebookAccessToken;
+@property NSString* googleAccessToken;
 @property(readonly) NSString* storageKey;
 @property(readonly) NSArray* achievementUids;
 @property GUAchievement* achievement;

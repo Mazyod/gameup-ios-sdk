@@ -41,6 +41,11 @@
 /**
  Create a new login window with a given callback responder
  */
-- (void)initWithResponder:(id<GUResponderProtocol>)guResponder withLoginServerUrl:(NSString*)guUrlPath withApiKey:(NSString*)guApiKey withUserAgent:(NSString*)guUserAgent;
+- (void)initWithResponder:(id<GUResponderProtocol>)guResponder
+       withLoginServerUrl:(NSString*)guUrlPath
+             withProvider:(NSString*)guProvider
+               withApiKey:(NSString*)guApiKey
+           withGamerToken:(NSString*)guGamerToken
+            withUserAgent:(NSString*)guUserAgent;
 
 @end

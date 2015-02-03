@@ -1,6 +1,15 @@
 Changelog
 =========
 
+### v0.5.0
+
+* *BREAKING CHANGES:* Migrating to the new Account Service. 
+* *BREAKING CHANGES:* New ways to login anonymously or use passthrough OAuth Tokens
+* *BREAKING CHANGES:* Caching API Keys in the GUGameUp client. No longer need to pass in for every operation.
+* *BREAKING CHANGES:* Gamer data only has Name - not Given and Family name.
+
+---
+
 ### v0.4.0
 
 * Added support for `/v0/game/leaderboard` endpoint.

@@ -25,11 +25,8 @@
 /** Nickname, intended for easy public display. */
 @property(readonly) NSString* nickname;
 
-/** First name. */
-@property(readonly) NSString* givenName;
-
-/** Last name. */
-@property(readonly) NSString* familyName;
+/** Gamer Name. */
+@property(readonly) NSString* name;
 
 /** Time zone of the gamer. */
 @property(readonly) NSString* timezone;

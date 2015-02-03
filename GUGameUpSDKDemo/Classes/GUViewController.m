@@ -24,6 +24,32 @@
     NSInteger currentlySelectedRowInPicker;
 }
 
+
+typedef NS_ENUM(NSInteger, GUOptions)
+{
+    LOGIN_ANONYMOUS,
+    LOGIN_FACEBOOK,
+    LOGIN_GOOGLE,
+    LOGIN_WEB_GAMEUP,
+    LOGIN_WEB_TWITTER,
+    LOGIN_WEB_FACEBOOK,
+    LOGIN_WEB_GOOGLE,
+    _NULL,
+    PING,
+    SERVER,
+    GAME,
+    ACHIEVEMENT,
+    LEADERBOARD,
+    GAMER,
+    STORAGE_PUT,
+    STORAGE_GET,
+    STORAGE_DEL,
+    GAMER_ACHIEVEMENT,
+    GAMER_ACHIEVEMENT_UPDATE,
+    GAMER_LEADERBOARD,
+    GAMER_LEADERBOARD_UPDATE
+};
+
 - (void)awakeFromNib
 {
     self.picker.dataSource = self;
@@ -31,12 +57,19 @@
     currentlySelectedRowInPicker = 0;
 
     pickerData = [NSArray arrayWithObjects:
+                  @"Login Anonymously",
+                  @"Facebook Login",
+                  @"Google Login",
+                  @"GameUp Web Login",
+                  @"Twitter Web Login",
+                  @"Facebook Web Login",
+                  @"Google Web Login",
+                  @"----",
                   @"Ping",
                   @"Server Info",
                   @"Game Info",
                   @"Game Achievements",
                   @"Game Leaderboard",
-                  @"Login",
                   @"Gamer Info",
                   @"PUT Storage",
                   @"GET Storage",
@@ -52,54 +85,81 @@
 
 - (IBAction)onGoButtonClick:(id)sender
 {
-    // case number correspond to the index of the pickerData array
     switch (currentlySelectedRowInPicker) {
-        case 0:
-            [_gameup ping:[_dataHolder apiKey]];
+        case LOGIN_ANONYMOUS:
+            [self loginAnonymously];
             break;
-        case 1:
-            [_gameup requestServerInfo:[_dataHolder apiKey]];
+        case LOGIN_FACEBOOK:
+            [_gameup loginThroughFacebookWith:[_dataHolder facebookAccessToken]];
             break;
-        case 2:
-            [_gameup requestToGetGameDetails:[_dataHolder apiKey]];
+        case LOGIN_GOOGLE:
+            [_gameup loginThroughGoogleWith:[_dataHolder googleAccessToken]];
             break;
-        case 3:
-            [_gameup requestToGetAllAchievements:[_dataHolder apiKey]];
-            break;
-        case 4:
-            [_gameup requestToGetLeaderboardData:[_dataHolder apiKey] withLeaderboardId:[_dataHolder leaderboardId]];
-            break;
-        case 5:
-            loginController = [_gameup requestSocialLogin:[_dataHolder apiKey]];
+        case LOGIN_WEB_GAMEUP:
+            loginController = [_gameup loginThroughBrowserToGameUp];
             [_window setRootViewController:loginController];
             break;
-        case 6:
-            [_gameup requestToGetGamerProfile:[_dataHolder apiKey] withToken:[_dataHolder gamerToken]];
+        case LOGIN_WEB_TWITTER:
+            loginController = [_gameup loginThroughBrowserToTwitter];
+            [_window setRootViewController:loginController];
             break;
-        case 7:
+        case LOGIN_WEB_FACEBOOK:
+            loginController = [_gameup loginThroughBrowserToFacebook];
+            [_window setRootViewController:loginController];
+            break;
+        case LOGIN_WEB_GOOGLE:
+            loginController = [_gameup loginThroughBrowserToGoogle];
+            [_window setRootViewController:loginController];
+            break;
+        case PING:
+            [_gameup ping];
+            break;
+        case SERVER:
+            [_gameup requestServerInfo];
+            break;
+        case GAME:
+            [_gameup requestToGetGameDetails];
+            break;
+        case ACHIEVEMENT:
+            [_gameup requestToGetAllAchievements];
+            break;
+        case LEADERBOARD:
+            [_gameup requestToGetLeaderboardData:[_dataHolder leaderboardId]];
+            break;
+        case GAMER:
+            [_gameup requestToGetGamerProfile:[_dataHolder gamerToken]];
+            break;
+        case STORAGE_PUT:
             [self storeData];
             break;
-        case 8:
-            [_gameup requestToGetStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
+        case STORAGE_GET:
+            [_gameup requestToGetStoredData:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
             break;
-        case 9:
-            [_gameup requestToDeleteStoredData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
+        case STORAGE_DEL:
+            [_gameup requestToDeleteStoredData:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
             break;
-        case 10:
-            [_gameup requestToGetAllAchievements:[_dataHolder apiKey] withToken:[_dataHolder gamerToken]];
+        case GAMER_ACHIEVEMENT:
+            [_gameup requestToGetAllAchievements:[_dataHolder gamerToken]];
             break;
-        case 11:
+        case GAMER_ACHIEVEMENT_UPDATE:
             [self updateAchievement];
             break;
-        case 12:
-            [_gameup requestToGetLeaderboardDataAndRank:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] withLeaderboardId:[_dataHolder leaderboardId]];
+        case GAMER_LEADERBOARD:
+            [_gameup requestToGetLeaderboardDataAndRank:[_dataHolder gamerToken] withLeaderboardId:[_dataHolder leaderboardId]];
             break;
-        case 13:
+        case GAMER_LEADERBOARD_UPDATE:
             [self updateLeaderboard];
             break;
         default:
             break;
     }
+}
+
+- (void)loginAnonymously
+{
+    UIDevice *device = [UIDevice currentDevice];
+    NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
+    [_gameup loginAnonymouslyWith:currentDeviceId];
 }
 
 - (void)storeData
@@ -114,14 +174,14 @@
        @"killed" : @5
     };
     
-    [_gameup requestToStoreData:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] storeWithKey:[_dataHolder storageKey] withValue:storageValue];
+    [_gameup requestToStoreData:[_dataHolder gamerToken] storeWithKey:[_dataHolder storageKey] withValue:storageValue];
 }
 
 - (void)updateAchievement
 {
     NSString* uid = [[_dataHolder achievementUids] objectAtIndex:0];
     GUAchievementUpdate* update = [[GUAchievementUpdate alloc] initWithAchievementUid:uid andCount:1];
-    [_gameup requestToUpdateAchievement:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] withAchievementUpdate:update];
+    [_gameup requestToUpdateAchievement:[_dataHolder gamerToken] withAchievementUpdate:update];
 }
 
 - (void)updateLeaderboard
@@ -129,7 +189,7 @@
     NSString* uid = [_dataHolder leaderboardId];
     long currentTime = (long)(NSTimeInterval)([[NSDate date] timeIntervalSince1970]);
     GULeaderboardUpdate* update = [[GULeaderboardUpdate alloc] initWithLeaderboardUid:uid andScore:currentTime];
-    [_gameup requestToUpdateLeaderboardRank:[_dataHolder apiKey] withToken:[_dataHolder gamerToken] withLeaderboardUpdate:update];
+    [_gameup requestToUpdateLeaderboardRank:[_dataHolder gamerToken] withLeaderboardUpdate:update];
 }
 
 /////////////

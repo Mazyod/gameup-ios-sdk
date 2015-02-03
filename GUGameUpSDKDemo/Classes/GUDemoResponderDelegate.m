@@ -90,8 +90,7 @@
     [_viewController setResultText:@"Retrieved gamer profile: \n"];
     
     NSLog(@"\n\nGamer Nick Name: %@",[gamer nickname]);
-    NSLog(@"Gamer Given Name: %@",[gamer givenName]);
-    NSLog(@"Gamer Family Name: %@",[gamer familyName]);
+    NSLog(@"Gamer Name: %@",[gamer name]);
     NSLog(@"Gamer timezone: %@",[gamer timezone]);
     NSLog(@"Gamer location: %@",[gamer location]);
     NSLog(@"Gamer createdAt: %ld",(long)[gamer createdAt]);
@@ -290,7 +289,7 @@
 {
     [_viewController backToMainView];
     
-    [_viewController setResultText:@"Failed to logged in"];
+    [_viewController setResultText:@"Failed to login"];
     [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"failed to login with error =%@", [error localizedDescription]);
 }

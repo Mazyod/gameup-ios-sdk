@@ -22,6 +22,10 @@
     self = [super init];
     if (self) {
         _apiKey = @"6fb004d4289748199cb858ab0905f657";
+        
+        _facebookAccessToken = @"facebook_oauth_access_token";
+        _googleAccessToken = @"google_oauth_access_token";
+        
         //for demo purposes, let's hardcode the storage key!
         _storageKey = @"profile_info";
         // we need to hardcode the Achievement Uid

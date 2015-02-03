@@ -22,15 +22,24 @@ static NSString *const SUCCESS_SUB_URL = @"success";
 {
     id<GUResponderProtocol> responder;
     NSString* urlPath;
+    NSString* provider;
     NSString* apiKey;
+    NSString* gamerToken;
     NSString* userAgent;
 }
 
-- (void)initWithResponder:(id<GUResponderProtocol>)guResponder withLoginServerUrl:(NSString*)guUrlPath withApiKey:(NSString*)guApiKey withUserAgent:(NSString*)guUserAgent
+- (void)initWithResponder:(id<GUResponderProtocol>)guResponder
+       withLoginServerUrl:(NSString*)guUrlPath
+             withProvider:(NSString*)guProvider
+               withApiKey:(NSString*)guApiKey
+           withGamerToken:(NSString*)guGamerToken
+            withUserAgent:(NSString*)guUserAgent
 {
     responder = guResponder;
     urlPath = guUrlPath;
+    provider = guProvider;
     apiKey = guApiKey;
+    gamerToken = guGamerToken;
     userAgent = guUserAgent;
 }
 
@@ -40,8 +49,14 @@ static NSString *const SUCCESS_SUB_URL = @"success";
     loginViewNavBarCancelButton.action = @selector(onCancelButtonTap);
     
     NSMutableString *fullUrlPathWithApiKey = [[NSMutableString alloc] initWithString:urlPath];
+    [fullUrlPathWithApiKey appendString:provider];
     [fullUrlPathWithApiKey appendString:@"?apiKey="];
     [fullUrlPathWithApiKey appendString:apiKey];
+    
+    if ([gamerToken length] > 0) {
+        [fullUrlPathWithApiKey appendString:@"&token="];
+        [fullUrlPathWithApiKey appendString:gamerToken];
+    }
     
     NSURL *url = [NSURL URLWithString:fullUrlPathWithApiKey];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -83,7 +98,6 @@ static NSString *const SUCCESS_SUB_URL = @"success";
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    
     [responder failedToLoginWithError:error];
 }
 - (BOOL)shouldAutorotate {

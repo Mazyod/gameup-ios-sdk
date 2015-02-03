@@ -16,6 +16,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GUResponderProtocol.h"
+#import "GURequestRetryHandlerProtocol.h"
 #import "GULoginViewController.h"
 #import "GUAchievementUpdate.h"
 #import "GULeaderboardUpdate.h"
@@ -25,56 +26,55 @@
  */
 @interface GUGameUp : NSObject
 
--(id)initWithResponder:(id<GUResponderProtocol>)responder;
-
 /**
- Ping the GameUp service to check it is reachable and ready to handle
- requests.
-
- @param apiKey The API key to use.
+ Initialise GUGameUp with an API Key, your responder and default retry handler.
  */
--(void)ping:(NSString*)apiKey;
+-(id)initWithApiKey:(id)apikey withResponder:(id<GUResponderProtocol>)responder;
+
+/**
+ Initialise GUGameUp with an API Key, your responder and a custom retry handler.
+ */
+-(id)initWithApiKey:(id)apikey withResponder:(id<GUResponderProtocol>)responder withRetryHandler:(id<GURequestRetryHandlerProtocol>)handler;
+
+/**
+ Ping the GameUp service with the given API Key to check it is reachable and ready to handle
+ requests.
+ */
+-(void)ping;
 
 /**
  Ping the GameUp service to check it is reachable and ready to handle
  requests.
 
- @param apiKey The API key to use.
  @param token The gamer token to use, may be an empty String but not null.
  */
--(void)ping:(id)apiKey withToken:(id)token;
+-(void)pingWithToken:(id)token;
 
 /**
  Retrieve GameUp global service and/or server instance data.
-
- @param apiKey The API key to use.
  */
--(void)requestServerInfo:(NSString*)apiKey;
+-(void)requestServerInfo;
 
 /**
  Retrieve information about the game the given API key corresponds to, as
  configured in the remote service.
-
- @param apiKey The API key to use.
  */
--(void)requestToGetGameDetails:(id)apiKey;
+-(void)requestToGetGameDetails;
 
 /**
  Get information about the gamer who owns this session.
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  */
--(void)requestToGetGamerProfile:(id)apiKey withToken:(id)token;
+-(void)requestToGetGamerProfile:(id)token;
 
 /**
  Perform a key-value storage read operation.
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  @param storageKey The key to attempt to read data from.
  */
--(void)requestToGetStoredData:(id)apiKey withToken:(id)token storedWithKey:(NSString*)storageKey;
+-(void)requestToGetStoredData:(id)token storedWithKey:(NSString*)storageKey;
 
 /**
  Perform a key-value storage write operation, storing data as JSON. Data
@@ -83,81 +83,167 @@
  NOTE: This is not designed to store confidential data, such as payment
  information etc.
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  @param storageKey The key to store the given data under.
  @param value The object to serialise and store.
  */
--(void)requestToStoreData:(id)apiKey withToken:(id)token storeWithKey:(NSString*)storageKey withValue:(NSDictionary*)value;
+-(void)requestToStoreData:(id)token storeWithKey:(NSString*)storageKey withValue:(NSDictionary*)value;
 
 /**
  Perform a key-value storage delete operation. Will silently ignore absent
  data.
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  @param key The key to delete data from.
  */
--(void)requestToDeleteStoredData:(id)apiKey withToken:(id)token storedWithKey:(NSString*)storageKey;
+-(void)requestToDeleteStoredData:(id)token storedWithKey:(NSString*)storageKey;
 
 /**
  Get a list of achievements available for the game, excluding any gamer
  data such as progress or completed timestamps.
-
- @param apiKey The API key to use.
  */
--(void)requestToGetAllAchievements:(id)apiKey;
+-(void)requestToGetAllAchievements;
 
 /**
  Get a list of achievements available for the game, including any gamer
  data such as progress or completed timestamps.
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  */
--(void)requestToGetAllAchievements:(id)apiKey withToken:(id)token;
+-(void)requestToGetAllAchievements:(id)token;
 
 /**
  Report progress towards a given achievement.
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  @param achievementUpdate An achievement update to be sent to the GameUp server
  */
--(void)requestToUpdateAchievement:(id)apiKey withToken:(id)token withAchievementUpdate:(GUAchievementUpdate*)achievementUpdate;
+-(void)requestToUpdateAchievement:(id)token withAchievementUpdate:(GUAchievementUpdate*)achievementUpdate;
 
 /**
  Get the metadata including leaderboard enteries for given leaderboard.
 
- @param apiKey The API key to use.
  @param leaderboardId The Leadeboard ID to use.
  */
--(void)requestToGetLeaderboardData:(id)apiKey withLeaderboardId:(id)leaderboardId;
+-(void)requestToGetLeaderboardData:(id)leaderboardId;
 
 /**
  Get the metadata including leaderboard enteries for given leaderboard. 
  This also retrieves the current gamer's leaderboard standing
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  @param leaderboardId The Leadeboard ID to use.
  */
--(void)requestToGetLeaderboardDataAndRank:(id)apiKey withToken:(id)token withLeaderboardId:(id)leaderboardId;
+-(void)requestToGetLeaderboardDataAndRank:(id)token withLeaderboardId:(id)leaderboardId;
 
 /**
  Update the gamer's stand in the leaderboard with a new score
 
- @param apiKey The API key to use.
  @param token The gamer token to use.
  @param leaderboardUpdate A Leaderboard update to be sent to the GameUp server
  */
--(void)requestToUpdateLeaderboardRank:(id)apiKey withToken:(id)token withLeaderboardUpdate:(GULeaderboardUpdate*)leaderboardUpdate;
+-(void)requestToUpdateLeaderboardRank:(id)token withLeaderboardUpdate:(GULeaderboardUpdate*)leaderboardUpdate;
 
 /**
- Prepares a GULoginStoryboard and attaches it to a GULoginViewController
-
- @param apiKey The API key to use.
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through Twitter
+ 
  @return GULoginViewController prepared to be shown to the user
  */
--(UIViewController*)requestSocialLogin:(id)apiKey;
+-(UIViewController*)loginThroughBrowserToTwitter;
+
+/**
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through Twitter
+ and links an existing (usually an anonymous token) to this account.
+
+ @param gamerToken The gamerToken to attach to the logged in profile
+ @return GULoginViewController prepared to be shown to the user
+ */
+-(UIViewController*)loginThroughBrowserToTwitterAndLinkExistingToken:(NSString*)gamerToken;
+
+/**
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through Google
+ 
+ @return GULoginViewController prepared to be shown to the user
+ */
+-(UIViewController*)loginThroughBrowserToGoogle;
+
+/**
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through Google
+ and links an existing (usually an anonymous token) to this account.
+ 
+ @param gamerToken The gamerToken to attach to the logged in profile
+ @return GULoginViewController prepared to be shown to the user
+ */
+-(UIViewController*)loginThroughBrowserToGoogleAndLinkExistingToken:(NSString*)gamerToken;
+
+/**
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through Facebook
+ 
+ @return GULoginViewController prepared to be shown to the user
+ */
+-(UIViewController*)loginThroughBrowserToFacebook;
+
+/**
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through Facebook
+ and links an existing (usually an anonymous token) to this account.
+ 
+ @param gamerToken The gamerToken to attach to the logged in profile
+ @return GULoginViewController prepared to be shown to the user
+ */
+-(UIViewController*)loginThroughBrowserToFacebookAndLinkExistingToken:(NSString*)gamerToken;
+
+/**
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through GameUp
+ 
+ @return GULoginViewController prepared to be shown to the user
+ */
+-(UIViewController*)loginThroughBrowserToGameUp;
+
+/**
+ Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through GameUp
+ and links an existing (usually an anonymous token) to this account.
+ 
+ @param gamerToken The gamerToken to attach to the logged in profile
+ @return GULoginViewController prepared to be shown to the user
+ */
+-(UIViewController*)loginThroughBrowserToGameUpAndLinkExistingToken:(NSString*)gamerToken;
+
+/**
+ Perform an anonymous login
+ @param deviceId An identifier to use to create a gamerToken. Using Device ID is recommended.
+ */
+-(void)loginAnonymouslyWith:(NSString*)deviceId;
+
+/**
+ Perform OAuth passthrough login for Facebook.
+ @param accessToken The Facebook access token to send to GameUp.
+ */
+-(void)loginThroughFacebookWith:(NSString*)accessToken;
+
+/**
+ Perform OAuth passthrough login for Facebook.
+ @param accessToken The Facebook access token to send to GameUp.
+ @param gameUpSession A session pointing to an existing account, on
+                      successful login the new social profile will be
+                      bound to this same account if possible, data will
+                      be migrated from the given account to the new one
+                      otherwise.
+ */
+-(void)loginThroughFacebookWith:(NSString*)accessToken andLinkExistingToken:(NSString*)gamerToken;
+
+/**
+ Perform OAuth passthrough login for Google.
+ @param accessToken The Google access token to send to GameUp.
+ */
+-(void)loginThroughGoogleWith:(NSString*)accessToken;
+
+/**
+ Perform OAuth passthrough login for Google.
+ @param accessToken The Google access token to send to GameUp.
+ @param gameUpSession A session pointing to an existing account, on
+                      successful login the new social profile will be
+                      bound to this same account if possible, data will
+                      be migrated from the given account to the new one
+ */
+-(void)loginThroughGoogleWith:(NSString*)accessToken andLinkExistingToken:(NSString*)gamerToken;
 @end

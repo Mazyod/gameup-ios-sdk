@@ -21,6 +21,7 @@
 #import "GUDataHolder.h"
 
 @implementation GUAppDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // if you do this, the window won't rotate anymore...
@@ -36,7 +37,7 @@
     [delegate setViewController:self.viewController];
     [delegate setDataHolder:dataHolder];
     
-    GUGameUp *gameup = [[GUGameUp alloc] initWithResponder:delegate];
+    GUGameUp *gameup = [[GUGameUp alloc] initWithApiKey:[dataHolder apiKey] withResponder:delegate];
     [self.viewController setGameUpController:gameup];
     [self.viewController setDataHolder:dataHolder];
     [self.viewController setWindow:_window];
