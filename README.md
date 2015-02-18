@@ -10,14 +10,14 @@ The service provides the features and functionality provided by game servers tod
 For the full list of features check out our [main documentation](https://gameup.io/docs/).
 
 ### Setup
-The client SDK is available on [CocoaPods](http://cocoadocs.org/docsets/GUGameUpSDK/0.3.0)
+The client SDK is available on [CocoaPods](http://cocoadocs.org/docsets/GUGameUpSDK/)
 
 It is fully compatible with iOS 6 and XCode 4.4+.
 
 ### Using [CocoaPods](http://http://cocoapods.org/)
 
 ```cocoapods
-pod 'GUGameUpSDK', '~> 0.3.0'
+pod 'GUGameUpSDK'
 ```
 
 ### Getting Started
@@ -79,7 +79,7 @@ static NSString *const MYGAME_API_KEY = @"your-api-key";
         // ... other init procedures you'd like to do!
 
         MyGameUpResponder *responder = [[MyGameUpResponder alloc] init];
-        _gameup = [[GUGameUp alloc] initWithResponder:responder];
+        _gameup = [[GUGameUp alloc] initWithApiKey:MYGAME_API_KEY withResponder:responder];
     }
 }
 // other methods ...
@@ -89,7 +89,7 @@ static NSString *const MYGAME_API_KEY = @"your-api-key";
 
 Now that you have an instance of a GUGameUp class, let's use it to log our gamer into the system. 
 
-Signing is done through a UIWebView which is created and maintained by the GUGameUpSDK. However this UIWebView is given back to you so you can display it however you like.
+Signing can be done through a UIWebView which is created and maintained by the GUGameUpSDK. However this UIWebView is given back to you so you can display it however you like.
 
 ```Objective-C
 // MyGameHelper.m
@@ -97,15 +97,16 @@ Signing is done through a UIWebView which is created and maintained by the GUGam
 // let's imagine that this is the method invoked when the gamer taps on 'Sign in' in your game.
 - (void)onLoginClick 
 {
-    UIViewController* webViewController = [_gameup requestSocialLogin:[MyGame]];
+    // if you'd like to log the gamer in seamlessly...
+    [_gameup loginAnonymously];
 
-    // somehow display the given view controller in your game - we recommend through your current views NavigationController
-    [navigationController pushViewController:webViewController animated:YES];
+    // or if you'd like the gamer to login through Twitter using a webView:
+    UIViewController* webViewController = [_gameup loginThroughBrowserToTwitter];
 }
 // other methods ...
 ```
 
-Once the gamer has logged in through their desired social login, you'll get a callback to the `MyGameUpResponder` we previously defined:
+Once the gamer has logged in through their desired login, you'll get a callback to the `MyGameUpResponder` we previously defined:
 
 ```Objective-C
 // MyGameUpResponder.m
@@ -115,10 +116,10 @@ Once the gamer has logged in through their desired social login, you'll get a ca
 - (void)successfullyLoggedinWithGamerToken:(NSString*)gamerToken 
 {
     // Called with the new session when login completes successfully.
-        // You may want to:
-        //  * Store it - most other gamer-specific method requires this gamerToken!
-        //  * Update your game's state.
-        //  * Welcome the user!
+    // You may want to:
+    //  * Store it - most other gamer-specific method requires this gamerToken!
+    //  * Update your game's state.
+    //  * Welcome the user!
 }
 - (void)failedToLoginWithError:(NSError*) error
 {
@@ -153,7 +154,7 @@ This part of the README is intended for those who would like to develop the `GUG
 
 To develop on the codebase you'll need:
 
-* [XCode 4.4+](https://developer.apple.com/xcode/) The iOS IDE (We internally use XCode 5)
+* [XCode 4.4+](https://developer.apple.com/xcode/) The iOS IDE (We internally use XCode 6.1)
 * [CocoaPods](http://cocoapods.org/) for dependecy management.
 * [Alcatraz](http://alcatraz.io) for plugin management within XCode. This is optional (but we use it internally).
 
@@ -174,8 +175,6 @@ To do this, you need to follow this [Stackoverflow Question](http://stackoverflo
 
 * Open the `GUGameUpSDKDemo.xcworkspace` in XCode. `GUGameUpSDK` can be found in the `Development Pods` group in the `Pods` project.     
 * Clean the project build directory by pressing the following keys: `Alt`+`Cmd`+`Shift`+`K`
-
-* Please ignore any `#pragma` warning that you get about `AFHTTPClient.h`. This warning is fixed in AFNetworking 2.0.
 
 * To install dependencies (only needed when changing/updating Podfile):
 `pod install`
