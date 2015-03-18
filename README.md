@@ -133,10 +133,6 @@ Once the gamer has logged in through their desired login, you'll get a callback 
 // ... other methods ...
 ```
 
-#### Quickstart
-
-The iOS SDK has a quickstart guide to help familiarise you with the API quickly it's available [here](http://gameup-io.github.io/gameup-ios-sdk/).
-
 #### More Documentation
 
 For more examples and more information on features in the GameUp service have a look at our [main documentation](https://gameup.io/docs/?ios).
