@@ -14,7 +14,7 @@ The client SDK is available on [CocoaPods](http://cocoadocs.org/docsets/GUGameUp
 
 It is fully compatible with iOS 6 and XCode 4.4+.
 
-### Using [CocoaPods](http://http://cocoapods.org/)
+### Using [CocoaPods](http://cocoapods.org/)
 
 ```cocoapods
 pod 'GUGameUpSDK'
