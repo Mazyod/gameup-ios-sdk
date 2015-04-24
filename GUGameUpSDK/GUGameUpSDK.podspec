@@ -3,9 +3,9 @@ Pod::Spec.new do |s|
   s.version      = "0.5.0"
   s.summary      = "GameUp iOS SDK for GameUp.io"
   s.description  = <<-DESC
-                   The iOS SDK for GameUp.io gaming backend server. 
-                   
-                   GameUp is a gaming backend as a service. 
+                   The iOS SDK for GameUp.io gaming backend server.
+
+                   GameUp is a gaming backend as a service.
                    For more information please checkout http://www.gameup.io.
                    DESC
 
@@ -15,19 +15,19 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "6.0"
   s.source       = { :git => "https://github.com/gameup-io/gameup-ios-sdk.git", :tag => "0.5.0"}
 
-  # FOR RELEASE  
-  s.license      = { :type => "Apache License, Version 2.0", :file => "GUGameUpSDK/LICENCE" }
-  s.source_files  = "GUGameUpSDK/Classes/*.{h,m}"
-  s.public_header_files = "GUGameUpSDK/Classes/*.h"
-  s.resources  = "GUGameUpSDK/Classes/*.storyboard"
+  # FOR RELEASE
+  #s.license      = { :type => "Apache License, Version 2.0", :file => "GUGameUpSDK/LICENCE" }
+  #s.source_files  = "GUGameUpSDK/Classes/*.{h,m}"
+  #s.public_header_files = "GUGameUpSDK/Classes/*.h"
+  #s.resources  = "GUGameUpSDK/Classes/*.storyboard"
 
   # FOR DEVELOPMENT
-  #s.license      = { :type => "Apache License, Version 2.0", :file => "LICENCE" }
-  #s.source_files  = "Classes/*.{h,m}"
-  #s.public_header_files = "Classes/*.h"
-  #s.resources  = "Classes/*.storyboard"
+  s.license      = { :type => "Apache License, Version 2.0", :file => "LICENCE" }
+  s.source_files  = "Classes/*.{h,m}"
+  s.public_header_files = "Classes/*.h"
+  s.resources  = "Classes/*.storyboard"
 
-  s.requires_arc = true  
+  s.requires_arc = true
   s.ios.deployment_target = "6.0"
   s.frameworks    = 'SystemConfiguration', 'MobileCoreServices'
 
@@ -36,5 +36,4 @@ Pod::Spec.new do |s|
 
   ## todo figure out SSL Pinning
   #define _AFNETWORKING_PIN_SSL_CERTIFICATES_
-  
 end
