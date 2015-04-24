@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GUGameUpSDK"
-  s.version      = "0.5.0"
+  s.version      = "0.6.0"
   s.summary      = "GameUp iOS SDK for GameUp.io"
   s.description  = <<-DESC
                    The iOS SDK for GameUp.io gaming backend server.
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.authors      = { "Mo Firouz" => "mo@gameup.io", "Chris Molozian" => "chris@gameup.io", "Andrei Mihu" => "andrei@gameup.io" }
   s.social_media_url   = "http://twitter.com/gameupio"
   s.platform     = :ios, "6.0"
-  s.source       = { :git => "https://github.com/gameup-io/gameup-ios-sdk.git", :tag => "0.5.0"}
+  s.source       = { :git => "https://github.com/gameup-io/gameup-ios-sdk.git", :tag => "0.6.0"}
 
   # FOR RELEASE
   #s.license      = { :type => "Apache License, Version 2.0", :file => "GUGameUpSDK/LICENCE" }
