@@ -29,6 +29,8 @@
 		CD8828B21991083D009E8D10 /* GUGameUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8828B11991083D009E8D10 /* GUGameUp.m */; };
 		CD8828B319910860009E8D10 /* GUGameUp.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD8828B01991083D009E8D10 /* GUGameUp.h */; };
 		CD8D1DE81A4E3713002B6AF9 /* GULoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8D1DE71A4E3713002B6AF9 /* GULoginStoryboard.storyboard */; };
+		CDCFE6F31AED2133006A20CB /* GUHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCFE6F21AED2133006A20CB /* GUHttpClient.m */; };
+		CDCFE6F41AEDA430006A20CB /* GUHttpClient.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CDCFE6F11AED211C006A20CB /* GUHttpClient.h */; };
 		CDECE7B01A54461A000ADDEF /* GULeaderboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECE7AF1A54461A000ADDEF /* GULeaderboard.m */; };
 		CDECE7B51A5446A1000ADDEF /* GULeaderboardRank.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECE7B41A5446A1000ADDEF /* GULeaderboardRank.m */; };
 		CDECE7B81A54594E000ADDEF /* GULeaderboardEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECE7B71A54594E000ADDEF /* GULeaderboardEntry.m */; };
@@ -67,6 +69,7 @@
 				CDECE7BA1A54643E000ADDEF /* GULeaderboardUpdate.h in Copy Files */,
 				CDECE7BB1A546440000ADDEF /* GULeaderboard.h in Copy Files */,
 				CDECE7BC1A546444000ADDEF /* GULeaderboardEntry.h in Copy Files */,
+				CDCFE6F41AEDA430006A20CB /* GUHttpClient.h in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +107,8 @@
 		CD8828B11991083D009E8D10 /* GUGameUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUGameUp.m; sourceTree = "<group>"; };
 		CD8D1DE71A4E3713002B6AF9 /* GULoginStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GULoginStoryboard.storyboard; sourceTree = "<group>"; };
 		CDC0F6A6196FD80800670565 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		CDCFE6F11AED211C006A20CB /* GUHttpClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GUHttpClient.h; sourceTree = "<group>"; };
+		CDCFE6F21AED2133006A20CB /* GUHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUHttpClient.m; sourceTree = "<group>"; };
 		CDECE7AC1A5445C4000ADDEF /* GULeaderboardUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GULeaderboardUpdate.h; sourceTree = "<group>"; };
 		CDECE7AE1A5445D4000ADDEF /* GULeaderboardUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GULeaderboardUpdate.m; sourceTree = "<group>"; };
 		CDECE7AF1A54461A000ADDEF /* GULeaderboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GULeaderboard.m; sourceTree = "<group>"; };
@@ -172,6 +177,8 @@
 		CD0742F11969FDF1003F0BE8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CDCFE6F11AED211C006A20CB /* GUHttpClient.h */,
+				CDCFE6F21AED2133006A20CB /* GUHttpClient.m */,
 				CD8828B01991083D009E8D10 /* GUGameUp.h */,
 				CD8828B11991083D009E8D10 /* GUGameUp.m */,
 				8A018FAF1A2F7DEF007EF85E /* GUAchievement.h */,
@@ -319,6 +326,7 @@
 				CD8828B21991083D009E8D10 /* GUGameUp.m in Sources */,
 				8A018FB41A2F7DEF007EF85E /* GUServer.m in Sources */,
 				CD8828AD199107A4009E8D10 /* GUGamer.m in Sources */,
+				CDCFE6F31AED2133006A20CB /* GUHttpClient.m in Sources */,
 				CD0742F71969FDF1003F0BE8 /* GUGame.m in Sources */,
 				8A38B40B1A31FC3B002FC7B0 /* GUAchievementUpdate.m in Sources */,
 				CDEF31401987A12E00480139 /* GULoginViewController.m in Sources */,

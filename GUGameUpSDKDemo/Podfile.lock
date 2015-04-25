@@ -21,7 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Base64nl (1.2)
-  - GUGameUpSDK (0.5.0):
+  - GUGameUpSDK (0.6.0):
     - AFNetworking (~> 2.5.0)
     - Base64nl (~> 1.2)
 
@@ -33,8 +33,8 @@ EXTERNAL SOURCES:
     :path: ../GUGameUpSDK
 
 SPEC CHECKSUMS:
-  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
-  Base64nl: 98b890ea8e2131561ea6aa0f2039ef82c35d47bf
-  GUGameUpSDK: b5045463afefdc358d1aa4be2660bc2e6f7621b4
+  AFNetworking: 96ac9bf3eda33582701cb1fcc5b896aa1e20311e
+  Base64nl: a497bdcd1c01ea793d36b399016195a8713c0e95
+  GUGameUpSDK: 590bc0c87af4e93c36cbc302c1a5ce0608306b89
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.3

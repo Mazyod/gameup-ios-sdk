@@ -24,9 +24,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // if you do this, the window won't rotate anymore...
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     self.viewController = [storyboard instantiateViewControllerWithIdentifier:@"GUViewController"];
     self.window.rootViewController = self.viewController;
@@ -38,6 +35,7 @@
     [delegate setDataHolder:dataHolder];
     
     GUGameUp *gameup = [[GUGameUp alloc] initWithApiKey:[dataHolder apiKey] withResponder:delegate];
+    
     [self.viewController setGameUpController:gameup];
     [self.viewController setDataHolder:dataHolder];
     [self.viewController setWindow:_window];
@@ -45,6 +43,7 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 }
