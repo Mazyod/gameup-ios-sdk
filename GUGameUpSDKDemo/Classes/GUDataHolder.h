@@ -16,14 +16,19 @@
 
 #import <Foundation/Foundation.h>
 #import "GUAchievement.h"
+#import "GUMatch.h"
+#import "GUMatchTurn.h"
+#import "GUSession.h"
 
 @interface GUDataHolder : NSObject
 @property NSString* apiKey;
-@property NSString* gamerToken;
+@property GUSession* session;
 @property NSString* facebookAccessToken;
 @property NSString* googleAccessToken;
 @property(readonly) NSString* storageKey;
 @property(readonly) NSArray* achievementUids;
 @property GUAchievement* achievement;
 @property NSString* leaderboardId;
+@property GUMatch* match;
+@property GUMatchTurn* turn;
 @end

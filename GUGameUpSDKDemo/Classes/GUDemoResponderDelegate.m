@@ -15,6 +15,7 @@
  */
 
 #import "GUDemoResponderDelegate.h"
+#import "GUSession.h"
 #import "GUAppDelegate.h"
 #import "GUAchievement.h"
 #import "GUAchievementUpdate.h"
@@ -24,51 +25,29 @@
 
 @implementation GUDemoResponderDelegate
 
-- (void)printDictionary:(NSDictionary*) data
-{
-    [_viewController appendResultText:@"!!Only showing NSString values"];
-    
-    for(id key in data) {
-        NSMutableString *value = [[NSMutableString alloc] initWithString:key];
-        [value appendString:@"="];
-        id dicValue = [data objectForKey:key];
-        if ([dicValue isKindOfClass:[NSString class]]) {
-            [value appendString:dicValue];
-            [_viewController appendResultText:value];
-        }
-    }
-}
-
 - (void)successfulPing
 {
     NSLog(@"Ping successful!!");
-    [_viewController setResultText:@"Ping Successful!"];
 }
 - (void)failedPing:(NSInteger)statusCode
          withError:(NSError*) error
 {
     NSLog(@"Ping failed with error %@", error);
-    [_viewController setResultText:@"Ping failed: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
 }
 
 - (void)retrievedServerData:(GUServer*)serverData
 {
     NSString *inStr = [NSString stringWithFormat: @"Server Time: %ld", (long)[serverData time]];
-    [_viewController setResultText:inStr];
+    NSLog(@"ServerTime: %@", inStr);
 }
 - (void)failedToRetrieveServerData:(NSInteger)statusCode
                           withError:(NSError*) error
 {
     NSLog(@"ServerTime failed with error %@", error);
-    [_viewController setResultText:@"ServerTime failed: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
 }
-
 
 - (void)retrievedGameData:(GUGame*)game
 {
-    [_viewController setResultText:@"Retrieved details: \n"];
     
     NSLog(@"Game Name: %@",[game name]);
     NSLog(@"Game Description: %@",[game description]);
@@ -78,16 +57,11 @@
 - (void)failedToRetrieveGameData:(NSInteger)statusCode
                         withError:(NSError*) error
 {
-    
-    [_viewController setResultText:@"Game retrieval failed: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
-
     NSLog(@"Game failed with error %ld %@", (long)statusCode, error);
 }
 
 - (void)retrievedGamerProfile:(GUGamer*)gamer
 {
-    [_viewController setResultText:@"Retrieved gamer profile: \n"];
     
     NSLog(@"\n\nGamer Nick Name: %@",[gamer nickname]);
     NSLog(@"Gamer Name: %@",[gamer name]);
@@ -98,18 +72,11 @@
 - (void)failedToRetrieveGamerProfile:(NSInteger)statusCode
                             withError:(NSError*) error
 {
-    
-    [_viewController setResultText:@"Game profile retrieval failed: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
-    
     NSLog(@"Gamer failed with error %ld %@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)successfullyStoredData:(id)storageKey
 {
-    [_viewController setResultText:@"Successfully stored data at "];
-    [_viewController appendResultText:storageKey];
-
     NSLog(@"Successfully stored data %@", storageKey);
 }
 - (void)failedToStoreData:(NSInteger)statusCode
@@ -117,21 +84,11 @@
            withStorageKey:(NSString*)storageKey
                  withData:(NSDictionary*)data
 {
-    
-    [_viewController setResultText:@"Failed to store data: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
-    
     NSLog(@"failed to stored data with error %ld %@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)retrievedStoredData:(NSString*)storageKey withData:(NSDictionary*)data
 {
-    [_viewController setResultText:@"Retrieved data at "];
-    [_viewController appendResultText:storageKey];
-    [_viewController appendResultText:@"\n"];
-    
-    [self printDictionary:data];
-    
     NSLog(@"Successfully retrieved stored data key=%@ data=%@", storageKey, data);
 }
 
@@ -139,46 +96,33 @@
                          withError:(NSError*)error
                     withStorageKey:(NSString*)storageKey
 {
-    [_viewController setResultText:@"Failed to retrieve stored data: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
-    
     NSLog(@"failed to retrieve stored data %ld key=%@ error=%@", (long)statusCode, storageKey, [error localizedRecoverySuggestion]);
 }
 
 - (void)successfullyDeletedData:(NSString*)storageKey
 {
-    [_viewController setResultText:@"Successfully deleted data at "];
-    [_viewController appendResultText:storageKey];
-    
     NSLog(@"Successfully deleted data %@", storageKey);
 }
 - (void)failedToDeleteStoredData:(NSInteger)statusCode
                        withError:(NSError*)error
                   withStorageKey:(NSString*)storageKey
 {
-    [_viewController setResultText:@"Failed to deleted stored data: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
-    
     NSLog(@"failed to delete stored data %ld key=%@ error=%@", (long)statusCode, storageKey, [error localizedRecoverySuggestion]);
 }
 
 - (void)retrievedGameAchievements:(NSArray*)achievements
 {
-    [_viewController setResultText:@"!!Only showing Game Achievement Names"];
     NSMutableString *value = [[NSMutableString alloc] initWithString:@""];
     for(id achievement in achievements) {
         [value appendString:[achievement name]];
         [value appendString:@"-"];
     }
     
-    [_viewController appendResultText:value];
     NSLog(@"Successfully retrieved game achievements %@", value);
 }
 - (void)failedToRetrieveGameAchievements:(NSInteger)statusCode
                                withError:(NSError *)error
 {
-    [_viewController setResultText:@"Failed to retrieve game achievements: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"Failed to retrieve game achievements %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
@@ -188,102 +132,173 @@
         [_dataHolder setAchievement:[gamerAchievements objectAtIndex:0]];
     }
     
-    [_viewController setResultText:@"!!Only showing Gamer Achievement Names"];
     NSMutableString *value = [[NSMutableString alloc] initWithString:@""];
     for(id achievement in gamerAchievements) {
         [value appendString:[achievement name]];
         [value appendString:@"-"];
     }
     
-    [_viewController appendResultText:value];
     NSLog(@"Successfully retrieved game achievements %@", value);
-    
 }
+
 - (void)failedToRetrieveGamerAchievements:(NSInteger)statusCode
                                 withError:(NSError *)error
 {
-    [_viewController setResultText:@"Failed to retrieve gamer achievements: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"Failed to retrieve gamer achievements %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)successfullyUpdatedAchievement:(NSString*)achievementUid
 {
-    [_viewController setResultText:@"!!Updated achievement with ID "];
-    [_viewController appendResultText:achievementUid];
     NSLog(@"Successfully updated gamer achievement with id %@", achievementUid);
 }
 - (void)failedToUpdateAchievement:(NSInteger)statusCode
                         withError:(NSError*)error
                withAchievementUid:(NSString*)achievementUid
 {
-    [_viewController setResultText:@"Failed to update achievement data with id:"];
-    [_viewController appendResultText:achievementUid];
-    [_viewController appendResultText:@"\n"];
-    [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"Failed to update achievement data for %@ %ld error=%@", achievementUid, (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)retrievedLeaderboardData:(GULeaderboard*)leaderboard
 {
-    [_viewController setResultText:@"Successfully retrieved leaderboard"];
-    [_viewController appendResultText:[leaderboard name]];
-    [_viewController appendResultText:@"\n"];
     NSLog(@"Successfully retrieved leaderboard %@", [leaderboard name]);
 }
 - (void)failedToRetrieveLeaderboardData:(NSInteger)statusCode
                               withError:(NSError *)error
 {
-    [_viewController setResultText:@"Failed to retrieve leaderboard: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"Failed to retrieve leaderboard %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
-
 }
 
 - (void)retrievedLeaderboardData:(GULeaderboard *)leaderboard andRank:(GULeaderboardRank*)leaderboardRank
 {
-    [_viewController setResultText:@"Successfully retrieved leaderboard and rank"];
-    [_viewController appendResultText:[leaderboard name]];
-    [_viewController appendResultText:@"\n"];
-    [_viewController appendResultText:@"current rank: \n"];
-    [_viewController appendResultText:[@([leaderboardRank rank]) stringValue]];
-    [_viewController appendResultText:@" @ : \n"];
-    [_viewController appendResultText:[@([leaderboardRank rankAt]) stringValue]];
     NSLog(@"Successfully retrieved leaderboard and rank %@ %ld", [leaderboard name], (long)[leaderboardRank rank]);
 }
 - (void)failedToRetrieveLeaderboardDataAndRank:(NSInteger)statusCode
                                      withError:(NSError *)error
 {
-    [_viewController setResultText:@"Failed to retrieve leaderboard and rank: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"Failed to retrieve leaderboard and rank %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
 - (void)successfullyUpdatedLeaderboardRank:(NSString*)leaderboardId
 {
-    [_viewController setResultText:@"Successfully updated leaderboard ranking"];
-    [_viewController appendResultText:leaderboardId];
     NSLog(@"Successfully updated leaderboard ranking %@", leaderboardId);
-
 }
 - (void)failedToUpdateLeaderboardRank:(NSInteger)statusCode
                             withError:(NSError*)error
                    withLeaderboardUid:(NSString*)leaderboardUid
 {
-    [_viewController setResultText:@"Failed to update leaderboard ranking: \n"];
-    [_viewController appendResultText:[error localizedDescription]];
     NSLog(@"Failed to update leaderboard ranking %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
 }
 
-- (void)successfullyLoggedinWithGamerToken:(NSString*)gamerToken
+- (void)retrievedMatches:(NSArray*)matches
 {
-    [_dataHolder setGamerToken:gamerToken];
+    id m = [[NSMutableString alloc] initWithString:@""];
+    for (GUMatch* match in matches) {
+        [m appendString:match.matchId];
+        [m appendString:@", "];
+        
+        _dataHolder.match = match;
+    }
     
-    NSLog(@"Successfully logged in with token: %@", gamerToken);
+    NSLog(@"Match list: %@", m);
+}
+- (void)failedToRetrieveMatches:(NSInteger)statusCode
+                      withError:(NSError*)error
+{
+    NSLog(@"Failed to get match list %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
+}
+- (void)retrievedMatch:(GUMatch*)match
+           withMatchId:(NSString*)matchId
+{
+    id m = [[NSMutableString alloc] initWithString:@""];
+    for (id gamer in match.gamers) {
+        [m appendString:gamer];
+        [m appendString:@", "];
+    }
+    NSLog(@"Match gamers: %@", m);
+}
+- (void)failedToRetrieveMatch:(NSString*)matchId
+               withStatusCode:(NSInteger)statusCode
+                    withError:(NSError*)error
+{
+    NSLog(@"Failed to get match list %ld error=%@", (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)retrievedTurn:(NSArray*)turns forMatch:(NSString*)matchId
+{
+    id m = [[NSMutableString alloc] initWithString:@""];
+    for (GUMatchTurn* turn in turns) {
+        [m appendString:turn.gamer];
+        [m appendString:@", "];
+        _dataHolder.turn = turn;
+    }
+    NSLog(@"Turn data %@ for match %@", m, matchId);
+}
+- (void)failedToRetrieveTurnData:(NSInteger)statusCode
+                       withError:(NSError*)error
+                        forMatch:(NSString*)matchId
+{
+    NSLog(@"Failed to get turns for match %@ - %ld %@", matchId, (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)successfullySubmittedTurnDataForMatch:(NSString*)matchId
+{
+    NSLog(@"Submitted turn data for match %@", matchId);
+}
+
+- (void)failedToSubmitTurn:(NSInteger)statusCode
+                 withError:(NSError*)error
+                  ForMatch:(NSString*)matchId
+                  withData:(id)data
+{
+    NSLog(@"Failed to submit turns for match %@ - %ld %@", matchId, (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)createdNewMatch:(GUMatch*)match
+{
+    NSLog(@"Created new match %@", match.matchId);
+    _dataHolder.match = match;
+}
+- (void)successfullyQueuedGamerForNewMatch
+{
+    NSLog(@"Queued gamer for a match");
+}
+- (void)failedToCreateMatch:(NSInteger)statusCode
+                  withError:(NSError*)error
+{
+    NSLog(@"Failed to create match %ld %@", (long)statusCode, [error localizedRecoverySuggestion]);
+}
+- (void)SuccessfullyEndedMatch:(NSString*)matchId
+{
+    NSLog(@"Ended match %@", matchId);
+}
+- (void)failedToEndMatch:(NSInteger)statusCode
+               withError:(NSError*)error
+              forMatchId:(NSString*)matchId
+{
+    NSLog(@"Failed to end match %@ - %ld %@", matchId, (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)SuccessfullyLeftMatch:(NSString*)matchId
+{
+    NSLog(@"Left match %@", matchId);
+}
+
+- (void)failedToLeaveMatch:(NSInteger)statusCode
+                 withError:(NSError*)error
+                forMatchId:(NSString*)matchId
+{
+    NSLog(@"Failed to leave match %@ - %ld %@", matchId, (long)statusCode, [error localizedRecoverySuggestion]);
+}
+
+- (void)successfullyLoggedinWithSession:(GUSession*)session
+{
+    [_dataHolder setSession:session];
+    
+    NSLog(@"Successfully logged in with token: %@", [session getGamerToken]);
     
     [_viewController backToMainView];
     [_viewController setResultText:@"Successfully logged in. Gamer Token:"];
-    [_viewController appendResultText:gamerToken];
+    [_viewController appendResultText:[session getGamerToken]];
 }
 - (void)failedToLoginWithError:(NSError*) error
 {

@@ -15,11 +15,10 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "GUSession.h"
 #import "GUResponderProtocol.h"
 #import "GURequestRetryHandlerProtocol.h"
 #import "GULoginViewController.h"
-#import "GUAchievementUpdate.h"
-#import "GULeaderboardUpdate.h"
 
 /**
  Represents interface for interacting with the GameUp service
@@ -37,112 +36,39 @@
 -(id)initWithApiKey:(id)apikey withResponder:(id<GUResponderProtocol>)responder withRetryHandler:(id<GURequestRetryHandlerProtocol>)handler;
 
 /**
+ Restores a GameUp Session with a Gamer Token. Validate Gamer Token with [GUSession ping].
+ */
+-(GUSession*)restoreSession:(id)gamerToken;
+
+/**
  Ping the GameUp service with the given API Key to check it is reachable and ready to handle
  requests.
  */
 -(void)ping;
 
 /**
- Ping the GameUp service to check it is reachable and ready to handle
- requests.
-
- @param token The gamer token to use, may be an empty String but not null.
- */
--(void)pingWithToken:(id)token;
-
-/**
  Retrieve GameUp global service and/or server instance data.
  */
--(void)requestServerInfo;
+-(void)retrieveServerInfo;
 
 /**
  Retrieve information about the game the given API key corresponds to, as
  configured in the remote service.
  */
--(void)requestToGetGameDetails;
-
-/**
- Get information about the gamer who owns this session.
-
- @param token The gamer token to use.
- */
--(void)requestToGetGamerProfile:(id)token;
-
-/**
- Perform a key-value storage read operation.
-
- @param token The gamer token to use.
- @param storageKey The key to attempt to read data from.
- */
--(void)requestToGetStoredData:(id)token storedWithKey:(NSString*)storageKey;
-
-/**
- Perform a key-value storage write operation, storing data as JSON. Data
- is private per-user and per-game.
-
- NOTE: This is not designed to store confidential data, such as payment
- information etc.
-
- @param token The gamer token to use.
- @param storageKey The key to store the given data under.
- @param value The object to serialise and store.
- */
--(void)requestToStoreData:(id)token storeWithKey:(NSString*)storageKey withValue:(NSDictionary*)value;
-
-/**
- Perform a key-value storage delete operation. Will silently ignore absent
- data.
-
- @param token The gamer token to use.
- @param key The key to delete data from.
- */
--(void)requestToDeleteStoredData:(id)token storedWithKey:(NSString*)storageKey;
+-(void)retrieveGameDetails;
 
 /**
  Get a list of achievements available for the game, excluding any gamer
  data such as progress or completed timestamps.
  */
--(void)requestToGetAllAchievements;
-
-/**
- Get a list of achievements available for the game, including any gamer
- data such as progress or completed timestamps.
-
- @param token The gamer token to use.
- */
--(void)requestToGetAllAchievements:(id)token;
-
-/**
- Report progress towards a given achievement.
-
- @param token The gamer token to use.
- @param achievementUpdate An achievement update to be sent to the GameUp server
- */
--(void)requestToUpdateAchievement:(id)token withAchievementUpdate:(GUAchievementUpdate*)achievementUpdate;
+-(void)retrieveAllAchievements;
 
 /**
  Get the metadata including leaderboard enteries for given leaderboard.
 
  @param leaderboardId The Leadeboard ID to use.
  */
--(void)requestToGetLeaderboardData:(id)leaderboardId;
-
-/**
- Get the metadata including leaderboard enteries for given leaderboard. 
- This also retrieves the current gamer's leaderboard standing
-
- @param token The gamer token to use.
- @param leaderboardId The Leadeboard ID to use.
- */
--(void)requestToGetLeaderboardDataAndRank:(id)token withLeaderboardId:(id)leaderboardId;
-
-/**
- Update the gamer's stand in the leaderboard with a new score
-
- @param token The gamer token to use.
- @param leaderboardUpdate A Leaderboard update to be sent to the GameUp server
- */
--(void)requestToUpdateLeaderboardRank:(id)token withLeaderboardUpdate:(GULeaderboardUpdate*)leaderboardUpdate;
+-(void)retrieveLeaderboardDataWithLeaderboardId:(id)leaderboardId;
 
 /**
  Prepares a GULoginStoryboard and attaches it to a GULoginViewController to login through Twitter

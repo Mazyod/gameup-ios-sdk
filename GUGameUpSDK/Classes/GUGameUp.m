@@ -16,9 +16,6 @@
 
 #import "GUGameUp.h"
 #import "GUHttpClient.h"
-#import "GUAchievementUpdate.h"
-#import "GULeaderboardUpdate.h"
-#import "GUResponderProtocol.h"
 #import "GUDefaultRequestRetryHandler.h"
 
 @implementation GUGameUp
@@ -45,126 +42,51 @@
     return self;
 }
 
+-(GUSession*)restoreSession:(id)gamerToken
+{
+    return [[GUSession alloc] initWithApiKey:apiKey withToken:gamerToken withResponder:responseDelegate withRetryHandler:retryHandler];
+}
+
 - (void)ping
 {
-    [self pingWithToken:@""];
-}
-
-- (void)pingWithToken:(NSString*)token
-{
     [self sendApiRequest:PING
-     withAppendedUrlPath:@""
+           withUrlParams:@{}
               withMethod:@"HEAD"
-               withToken:token
               withEntity:@""];
 }
 
-- (void)requestServerInfo
+- (void)retrieveServerInfo
 {
     [self sendApiRequest:SERVER
-     withAppendedUrlPath:@""
+           withUrlParams:@{}
               withMethod:@"GET"
-               withToken:@""
               withEntity:@""];
 }
 
-- (void)requestToGetGameDetails
+- (void)retrieveGameDetails
 {
     [self sendApiRequest:GAME
-     withAppendedUrlPath:@""
+           withUrlParams:@{}
               withMethod:@"GET"
-               withToken:@""
               withEntity:@""];
 }
 
-- (void)requestToGetGamerProfile:(NSString*)token
-{
-    [self sendApiRequest:GAMER
-     withAppendedUrlPath:@""
-              withMethod:@"GET"
-               withToken:token
-              withEntity:@""];
-}
-
-- (void)requestToGetStoredData:(id)token storedWithKey:(NSString*)storageKey
-{
-    [self sendApiRequest:STORAGE_GET
-     withAppendedUrlPath:storageKey
-              withMethod:@"GET"
-               withToken:token
-              withEntity:@""];
-}
-
-- (void)requestToStoreData:(id)token storeWithKey:(NSString*)storageKey withValue:(NSDictionary*)value
-{
-    [self sendApiRequest:STORAGE_PUT
-     withAppendedUrlPath:storageKey
-              withMethod:@"PUT"
-               withToken:token
-              withEntity:value];
-}
-
-- (void)requestToDeleteStoredData:(id)token storedWithKey:(NSString*)storageKey
-{
-    [self sendApiRequest:STORAGE_DELETE
-     withAppendedUrlPath:storageKey
-              withMethod:@"DELETE"
-               withToken:token
-              withEntity:@""];
-}
-
--(void)requestToGetAllAchievements
+-(void)retrieveAllAchievements
 {
     [self sendApiRequest:ACHIEVEMENTS_GAME
-     withAppendedUrlPath:@""
+           withUrlParams:@{}
               withMethod:@"GET"
-               withToken:@""
               withEntity:@""];
 }
 
--(void)requestToGetAllAchievements:(id)token
-{
-    [self sendApiRequest:ACHIEVEMENTS_GAMER
-     withAppendedUrlPath:@""
-              withMethod:@"GET"
-               withToken:token
-              withEntity:@""];
-}
-
--(void)requestToUpdateAchievement:(id)token
-            withAchievementUpdate:(GUAchievementUpdate*)achievementUpdate
-{
-    [self sendApiRequest:ACHIEVEMENT_POST
-     withAppendedUrlPath:[achievementUpdate achievementId]
-              withMethod:@"POST"
-               withToken:token
-              withEntity:[achievementUpdate toDictionary]];
-}
-
--(void)requestToGetLeaderboardData:(id)leaderboardId
+-(void)retrieveLeaderboardDataWithLeaderboardId:(id)leaderboardId
 {
     [self sendApiRequest:LEADERBOARD_GAME
-     withAppendedUrlPath:leaderboardId
+           withUrlParams:@{@":id": leaderboardId}
               withMethod:@"GET"
-               withToken:@""
               withEntity:@""];
 }
--(void)requestToGetLeaderboardDataAndRank:(id)token withLeaderboardId:(id)leaderboardId
-{
-    [self sendApiRequest:LEADERBOARD_GAMER
-     withAppendedUrlPath:leaderboardId
-              withMethod:@"GET"
-               withToken:token
-              withEntity:@""];
-}
--(void)requestToUpdateLeaderboardRank:(id)token withLeaderboardUpdate:(GULeaderboardUpdate*)leaderboardUpdate
-{
-    [self sendApiRequest:LEADERBOARD_POST
-     withAppendedUrlPath:[leaderboardUpdate leaderboardId]
-              withMethod:@"POST"
-               withToken:token
-              withEntity:[leaderboardUpdate toDictionary]];
-}
+
 
 -(UIViewController*)loginThroughBrowserToTwitter
 {
@@ -208,6 +130,7 @@
     
     GULoginViewController *controller = (GULoginViewController *)[loginStoryboard instantiateViewControllerWithIdentifier:@"GULoginViewController"];
     [controller initWithResponder:responseDelegate
+                 withRetryHandler:retryHandler
                withLoginServerUrl:loginUrlPath
                      withProvider:loginProvider
                        withApiKey:apiKey
@@ -221,7 +144,7 @@
     NSDictionary* entity = @{@"id" : deviceId};
     [GUHttpClient sendRequest:GAMEUP_LOGIN_URL
                  withEndpoint:LOGIN
-          withAppendedUrlPath:@"anonymous"
+                withUrlParams:@{@":type": @"anonymous"}
                    withMethod:@"POST"
                    withApiKey:apiKey
                     withToken:@""
@@ -259,18 +182,17 @@
 }
 
 - (void)sendApiRequest:(enum GURequestType)endpoint
-   withAppendedUrlPath:(NSString*)appendedUrlPath
+         withUrlParams:(NSDictionary*)urlParams
             withMethod:(NSString*)method
-             withToken:(NSString*)token
             withEntity:(id)entity
 {
 
     [GUHttpClient sendRequest:GAMEUP_API_URL
                  withEndpoint:endpoint
-          withAppendedUrlPath:appendedUrlPath
+                withUrlParams:urlParams
                    withMethod:method
                    withApiKey:apiKey
-                    withToken:token
+                    withToken:@""
                    withEntity:entity
                 withResponder:responseDelegate
              withRetryHandler:retryHandler];

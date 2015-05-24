@@ -36,6 +36,12 @@ typedef NS_ENUM(NSInteger, GURequestType)
     LEADERBOARD_GAME,
     LEADERBOARD_GAMER,
     LEADERBOARD_POST,
+    MATCH_GET_ALL,
+    MATCH_GET,
+    MATCH_TURN_GET,
+    MATCH_TURN_POST,
+    MATCH_POST,
+    MATCH_POST_ACTION,
     LOGIN
 };
 
@@ -53,7 +59,7 @@ typedef NS_ENUM(NSInteger, GURequestType)
 
 + (void)sendRequest:(NSString*)to
        withEndpoint:(enum GURequestType)endpoint
-withAppendedUrlPath:(NSString*)appendedUrlPath
+      withUrlParams:(NSDictionary*)urlParams
          withMethod:(NSString*)method
          withApiKey:(NSString*)apikeyToUse
           withToken:(NSString*)token

@@ -18,9 +18,12 @@
 #import <Base64.h>
 
 #import "GUHttpClient.h"
+#import "GUSession.h"
 #import "GUAchievement.h"
 #import "GULeaderboard.h"
 #import "GULeaderboardRank.h"
+#import "GUMatch.h"
+#import "GUMatchTurn.h"
 #import "GUResponderProtocol.h"
 #import "GURequestRetryHandlerProtocol.h"
 
@@ -44,16 +47,22 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
                      @(SERVER) : @"/v0/server/",
                      @(GAME) : @"/v0/game/",
                      @(GAMER) : @"/v0/gamer/",
-                     @(STORAGE_PUT) : @"/v0/gamer/storage/",
-                     @(STORAGE_GET) : @"/v0/gamer/storage/",
-                     @(STORAGE_DELETE) : @"/v0/gamer/storage/",
+                     @(STORAGE_PUT) : @"/v0/gamer/storage/:key",
+                     @(STORAGE_GET) : @"/v0/gamer/storage/:key",
+                     @(STORAGE_DELETE) : @"/v0/gamer/storage/:key",
                      @(ACHIEVEMENTS_GAME) : @"/v0/game/achievement/",
                      @(ACHIEVEMENTS_GAMER) : @"/v0/game/achievement/",
-                     @(ACHIEVEMENT_POST) : @"/v0/gamer/achievement/",
-                     @(LEADERBOARD_GAME) : @"/v0/game/leaderboard/",
-                     @(LEADERBOARD_GAMER) : @"/v0/gamer/leaderboard/",
-                     @(LEADERBOARD_POST) : @"/v0/gamer/leaderboard/",
-                     @(LOGIN) : @"/v0/gamer/login/"
+                     @(ACHIEVEMENT_POST) : @"/v0/gamer/achievement/:id",
+                     @(LEADERBOARD_GAME) : @"/v0/game/leaderboard/:id",
+                     @(LEADERBOARD_GAMER) : @"/v0/gamer/leaderboard/:id",
+                     @(LEADERBOARD_POST) : @"/v0/gamer/leaderboard/:id",
+                     @(MATCH_GET_ALL) : @"/v0/gamer/match/",
+                     @(MATCH_GET) : @"/v0/gamer/match/:id",
+                     @(MATCH_TURN_GET): @"/v0/gamer/match/:id/turn/:turn_id",
+                     @(MATCH_TURN_POST): @"/v0/gamer/match/:id/turn",
+                     @(MATCH_POST): @"/v0/gamer/match/",
+                     @(MATCH_POST_ACTION): @"/v0/gamer/match/:id",
+                     @(LOGIN) : @"/v0/gamer/login/:type"
                     };
     
     USER_AGENT = [[NSString alloc] initWithString:[GUHttpClient setupUserAgent]];
@@ -111,7 +120,7 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
     
     [GUHttpClient sendRequest:GAMEUP_LOGIN_URL
                  withEndpoint:LOGIN
-          withAppendedUrlPath:@"oauth2"
+                withUrlParams:@{@":type": @"oauth2"}
                    withMethod:@"POST"
                    withApiKey:apikeyToUse
                     withToken:token
@@ -122,7 +131,7 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
 
 + (void)sendRequest:(NSString*)to
        withEndpoint:(enum GURequestType)endpoint
-withAppendedUrlPath:(NSString*)appendedUrlPath
+      withUrlParams:(NSDictionary*)urlParams
          withMethod:(NSString*)method
          withApiKey:(NSString*)apiKey
           withToken:(NSString*)token
@@ -133,9 +142,14 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
     
     NSMutableString *stringUrl = [[NSMutableString alloc] initWithString:to];
     [stringUrl appendString:[REQUEST_URLS objectForKey:@(endpoint)]];
-    [stringUrl appendString:appendedUrlPath];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:stringUrl]
+    NSString* finalUrl = stringUrl;
+    for (id key in urlParams) {
+        id param = [urlParams objectForKey:key];
+        finalUrl = [finalUrl stringByReplacingOccurrencesOfString:key withString:param];
+    }
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:finalUrl]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:REQUEST_TIMEOUT];
     
@@ -158,7 +172,8 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
     
     [GUHttpClient sendRequest:request
                  withEndpoint:endpoint
-          withAppendedUrlPath:appendedUrlPath
+                withUrlParams:urlParams
+                   withApiKey:apiKey
                    withEntity:entity
                 withResponder:responder
              withRetryHandler:handler];
@@ -166,7 +181,8 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
 
 + (void)sendRequest:(NSURLRequest*)request
        withEndpoint:(enum GURequestType)endpoint
-withAppendedUrlPath:(NSString*)appendedUrlPath
+      withUrlParams:(NSDictionary*)urlParams
+         withApiKey:(id)apikey
          withEntity:(id)entity
       withResponder:(id<GUResponderProtocol>)responder
    withRetryHandler:(id<GURequestRetryHandlerProtocol>)retryHandler
@@ -178,11 +194,13 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
         [retryHandler requestSucceed:request];
         [GUHttpClient listenerCallback:endpoint
-                        withStatusCode:200
-                   withAppendedUrlPath:appendedUrlPath
+                        withStatusCode:[[operation response] statusCode]
+                         withUrlParams:urlParams
+                            withApiKey:apikey
                      withRequestEntity:entity
                     withResponseEntity:JSON
-                         withResponder:responder];
+                         withResponder:responder
+                      withRetryHandler:retryHandler];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSHTTPURLResponse *response = [operation response];
         
@@ -190,27 +208,32 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
             [retryHandler requestFailed:request];
             if ([retryHandler shouldRetryRequest:request]) {
                 [GUHttpClient sendRequest:request
-                     withEndpoint:endpoint
-              withAppendedUrlPath:appendedUrlPath
-                       withEntity:entity
-                    withResponder:responder
+                             withEndpoint:endpoint
+                            withUrlParams:urlParams
+                               withApiKey:apikey
+                               withEntity:entity
+                            withResponder:responder
                  withRetryHandler:retryHandler];
             } else {
                 [self listenerCallback:endpoint
                         withStatusCode:[response statusCode]
-                   withAppendedUrlPath:appendedUrlPath
+                         withUrlParams:urlParams
+                            withApiKey:apikey
                      withRequestEntity:entity
                     withResponseEntity:error
-                         withResponder:responder];
+                         withResponder:responder
+                      withRetryHandler:retryHandler];
             }
         } else {
             [retryHandler requestSucceed:request];
             [self listenerCallback:endpoint
                     withStatusCode:[response statusCode]
-               withAppendedUrlPath:appendedUrlPath
+                     withUrlParams:urlParams
+                        withApiKey:apikey
                  withRequestEntity:entity
                 withResponseEntity:error
-                     withResponder:responder];
+                     withResponder:responder
+                  withRetryHandler:retryHandler];
         }
     }];
     [NETWORK_MANAGER.operationQueue addOperation:op];
@@ -218,14 +241,23 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
 
 + (void)listenerCallback:(enum GURequestType)requestKey
           withStatusCode:(NSInteger)statusCode
-     withAppendedUrlPath:(id)urlPath
+     withUrlParams:(NSDictionary*)urlParams
+              withApiKey:(id)apikey
        withRequestEntity:(id)requestEntity
       withResponseEntity:(id)responseEntity
            withResponder:(id<GUResponderProtocol>)responseDelegate
+        withRetryHandler:(id<GURequestRetryHandlerProtocol>)retryHandler
 {
     switch (requestKey) {
         case LOGIN:
-            if (statusCode == 200) { [responseDelegate successfullyLoggedinWithGamerToken:[responseEntity objectForKey:@"token"]]; }
+            if (statusCode == 200) {
+                id token = [responseEntity objectForKey:@"token"];
+                GUSession* session = [[GUSession alloc] initWithApiKey:apikey
+                                                             withToken:token
+                                                         withResponder:responseDelegate
+                                                      withRetryHandler:retryHandler];
+                [responseDelegate successfullyLoggedinWithSession:session];
+            }
             else { [responseDelegate failedToLoginWithError:responseEntity]; }
             break;
         case PING:
@@ -245,16 +277,16 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
             else { [responseDelegate failedToRetrieveGamerProfile:statusCode withError:responseEntity]; }
             break;
         case STORAGE_GET:
-            if (statusCode == 200) { [responseDelegate retrievedStoredData:urlPath withData:[GUHttpClient parseStorageDataToDictionary:responseEntity]]; }
-            else { [responseDelegate failedToRetrieveStoredData:statusCode withError:responseEntity withStorageKey:urlPath]; }
+            if (statusCode == 200) { [responseDelegate retrievedStoredData:[urlParams objectForKey:@":key"] withData:[GUHttpClient parseStorageDataToDictionary:responseEntity]]; }
+            else { [responseDelegate failedToRetrieveStoredData:statusCode withError:responseEntity withStorageKey:[urlParams objectForKey:@":key"]]; }
             break;
         case STORAGE_PUT:
-            if (statusCode == 200) { [responseDelegate successfullyStoredData:urlPath]; }
-            else { [responseDelegate failedToStoreData:statusCode withError:responseEntity withStorageKey:urlPath withData:requestEntity ]; }
+            if (statusCode == 200) { [responseDelegate successfullyStoredData:[urlParams objectForKey:@":key"]]; }
+            else { [responseDelegate failedToStoreData:statusCode withError:responseEntity withStorageKey:[urlParams objectForKey:@":key"] withData:requestEntity ]; }
             break;
         case STORAGE_DELETE:
-            if (statusCode == 200) { [responseDelegate successfullyDeletedData:urlPath]; }
-            else { [responseDelegate failedToDeleteStoredData:statusCode withError:responseEntity withStorageKey:urlPath]; }
+            if (statusCode == 200) { [responseDelegate successfullyDeletedData:[urlParams objectForKey:@":key"]]; }
+            else { [responseDelegate failedToDeleteStoredData:statusCode withError:responseEntity withStorageKey:[urlParams objectForKey:@":key"]]; }
             break;
         case ACHIEVEMENTS_GAME:
             if (statusCode == 200) { [responseDelegate retrievedGameAchievements:[GUHttpClient convertDictionaryToAchievementArray:responseEntity]]; }
@@ -265,8 +297,8 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
             else { [responseDelegate failedToRetrieveGamerAchievements:statusCode withError:responseEntity]; }
             break;
         case ACHIEVEMENT_POST:
-            if (statusCode == 200 || statusCode == 204) { [responseDelegate successfullyUpdatedAchievement:urlPath]; }
-            else { [responseDelegate failedToUpdateAchievement:statusCode withError:responseEntity withAchievementUid:urlPath]; }
+            if (statusCode == 200 || statusCode == 204) { [responseDelegate successfullyUpdatedAchievement:[urlParams objectForKey:@":id"]]; }
+            else { [responseDelegate failedToUpdateAchievement:statusCode withError:responseEntity withAchievementUid:[urlParams objectForKey:@":id"]]; }
             break;
         case LEADERBOARD_GAME:
             if (statusCode == 200) { [responseDelegate retrievedLeaderboardData:[[GULeaderboard alloc] initWithDictionary:responseEntity]]; }
@@ -280,12 +312,64 @@ withAppendedUrlPath:(NSString*)appendedUrlPath
             } else { [responseDelegate failedToRetrieveLeaderboardDataAndRank:statusCode withError:responseEntity]; }
             break;
         case LEADERBOARD_POST:
-            if (statusCode == 200 || statusCode == 204) { [responseDelegate successfullyUpdatedLeaderboardRank:urlPath]; }
-            else { [responseDelegate failedToUpdateLeaderboardRank:statusCode withError:responseEntity withLeaderboardUid:urlPath]; }
+            if (statusCode == 200 || statusCode == 204) { [responseDelegate successfullyUpdatedLeaderboardRank:[urlParams objectForKey:@":id"]]; }
+            else { [responseDelegate failedToUpdateLeaderboardRank:statusCode withError:responseEntity withLeaderboardUid:[urlParams objectForKey:@":id"]]; }
+            break;
+        case MATCH_GET_ALL:
+            if (statusCode == 200) { [responseDelegate retrievedMatches:[GUHttpClient getMatches:responseEntity]]; }
+            else { [responseDelegate failedToRetrieveMatches:statusCode withError:responseEntity];}
+            break;
+        case MATCH_GET:
+            if (statusCode == 200) { [responseDelegate retrievedMatch:[[GUMatch alloc] initWithDictionary:responseEntity] withMatchId:[urlParams objectForKey:@":id"]]; }
+            else { [responseDelegate failedToRetrieveMatch:[urlParams objectForKey:@":id"] withStatusCode:statusCode withError:responseEntity]; }
+            break;
+        case MATCH_TURN_GET:
+            if (statusCode == 200) { [responseDelegate retrievedTurn:[GUHttpClient getMatchTurns:responseEntity] forMatch:[urlParams objectForKey:@":id"]]; }
+            else { [responseDelegate failedToRetrieveTurnData:statusCode withError:responseEntity forMatch:[urlParams objectForKey:@":id"]]; }
+            break;
+        case MATCH_TURN_POST:
+            if (statusCode == 204) { [responseDelegate successfullySubmittedTurnDataForMatch:[urlParams objectForKey:@":id"]];}
+            else { [responseDelegate failedToSubmitTurn:statusCode withError:responseEntity ForMatch:[urlParams objectForKey:@":id"] withData:requestEntity]; }
+            break;
+        case MATCH_POST:
+            if (statusCode == 204) { [responseDelegate successfullyQueuedGamerForNewMatch]; }
+            else if (statusCode == 200) { [responseDelegate createdNewMatch:[[GUMatch alloc] initWithDictionary:responseEntity]]; }
+            else { [responseDelegate failedToCreateMatch:statusCode withError:responseEntity]; }
+            break;
+        case MATCH_POST_ACTION:
+            if ([[requestEntity objectForKey:@"action"] isEqualToString:@"end"]) {
+                if (statusCode == 204) { [responseDelegate SuccessfullyEndedMatch:[urlParams objectForKey:@":id"]]; }
+                else { [responseDelegate failedToEndMatch:statusCode withError:responseEntity forMatchId:[urlParams objectForKey:@":id"]]; }
+            } else if ([[requestEntity objectForKey:@"action"] isEqualToString:@"leave"]) {
+                if (statusCode == 204) { [responseDelegate SuccessfullyLeftMatch:[urlParams objectForKey:@":id"]]; }
+                else { [responseDelegate failedToLeaveMatch:statusCode withError:responseEntity forMatchId:[urlParams objectForKey:@":id"]]; }
+            }
             break;
         default:
             break;
     }
+}
+
++ (NSArray*)getMatchTurns:(NSDictionary*) dict
+{
+    id result = [[NSMutableArray alloc] init];
+    for (id turn in [dict objectForKey:@"turns"])
+    {
+        [result addObject:[[GUMatchTurn alloc] initWithDictionary:turn]];
+    }
+    
+    return result;
+}
+
++ (NSArray*)getMatches:(NSDictionary*) dict
+{
+    id result = [[NSMutableArray alloc] init];
+    for (id match in [dict objectForKey:@"matches"])
+    {
+        [result addObject:[[GUMatch alloc] initWithDictionary:match]];
+    }
+    
+    return result;
 }
 
 + (NSData*)serialiseDictionaryToData:(NSDictionary*)dict

@@ -24,7 +24,6 @@
     NSInteger currentlySelectedRowInPicker;
 }
 
-
 typedef NS_ENUM(NSInteger, GUOptions)
 {
     LOGIN_ANONYMOUS,
@@ -47,7 +46,14 @@ typedef NS_ENUM(NSInteger, GUOptions)
     GAMER_ACHIEVEMENT,
     GAMER_ACHIEVEMENT_UPDATE,
     GAMER_LEADERBOARD,
-    GAMER_LEADERBOARD_UPDATE
+    GAMER_LEADERBOARD_UPDATE,
+    MATCH_LIST,
+    MATCH_NEW,
+    MATCH_GET_FIRST,
+    MATCH_TURN_GET,
+    MATCH_TURN_SUBMIT,
+    MATCH_END,
+    MATCH_LEAVE
 };
 
 - (void)awakeFromNib
@@ -78,6 +84,13 @@ typedef NS_ENUM(NSInteger, GUOptions)
                   @"Update Achievements",
                   @"Gamer Leaderboard",
                   @"Update Leaderboard",
+                  @"List Matches",
+                  @"New Match",
+                  @"Match Status",
+                  @"Turn Data",
+                  @"Submit Turn",
+                  @"End Match",
+                  @"Leave Match",
                   nil
                   ];
 
@@ -85,6 +98,7 @@ typedef NS_ENUM(NSInteger, GUOptions)
 
 - (IBAction)onGoButtonClick:(id)sender
 {
+    GUSession* session = [_dataHolder session];
     switch (currentlySelectedRowInPicker) {
         case LOGIN_ANONYMOUS:
             [self loginAnonymously];
@@ -115,40 +129,61 @@ typedef NS_ENUM(NSInteger, GUOptions)
             [_gameup ping];
             break;
         case SERVER:
-            [_gameup requestServerInfo];
+            [_gameup retrieveServerInfo];
             break;
         case GAME:
-            [_gameup requestToGetGameDetails];
+            [_gameup retrieveGameDetails];
             break;
         case ACHIEVEMENT:
-            [_gameup requestToGetAllAchievements];
+            [_gameup retrieveAllAchievements];
             break;
         case LEADERBOARD:
-            [_gameup requestToGetLeaderboardData:[_dataHolder leaderboardId]];
+            [_gameup retrieveLeaderboardDataWithLeaderboardId:[_dataHolder leaderboardId]];
             break;
         case GAMER:
-            [_gameup requestToGetGamerProfile:[_dataHolder gamerToken]];
+            [session retrieveGamerProfile];
             break;
         case STORAGE_PUT:
             [self storeData];
             break;
         case STORAGE_GET:
-            [_gameup requestToGetStoredData:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
+            [session retrieveStoredDataWithKey:[_dataHolder storageKey]];
             break;
         case STORAGE_DEL:
-            [_gameup requestToDeleteStoredData:[_dataHolder gamerToken] storedWithKey:[_dataHolder storageKey]];
+            [session deleteStoredDataWithKey:[_dataHolder storageKey]];
             break;
         case GAMER_ACHIEVEMENT:
-            [_gameup requestToGetAllAchievements:[_dataHolder gamerToken]];
+            [session retrieveAllAchievementsWithProgress];
             break;
         case GAMER_ACHIEVEMENT_UPDATE:
             [self updateAchievement];
             break;
         case GAMER_LEADERBOARD:
-            [_gameup requestToGetLeaderboardDataAndRank:[_dataHolder gamerToken] withLeaderboardId:[_dataHolder leaderboardId]];
+            [session retrieveLeaderboardDataAndRankWithLeaderboardId:[_dataHolder leaderboardId]];
             break;
         case GAMER_LEADERBOARD_UPDATE:
             [self updateLeaderboard];
+            break;
+        case MATCH_LIST:
+            [session retrieveMatches];
+            break;
+        case MATCH_NEW:
+            [session createMatch:2];
+            break;
+        case MATCH_GET_FIRST:
+            [session retrieveMatch:[_dataHolder match].matchId];
+            break;
+        case MATCH_TURN_GET:
+            [session retrieveTurnData:0 forMatchWithId:[_dataHolder match].matchId];
+            break;
+        case MATCH_TURN_SUBMIT:
+            [session submitTurn:[_dataHolder turn].turn_number withData:@"ios-test-data" toNextGamer:@"emagpu" forMatch:[_dataHolder match].matchId];
+            break;
+        case MATCH_END:
+            [session endMatchWithId:[_dataHolder match].matchId];
+            break;
+        case MATCH_LEAVE:
+            [session leaveMatchWithId:[_dataHolder match].matchId];
             break;
         default:
             break;
@@ -164,6 +199,7 @@ typedef NS_ENUM(NSInteger, GUOptions)
 
 - (void)storeData
 {
+    GUSession* session = [_dataHolder session];
     NSDictionary *storageValue = @{
        @"level" : @4,
        @"level_name" : @"boomrang",
@@ -174,22 +210,24 @@ typedef NS_ENUM(NSInteger, GUOptions)
        @"killed" : @5
     };
     
-    [_gameup requestToStoreData:[_dataHolder gamerToken] storeWithKey:[_dataHolder storageKey] withValue:storageValue];
+    [session storeData:storageValue WithKey:[_dataHolder storageKey]];
 }
 
 - (void)updateAchievement
 {
+    GUSession* session = [_dataHolder session];
     NSString* uid = [[_dataHolder achievementUids] objectAtIndex:0];
     GUAchievementUpdate* update = [[GUAchievementUpdate alloc] initWithAchievementUid:uid andCount:1];
-    [_gameup requestToUpdateAchievement:[_dataHolder gamerToken] withAchievementUpdate:update];
+    [session updateAchievement:update];
 }
 
 - (void)updateLeaderboard
 {
+    GUSession* session = [_dataHolder session];
     NSString* uid = [_dataHolder leaderboardId];
     long currentTime = (long)(NSTimeInterval)([[NSDate date] timeIntervalSince1970]);
     GULeaderboardUpdate* update = [[GULeaderboardUpdate alloc] initWithLeaderboardUid:uid andScore:currentTime];
-    [_gameup requestToUpdateLeaderboardRank:[_dataHolder gamerToken] withLeaderboardUpdate:update];
+    [session updateLeaderboardRank:update];
 }
 
 /////////////

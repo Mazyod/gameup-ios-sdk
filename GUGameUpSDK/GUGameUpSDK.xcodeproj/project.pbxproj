@@ -24,11 +24,15 @@
 		CD34E7DE1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CD34E7DD1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m */; };
 		CD34E7DF1A50AFC600A253E0 /* NSURLRequest+GUURLRequest.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD34E7DC1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.h */; };
 		CD34E7E01A50AFE500A253E0 /* GUNoRequestRetryHandler.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD34E7D91A50992D00A253E0 /* GUNoRequestRetryHandler.h */; };
+		CD3ECA791B123E1C0020DD1F /* GUSession.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3ECA781B123E1C0020DD1F /* GUSession.m */; };
+		CD3ECA7B1B123E360020DD1F /* GUSession.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD3ECA7A1B123E270020DD1F /* GUSession.h */; };
 		CD8828AD199107A4009E8D10 /* GUGamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD77CF86197F1B13006ACC0D /* GUGamer.m */; };
 		CD8828AF19910818009E8D10 /* GUGamer.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD77CF85197F1B13006ACC0D /* GUGamer.h */; };
 		CD8828B21991083D009E8D10 /* GUGameUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8828B11991083D009E8D10 /* GUGameUp.m */; };
 		CD8828B319910860009E8D10 /* GUGameUp.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CD8828B01991083D009E8D10 /* GUGameUp.h */; };
 		CD8D1DE81A4E3713002B6AF9 /* GULoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8D1DE71A4E3713002B6AF9 /* GULoginStoryboard.storyboard */; };
+		CDA951041B1F67F70058955C /* GUMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA951031B1F67F70058955C /* GUMatch.m */; };
+		CDA951071B1F68130058955C /* GUMatchTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA951061B1F68130058955C /* GUMatchTurn.m */; };
 		CDCFE6F31AED2133006A20CB /* GUHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCFE6F21AED2133006A20CB /* GUHttpClient.m */; };
 		CDCFE6F41AEDA430006A20CB /* GUHttpClient.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CDCFE6F11AED211C006A20CB /* GUHttpClient.h */; };
 		CDECE7B01A54461A000ADDEF /* GULeaderboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECE7AF1A54461A000ADDEF /* GULeaderboard.m */; };
@@ -70,6 +74,7 @@
 				CDECE7BB1A546440000ADDEF /* GULeaderboard.h in Copy Files */,
 				CDECE7BC1A546444000ADDEF /* GULeaderboardEntry.h in Copy Files */,
 				CDCFE6F41AEDA430006A20CB /* GUHttpClient.h in Copy Files */,
+				CD3ECA7B1B123E360020DD1F /* GUSession.h in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,12 +105,18 @@
 		CD34E7DA1A50995200A253E0 /* GUNoRequestRetryHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUNoRequestRetryHandler.m; sourceTree = "<group>"; };
 		CD34E7DC1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+GUURLRequest.h"; sourceTree = "<group>"; };
 		CD34E7DD1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+GUURLRequest.m"; sourceTree = "<group>"; };
+		CD3ECA781B123E1C0020DD1F /* GUSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUSession.m; sourceTree = "<group>"; };
+		CD3ECA7A1B123E270020DD1F /* GUSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUSession.h; sourceTree = "<group>"; };
 		CD77CF85197F1B13006ACC0D /* GUGamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUGamer.h; sourceTree = "<group>"; };
 		CD77CF86197F1B13006ACC0D /* GUGamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUGamer.m; sourceTree = "<group>"; };
 		CD77CF91197F27BA006ACC0D /* GUResponderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUResponderProtocol.h; sourceTree = "<group>"; };
 		CD8828B01991083D009E8D10 /* GUGameUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUGameUp.h; sourceTree = "<group>"; };
 		CD8828B11991083D009E8D10 /* GUGameUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUGameUp.m; sourceTree = "<group>"; };
 		CD8D1DE71A4E3713002B6AF9 /* GULoginStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GULoginStoryboard.storyboard; sourceTree = "<group>"; };
+		CDA951021B1F67E90058955C /* GUMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUMatch.h; sourceTree = "<group>"; };
+		CDA951031B1F67F70058955C /* GUMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUMatch.m; sourceTree = "<group>"; };
+		CDA951051B1F68030058955C /* GUMatchTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUMatchTurn.h; sourceTree = "<group>"; };
+		CDA951061B1F68130058955C /* GUMatchTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUMatchTurn.m; sourceTree = "<group>"; };
 		CDC0F6A6196FD80800670565 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		CDCFE6F11AED211C006A20CB /* GUHttpClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GUHttpClient.h; sourceTree = "<group>"; };
 		CDCFE6F21AED2133006A20CB /* GUHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUHttpClient.m; sourceTree = "<group>"; };
@@ -181,6 +192,8 @@
 				CDCFE6F21AED2133006A20CB /* GUHttpClient.m */,
 				CD8828B01991083D009E8D10 /* GUGameUp.h */,
 				CD8828B11991083D009E8D10 /* GUGameUp.m */,
+				CD3ECA7A1B123E270020DD1F /* GUSession.h */,
+				CD3ECA781B123E1C0020DD1F /* GUSession.m */,
 				8A018FAF1A2F7DEF007EF85E /* GUAchievement.h */,
 				8A018FB01A2F7DEF007EF85E /* GUAchievement.m */,
 				8A38B4091A31FC1B002FC7B0 /* GUAchievementUpdate.h */,
@@ -191,6 +204,18 @@
 				CD77CF86197F1B13006ACC0D /* GUGamer.m */,
 				8A018FB11A2F7DEF007EF85E /* GUServer.h */,
 				8A018FB21A2F7DEF007EF85E /* GUServer.m */,
+				CDECE7AC1A5445C4000ADDEF /* GULeaderboardUpdate.h */,
+				CDECE7AE1A5445D4000ADDEF /* GULeaderboardUpdate.m */,
+				CDECE7B11A544622000ADDEF /* GULeaderboard.h */,
+				CDECE7AF1A54461A000ADDEF /* GULeaderboard.m */,
+				CDECE7B91A545958000ADDEF /* GULeaderboardEntry.h */,
+				CDECE7B71A54594E000ADDEF /* GULeaderboardEntry.m */,
+				CDECE7B61A5446A9000ADDEF /* GULeaderboardRank.h */,
+				CDECE7B41A5446A1000ADDEF /* GULeaderboardRank.m */,
+				CDA951021B1F67E90058955C /* GUMatch.h */,
+				CDA951031B1F67F70058955C /* GUMatch.m */,
+				CDA951051B1F68030058955C /* GUMatchTurn.h */,
+				CDA951061B1F68130058955C /* GUMatchTurn.m */,
 				CD34E7DC1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.h */,
 				CD34E7DD1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m */,
 				CD77CF91197F27BA006ACC0D /* GUResponderProtocol.h */,
@@ -204,14 +229,6 @@
 				CDEF313E1987A12E00480139 /* GULoginViewController.m */,
 				CD8D1DE71A4E3713002B6AF9 /* GULoginStoryboard.storyboard */,
 				CD0742F21969FDF1003F0BE8 /* Supporting Files */,
-				CDECE7AC1A5445C4000ADDEF /* GULeaderboardUpdate.h */,
-				CDECE7AE1A5445D4000ADDEF /* GULeaderboardUpdate.m */,
-				CDECE7B11A544622000ADDEF /* GULeaderboard.h */,
-				CDECE7AF1A54461A000ADDEF /* GULeaderboard.m */,
-				CDECE7B91A545958000ADDEF /* GULeaderboardEntry.h */,
-				CDECE7B71A54594E000ADDEF /* GULeaderboardEntry.m */,
-				CDECE7B61A5446A9000ADDEF /* GULeaderboardRank.h */,
-				CDECE7B41A5446A1000ADDEF /* GULeaderboardRank.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -325,11 +342,14 @@
 				8A018FB31A2F7DEF007EF85E /* GUAchievement.m in Sources */,
 				CD8828B21991083D009E8D10 /* GUGameUp.m in Sources */,
 				8A018FB41A2F7DEF007EF85E /* GUServer.m in Sources */,
+				CDA951041B1F67F70058955C /* GUMatch.m in Sources */,
 				CD8828AD199107A4009E8D10 /* GUGamer.m in Sources */,
 				CDCFE6F31AED2133006A20CB /* GUHttpClient.m in Sources */,
 				CD0742F71969FDF1003F0BE8 /* GUGame.m in Sources */,
+				CD3ECA791B123E1C0020DD1F /* GUSession.m in Sources */,
 				8A38B40B1A31FC3B002FC7B0 /* GUAchievementUpdate.m in Sources */,
 				CDEF31401987A12E00480139 /* GULoginViewController.m in Sources */,
+				CDA951071B1F68130058955C /* GUMatchTurn.m in Sources */,
 				CD33F2201A5027F400275061 /* GUDefaultRequestRetryHandler.m in Sources */,
 				CD34E7DE1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m in Sources */,
 				CD34E7DB1A50995200A253E0 /* GUNoRequestRetryHandler.m in Sources */,

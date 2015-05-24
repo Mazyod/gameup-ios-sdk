@@ -16,6 +16,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GUResponderProtocol.h"
+#import "GURequestRetryHandlerProtocol.h"
 
 /**
  Login window view controller
@@ -42,6 +43,7 @@
  Create a new login window with a given callback responder
  */
 - (void)initWithResponder:(id<GUResponderProtocol>)guResponder
+         withRetryHandler:(id<GURequestRetryHandlerProtocol>) guRetryHandler
        withLoginServerUrl:(NSString*)guUrlPath
              withProvider:(NSString*)guProvider
                withApiKey:(NSString*)guApiKey

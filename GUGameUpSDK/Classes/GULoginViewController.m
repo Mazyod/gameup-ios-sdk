@@ -15,12 +15,14 @@
  */
 
 #import "GULoginViewController.h"
+#import "GUSession.h"
 
 static NSString *const SUCCESS_SUB_URL = @"success";
 
 @implementation GULoginViewController
 {
     id<GUResponderProtocol> responder;
+    id<GURequestRetryHandlerProtocol> retryHandler;
     NSString* urlPath;
     NSString* provider;
     NSString* apiKey;
@@ -29,6 +31,7 @@ static NSString *const SUCCESS_SUB_URL = @"success";
 }
 
 - (void)initWithResponder:(id<GUResponderProtocol>)guResponder
+         withRetryHandler:(id<GURequestRetryHandlerProtocol>) guRetryHandler
        withLoginServerUrl:(NSString*)guUrlPath
              withProvider:(NSString*)guProvider
                withApiKey:(NSString*)guApiKey
@@ -36,6 +39,7 @@ static NSString *const SUCCESS_SUB_URL = @"success";
             withUserAgent:(NSString*)guUserAgent
 {
     responder = guResponder;
+    retryHandler = guRetryHandler;
     urlPath = guUrlPath;
     provider = guProvider;
     apiKey = guApiKey;
@@ -93,7 +97,11 @@ static NSString *const SUCCESS_SUB_URL = @"success";
         [guSuccessPath appendString:@"&token="];
         
         NSString *token = [currentUrl substringFromIndex:guSuccessPath.length];
-        [responder successfullyLoggedinWithGamerToken:token];
+        id session = [[GUSession alloc] initWithApiKey:apiKey
+                                             withToken:token
+                                         withResponder:responder
+                                      withRetryHandler:retryHandler];
+        [responder successfullyLoggedinWithSession:session];
     }
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error

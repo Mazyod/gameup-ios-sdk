@@ -21,7 +21,8 @@
 {
     self = [super init];
     if (self) {
-        _apiKey = @"6fb004d4289748199cb858ab0905f657";
+//        _apiKey = @"9e87fc40a177490f95e734750f6b513e";
+        _apiKey = @"bb750db73a0c4fd292d324d8a2d2937f";
         
         _facebookAccessToken = @"facebook_oauth_access_token";
         _googleAccessToken = @"google_oauth_access_token";

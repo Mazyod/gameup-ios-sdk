@@ -18,6 +18,8 @@
 #import "GUGame.h"
 #import "GUGamer.h"
 #import "GUServer.h"
+#import "GUMatch.h"
+#import "GUMatchTurn.h"
 #import "GUAchievement.h"
 #import "GULeaderboard.h"
 #import "GULeaderboardRank.h"
@@ -111,8 +113,8 @@
                     withStorageKey:(NSString*)storageKey;
 
 /**
- * Invoked when storage DELETE operation successed
- * @param storageKey storageKey of the delete operation
+ Invoked when storage DELETE operation successed
+ @param storageKey storageKey of the delete operation
  */
 - (void)successfullyDeletedData:(NSString*)storageKey;
 /**
@@ -170,7 +172,6 @@
 
 /**
  Invoked when successfully retrieved leaderboard
-
  @param leaderboard Leaderboard metadata
  */
 - (void)retrievedLeaderboardData:(GULeaderboard*)leaderboard;
@@ -185,11 +186,11 @@
 /**
  Invoked when successfully retrieved leaderboard,
  including gamer's standing in the leaderboard
-
  @param leaderboard Leaderboard metadata
  @param leaderboardRank gamer's rank in the leaderboard
  */
-- (void)retrievedLeaderboardData:(GULeaderboard *)leaderboard andRank:(GULeaderboardRank*)leaderboardRank;
+- (void)retrievedLeaderboardData:(GULeaderboard *)leaderboard
+                         andRank:(GULeaderboardRank*)leaderboardRank;
 /**
  Invoked when retrieving gamer leaderboard ranking failed
  @param statusCode HTTP status code
@@ -214,18 +215,145 @@
                    withLeaderboardUid:(NSString*)leaderboardUid;
 
 /**
- Invoked when the gamer has successfully logged into their Social Provider
- @param gamerToken token retrieved. Can be safely stored on the device.
+ Invoked when successfully retrieved a list of all matches for gamer.
+ @param matches Array of GUMatch objects
+ */
+- (void)retrievedMatches:(NSArray*)matches;
 
- NOTE: we recommend that you ping(apikey, gamerToken) 
- at the start of your game to make sure that both ApiKey and GamerToken are valid,
+/**
+ Invoked when could not get a list of matches from the server
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ */
+- (void)failedToRetrieveMatches:(NSInteger)statusCode
+                      withError:(NSError*)error;
+
+/**
+ Invoked when successfully retrieved a match status and metadata
+ @param metadata Match status and metadata
+ @param matchId ID of the match that the metadata belongs to
+ */
+- (void)retrievedMatch:(GUMatch*)match
+           withMatchId:(NSString*)matchId;
+
+/**
+ Invoked when could not get match metadata and status
+ @param matchId ID of the match that this failure belongs to
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ */
+- (void)failedToRetrieveMatch:(NSString*)matchId
+               withStatusCode:(NSInteger)statusCode
+                    withError:(NSError*)error;
+
+/**
+ Invoked when successfully retrieved a match's turn data
+ @param data Array of GUMatchTurn data for the given match
+ @param matchId ID of the match that the data belongs to
+ */
+- (void)retrievedTurn:(NSArray*)turns
+             forMatch:(NSString*)matchId;
+
+/**
+ Invoked when could not get match turn data
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ @param matchId ID of the match that this failure belongs to
+ */
+- (void)failedToRetrieveTurnData:(NSInteger)statusCode
+                       withError:(NSError*)error
+                        forMatch:(NSString*)matchId;
+
+/**
+ Invoked when successfully submitted a match's turn data
+ @param matchId ID of the match
+ */
+- (void)successfullySubmittedTurnDataForMatch:(NSString*)matchId;
+
+/**
+ Invoked when could not submit match turn data
+ @param statusCode HTTP status code
+ @param data Turn data that was failed to submit
+ @param matchId ID of the match that this failure belongs to
+ @param error Error object associated with this failure
+ */
+- (void)failedToSubmitTurn:(NSInteger)statusCode
+                 withError:(NSError*)error
+                  ForMatch:(NSString*)matchId
+                  withData:(id)data;
+
+
+/**
+ Invoked when successfully created a match.
+ @param metadata New match status and metadata
+ */
+- (void)createdNewMatch:(id)metadata;
+
+/**
+ Invoked when could not create match immediately due to insufficient gamers in the queue.
+ The current gamer will be added to a queue for the next available match.
+ 
+ In this current implementation, the only way to get notified that the gamer has joint a new match
+ is by constant polling of the [GUSession retrieveMatches]. 
+ 
+ We recommend that you don't use a high number as the required number of gamers for a given match 
+ as this could increase the likelihood that your gamer would be queued rather than immediately allocated a match.
+ */
+- (void)successfullyQueuedGamerForNewMatch;
+
+/**
+ Invoked when the service failed to create a new match.
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ */
+- (void)failedToCreateMatch:(NSInteger)statusCode
+                  withError:(NSError*)error;
+
+/**
+ Successfully ended the specified match
+ @param matchId ID of the match
+ */
+- (void)SuccessfullyEndedMatch:(NSString*)matchId;
+
+/**
+ Failed to end the specified match
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ @param matchId ID of the match
+ */
+- (void)failedToEndMatch:(NSInteger)statusCode
+               withError:(NSError*)error
+              forMatchId:(NSString*)matchId;
+
+/**
+ Successfully left the specified match
+ @param matchId ID of the match
+ */
+- (void)SuccessfullyLeftMatch:(NSString*)matchId;
+
+/**
+ Failed to leave the specified match
+ @param statusCode HTTP status code
+ @param error Error object associated with this failure
+ @param matchId ID of the match
+ */
+- (void)failedToLeaveMatch:(NSInteger)statusCode
+                 withError:(NSError*)error
+                forMatchId:(NSString*)matchId;
+
+/**
+ Invoked when the gamer has successfully logged into their Social Provider
+ @param session newly established Session. Can be safely stored on the device.
+
+ NOTE: we recommend that you [GUSession ping]
+ at the start of your game to make sure that both ApiKey and the session are valid,
  if you choose to store the GamerToken on device storage
  */
-- (void)successfullyLoggedinWithGamerToken:(NSString*)gamerToken;
+- (void)successfullyLoggedinWithSession:(id)session;
+
 /**
  Invoked when the gamer failed to login to their Social Provider
  caused by of multiple password failure, server errors etc
-
  @param error Error object associated with this failure
  */
 - (void)failedToLoginWithError:(NSError*) error;
@@ -234,5 +362,6 @@
  Invoked when the gamer explicitly presses 'Cancel' button the Login Window Navigation Bar
  */
 - (void)loginCancelled;
+
 
 @end
