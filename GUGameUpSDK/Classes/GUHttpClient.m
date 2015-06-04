@@ -27,7 +27,7 @@
 #import "GUResponderProtocol.h"
 #import "GURequestRetryHandlerProtocol.h"
 
-static NSString *const GAMEUP_VERSION=@"0.6.0";
+static NSString *const GAMEUP_VERSION=@"0.7.0";
 static NSString *const AFN_VERSION=@"AFN2.5.0";
 
 static NSString *const USER_AGENT_NAME=@"gameup-ios-sdk";
