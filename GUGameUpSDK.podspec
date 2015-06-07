@@ -15,13 +15,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "6.0"
   s.source       = { :git => "https://github.com/gameup-io/gameup-ios-sdk.git", :tag => "0.7.0"}
 
-  # FOR RELEASE
-  #s.license      = { :type => "Apache License, Version 2.0", :file => "GUGameUpSDK/LICENCE" }
-  #s.source_files  = "GUGameUpSDK/Classes/*.{h,m}"
-  #s.public_header_files = "GUGameUpSDK/Classes/*.h"
-  #s.resources  = "GUGameUpSDK/Classes/*.storyboard"
-
-  # FOR DEVELOPMENT
   s.license      = { :type => "Apache License, Version 2.0", :file => "LICENCE" }
   s.source_files  = "Classes/*.{h,m}"
   s.public_header_files = "Classes/*.h"

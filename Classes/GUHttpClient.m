@@ -62,7 +62,8 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
                      @(MATCH_TURN_POST): @"/v0/gamer/match/:id/turn",
                      @(MATCH_POST): @"/v0/gamer/match/",
                      @(MATCH_POST_ACTION): @"/v0/gamer/match/:id",
-                     @(LOGIN) : @"/v0/gamer/login/:type"
+                     @(LOGIN) : @"/v0/gamer/login/:type",
+                     @(PUSH_SUBSCRIBE) : @"/v0/gamer/push/"
                     };
     
     USER_AGENT = [[NSString alloc] initWithString:[GUHttpClient setupUserAgent]];
@@ -344,6 +345,10 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
                 if (statusCode == 204) { [responseDelegate SuccessfullyLeftMatch:[urlParams objectForKey:@":id"]]; }
                 else { [responseDelegate failedToLeaveMatch:statusCode withError:responseEntity forMatchId:[urlParams objectForKey:@":id"]]; }
             }
+            break;
+        case PUSH_SUBSCRIBE:
+            if (statusCode == 204) { [responseDelegate successfullySubscribed]; }
+            else { [responseDelegate failedToRegisterForPush:responseEntity]; }
             break;
         default:
             break;

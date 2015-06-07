@@ -5,23 +5,23 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0B62ECAC-209A-423E-94C2-30E7F4304FCD</string>
+	<string>2D83DF50-882D-454C-BD46-50CDF75E8A6C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>GUGameUpSDKDemo</string>
+	<string>GUGameUpSDK</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DCA5F8275FB6A3F011588CC187B9B3B6FD3DCB06</key>
-		<string>github.com:mofirouz/gameup-ios-sdk.git</string>
+		<string>github.com:gameup-io/gameup-ios-sdk.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GUGameUpSDKDemo/GUGameUpSDKDemo.xcodeproj</string>
+	<string>GUGameUpSDK.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DCA5F8275FB6A3F011588CC187B9B3B6FD3DCB06</key>
-		<string>../../..</string>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:mofirouz/gameup-ios-sdk.git</string>
+	<string>github.com:gameup-io/gameup-ios-sdk.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

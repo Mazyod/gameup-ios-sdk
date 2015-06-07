@@ -1,10 +1,14 @@
 Changelog
 =========
 
+### v0.7.0
+
+*Added support for `/v0/gamer/push` endpoint. Now you can send push notifications to a device.
+
 ### v0.6.0
 
 * *BREAKING CHANGES:* Addition of GameUp Session Objects to differentiate between global game activity and per gamer activity
-* Added support for `/v0/game/match` endpoint. Now you can build turn-based multiplayer matches much easier.
+* Added support for `/v0/gamer/match` endpoint. Now you can build turn-based multiplayer matches much easier.
 
 
 ### v0.5.0

@@ -34,6 +34,7 @@
       withResponder:(id<GUResponderProtocol>)responder
    withRetryHandler:(id<GURequestRetryHandlerProtocol>)handler;
 
+
 /**
  Returns the cached Gamer Token. Save this Gamer Token in the local device storage for later restore.
  */
@@ -145,5 +146,13 @@
  @param matchId The match identifier
  */
 -(void)leaveMatchWithId:(NSString*)matchId;
+
+/**
+ Subscribe this device for Push notification with GameUp Push and Apple Push Notifications.
+ 
+ @param inDeviceToken raw Device Token recieved from APN
+ @param segments Segment names to subscribe to. To subscribe to all segments, pass an empty array.
+ */
+- (void)subscribePushWithDeviceToken:(NSData*)inDeviceToken toSegments:(NSArray*)segments;
 
 @end

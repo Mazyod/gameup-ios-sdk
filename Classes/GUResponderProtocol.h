@@ -363,5 +363,25 @@
  */
 - (void)loginCancelled;
 
+@optional
+
+/**
+ Invoked when successfully connected to both APN and GameUp Push Services.
+ */
+- (void) successfullySubscribed;
+
+/**
+ Invoked when could not register with either the GameUp Push Service or Apple Push Service.
+
+ @param error Error object associated with this failure. This either comes from APN or GameUp
+ */
+- (void)failedToRegisterForPush:(NSError*) error;
+
+/**
+ Invoked when a new message from the GameUp Push system was recieved.
+ 
+ @param message Message recieved.
+ */
+- (void)recievedPushMessage:(id) message;
 
 @end

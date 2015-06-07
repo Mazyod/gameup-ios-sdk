@@ -97,8 +97,11 @@ Signing can be done through a UIWebView which is created and maintained by the G
 // let's imagine that this is the method invoked when the gamer taps on 'Sign in' in your game.
 - (void)onLoginClick 
 {
+    // Get or create a unique device ID
+    UIDevice *device = [UIDevice currentDevice];
+    NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
     // if you'd like to log the gamer in seamlessly...
-    [_gameup loginAnonymously];
+    [_gameup loginAnonymouslyWith:currentDeviceId];
 
     // or if you'd like the gamer to login through Twitter using a webView:
     UIViewController* webViewController = [_gameup loginThroughBrowserToTwitter];
@@ -113,11 +116,12 @@ Once the gamer has logged in through their desired login, you'll get a callback 
 
 // ... other methods ...
 
-- (void)successfullyLoggedinWithGamerToken:(NSString*)gamerToken 
+- (void)successfullyLoggedinWithSession:(id)session 
 {
     // Called with the new session when login completes successfully.
     // You may want to:
-    //  * Store it - most other gamer-specific method requires this gamerToken!
+    //  * Store it - most other gamer-specific method requires this session!
+    //  * Permanently Store it and retrieve it when your game restarts using [session getGamerToken];
     //  * Update your game's state.
     //  * Welcome the user!
 }
@@ -133,6 +137,19 @@ Once the gamer has logged in through their desired login, you'll get a callback 
 // ... other methods ...
 ```
 
+#### GameUp Push
+
+GameUp Push is extremely simple to setup. Setup your game as you would to use APN and add the following line in the method override below:
+
+```Objective-C
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)token
+{
+    GUSession* session = ...;
+    [session subscribePushWithDeviceToken:token];
+}
+
+```
+
 #### More Documentation
 
 For more examples and more information on features in the GameUp service have a look at our [main documentation](https://gameup.io/docs/?ios).
@@ -140,40 +157,6 @@ For more examples and more information on features in the GameUp service have a 
 #### Note
 
 The iOS SDK is still in _flux_, we're looking for [feedback](mailto:hello@gameup.io) from developers to make sure we're designing what you need to build incredible games. Please do get in touch and let us know what we can improve.
-
-===========
-
-GameUp iOS SDK Development
-==========================
-
-This part of the README is intended for those who would like to develop the `GUGameUpSDK` and `GUGameUpSDKDemo` app.
-
-To develop on the codebase you'll need:
-
-* [XCode 4.4+](https://developer.apple.com/xcode/) The iOS IDE (We internally use XCode 6.1)
-* [CocoaPods](http://cocoapods.org/) for dependecy management.
-* [Alcatraz](http://alcatraz.io) for plugin management within XCode. This is optional (but we use it internally).
-
-_If you want to use JetBrains AppCode, you need to disable Code Signing Requirement for the GUGameUpSDKDemo App. 
-To do this, you need to follow this [Stackoverflow Question](http://stackoverflow.com/questions/9898039/xcode-4-3-2-bypass-code-signing)._
-
-#### System Dependencies
-
-* Install CocoaPods:
-
-` sudo gem install cocoapods `
-
-* Install Alcatraz:
-
-` curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh `
-
-#### Project Development Steps
-
-* Open the `GUGameUpSDKDemo.xcworkspace` in XCode. `GUGameUpSDK` can be found in the `Development Pods` group in the `Pods` project.     
-* Clean the project build directory by pressing the following keys: `Alt`+`Cmd`+`Shift`+`K`
-
-* To install dependencies (only needed when changing/updating Podfile):
-`pod install`
 
 ### Contribute
 

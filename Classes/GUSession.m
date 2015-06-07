@@ -193,6 +193,28 @@
              withRetryHandler:retryHandler];
 }
 
-
+- (void)subscribePushWithDeviceToken:(NSData*)inDeviceToken toSegments:(NSArray*)segments
+{
+    NSString* trimmedDeviceToken = [[inDeviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    NSString* parsedDeviceToken = [[trimmedDeviceToken componentsSeparatedByString:@" "] componentsJoinedByString:@""];
+    NSLog(@"didRegisterForRemoteNotifications device token %@", parsedDeviceToken);
+    
+    id payload = @{
+                  @"platform":@"ios",
+                  @"id":[[NSString alloc] initWithString:parsedDeviceToken],
+                  @"multiplayer": @NO,
+                  @"segments":segments
+                 };
+                   
+    [GUHttpClient sendRequest:GAMEUP_API_URL
+                 withEndpoint:PUSH_SUBSCRIBE
+                withUrlParams:@{}
+                   withMethod:@"PUT"
+                   withApiKey:apiKey
+                    withToken:token
+                   withEntity:payload
+                withResponder:responseDelegate
+             withRetryHandler:retryHandler];
+}
 
 @end

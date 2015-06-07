@@ -21,9 +21,3 @@ xcuserdata
 DerivedData/
 build/
 Pods/
-<<<<<<< HEAD
-GUGameUpSDK/Pods
-GUGameUpSDKDemo/Pods
-=======
-gameupsdk/Pods/
->>>>>>> 7d72f3d... Initial structure for the GameUp iOS SDK Static Cocoa Touch Library with a Resource Bundle, using Cocoapods for Dependency Management - Merged #1
