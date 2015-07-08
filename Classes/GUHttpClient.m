@@ -27,7 +27,7 @@
 #import "GUResponderProtocol.h"
 #import "GURequestRetryHandlerProtocol.h"
 
-static NSString *const GAMEUP_VERSION=@"0.7.0";
+static NSString *const GAMEUP_VERSION=@"0.8.0";
 static NSString *const AFN_VERSION=@"AFN2.5.0";
 
 static NSString *const USER_AGENT_NAME=@"gameup-ios-sdk";
@@ -59,11 +59,12 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
                      @(MATCH_GET_ALL) : @"/v0/gamer/match/",
                      @(MATCH_GET) : @"/v0/gamer/match/:id",
                      @(MATCH_TURN_GET): @"/v0/gamer/match/:id/turn/:turn_id",
-                     @(MATCH_TURN_POST): @"/v0/gamer/match/:id/turn",
+                     @(MATCH_TURN_POST): @"/v0/gamer/match/:id/turn/",
                      @(MATCH_POST): @"/v0/gamer/match/",
                      @(MATCH_POST_ACTION): @"/v0/gamer/match/:id",
                      @(LOGIN) : @"/v0/gamer/login/:type",
-                     @(PUSH_SUBSCRIBE) : @"/v0/gamer/push/"
+                     @(PUSH_SUBSCRIBE) : @"/v0/gamer/push/",
+                     @(PURCHASE_VERIFY_POST) : @"/v0/gamer/purchase/verify/apple/"
                     };
     
     USER_AGENT = [[NSString alloc] initWithString:[GUHttpClient setupUserAgent]];
@@ -339,16 +340,20 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
             break;
         case MATCH_POST_ACTION:
             if ([[requestEntity objectForKey:@"action"] isEqualToString:@"end"]) {
-                if (statusCode == 204) { [responseDelegate SuccessfullyEndedMatch:[urlParams objectForKey:@":id"]]; }
+                if (statusCode == 204) { [responseDelegate successfullyEndedMatch:[urlParams objectForKey:@":id"]]; }
                 else { [responseDelegate failedToEndMatch:statusCode withError:responseEntity forMatchId:[urlParams objectForKey:@":id"]]; }
             } else if ([[requestEntity objectForKey:@"action"] isEqualToString:@"leave"]) {
-                if (statusCode == 204) { [responseDelegate SuccessfullyLeftMatch:[urlParams objectForKey:@":id"]]; }
+                if (statusCode == 204) { [responseDelegate successfullyLeftMatch:[urlParams objectForKey:@":id"]]; }
                 else { [responseDelegate failedToLeaveMatch:statusCode withError:responseEntity forMatchId:[urlParams objectForKey:@":id"]]; }
             }
             break;
         case PUSH_SUBSCRIBE:
             if (statusCode == 204) { [responseDelegate successfullySubscribed]; }
             else { [responseDelegate failedToRegisterForPush:responseEntity]; }
+            break;
+        case PURCHASE_VERIFY_POST:
+            if (statusCode == 200) { [responseDelegate receivedPurchaseVerification:[[GUPurchaseVerification alloc] initWithDictionary:responseEntity]]; }
+            else { [responseDelegate failedToReceivedPurchaseVerification:responseEntity]; }
             break;
         default:
             break;

@@ -47,6 +47,24 @@
     return token;
 }
 
+
+- (void)sendApiRequest:(enum GURequestType)endpoint
+         withUrlParams:(NSDictionary*)urlParams
+            withMethod:(NSString*)method
+            withEntity:(id)entity
+{
+    
+    [GUHttpClient sendRequest:GAMEUP_API_URL
+                 withEndpoint:endpoint
+                withUrlParams:urlParams
+                   withMethod:method
+                   withApiKey:apiKey
+                    withToken:token
+                   withEntity:entity
+                withResponder:responseDelegate
+             withRetryHandler:retryHandler];
+}
+
 - (void)ping
 {
     [self sendApiRequest:PING
@@ -176,23 +194,6 @@
               withEntity:@{@"action": @"leave"}];
 }
 
-- (void)sendApiRequest:(enum GURequestType)endpoint
-         withUrlParams:(NSDictionary*)urlParams
-            withMethod:(NSString*)method
-            withEntity:(id)entity
-{
-    
-    [GUHttpClient sendRequest:GAMEUP_API_URL
-                 withEndpoint:endpoint
-                withUrlParams:urlParams
-                   withMethod:method
-                   withApiKey:apiKey
-                    withToken:token
-                   withEntity:entity
-                withResponder:responseDelegate
-             withRetryHandler:retryHandler];
-}
-
 - (void)subscribePushWithDeviceToken:(NSData*)inDeviceToken toSegments:(NSArray*)segments
 {
     NSString* trimmedDeviceToken = [[inDeviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
@@ -215,6 +216,14 @@
                    withEntity:payload
                 withResponder:responseDelegate
              withRetryHandler:retryHandler];
+}
+
+- (void)verifyPurchase:(NSString*)receipt ofProduct:(NSString*)productId
+{
+    [self sendApiRequest:PURCHASE_VERIFY_POST
+           withUrlParams:@{}
+              withMethod:@"POST"
+              withEntity:@{@"receipt_data" : receipt, @"product_id" : productId}];
 }
 
 @end

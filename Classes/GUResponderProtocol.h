@@ -23,12 +23,39 @@
 #import "GUAchievement.h"
 #import "GULeaderboard.h"
 #import "GULeaderboardRank.h"
+#import "GUPurchaseVerification.h"
 
 /**
  Callback protocol to be called upon completion / failure of GameUp Requests
  */
 @protocol GUResponderProtocol
+
 @required
+
+/**
+ Invoked when the gamer has successfully logged into their Social Provider
+ @param session newly established Session. Can be safely stored on the device.
+ 
+ NOTE: we recommend that you [GUSession ping]
+ at the start of your game to make sure that both ApiKey and the session are valid,
+ if you choose to store the GamerToken on device storage
+ */
+- (void)successfullyLoggedinWithSession:(id)session;
+
+/**
+ Invoked when the gamer failed to login to their Social Provider
+ caused by of multiple password failure, server errors etc
+ @param error Error object associated with this failure
+ */
+- (void)failedToLoginWithError:(NSError*) error;
+
+/**
+ Invoked when the gamer explicitly presses 'Cancel' button the Login Window Navigation Bar
+ */
+- (void)loginCancelled;
+
+@optional
+
 /** Invoked when the ping request has been successful */
 - (void)successfulPing;
 /**
@@ -313,7 +340,7 @@
  Successfully ended the specified match
  @param matchId ID of the match
  */
-- (void)SuccessfullyEndedMatch:(NSString*)matchId;
+- (void)successfullyEndedMatch:(NSString*)matchId;
 
 /**
  Failed to end the specified match
@@ -329,7 +356,7 @@
  Successfully left the specified match
  @param matchId ID of the match
  */
-- (void)SuccessfullyLeftMatch:(NSString*)matchId;
+- (void)successfullyLeftMatch:(NSString*)matchId;
 
 /**
  Failed to leave the specified match
@@ -342,33 +369,9 @@
                 forMatchId:(NSString*)matchId;
 
 /**
- Invoked when the gamer has successfully logged into their Social Provider
- @param session newly established Session. Can be safely stored on the device.
-
- NOTE: we recommend that you [GUSession ping]
- at the start of your game to make sure that both ApiKey and the session are valid,
- if you choose to store the GamerToken on device storage
- */
-- (void)successfullyLoggedinWithSession:(id)session;
-
-/**
- Invoked when the gamer failed to login to their Social Provider
- caused by of multiple password failure, server errors etc
- @param error Error object associated with this failure
- */
-- (void)failedToLoginWithError:(NSError*) error;
-
-/**
- Invoked when the gamer explicitly presses 'Cancel' button the Login Window Navigation Bar
- */
-- (void)loginCancelled;
-
-@optional
-
-/**
  Invoked when successfully connected to both APN and GameUp Push Services.
  */
-- (void) successfullySubscribed;
+- (void)successfullySubscribed;
 
 /**
  Invoked when could not register with either the GameUp Push Service or Apple Push Service.
@@ -378,10 +381,17 @@
 - (void)failedToRegisterForPush:(NSError*) error;
 
 /**
- Invoked when a new message from the GameUp Push system was recieved.
+ Successfully received purchase verification data.
+ This is called even if the verification has failed.
  
- @param message Message recieved.
+ @param verificationStatus Verification data for the product requested. This could be success or failure of verification.
  */
-- (void)recievedPushMessage:(id) message;
+- (void)receivedPurchaseVerification:(GUPurchaseVerification*) verificationStatus;
+
+/**
+ Invoked when couldn't send or receive correct verification data. 
+ This isn't related to a purchase not being verified.
+ */
+- (void)failedToReceivedPurchaseVerification:(NSError*) error;
 
 @end

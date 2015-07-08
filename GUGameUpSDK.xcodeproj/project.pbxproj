@@ -35,6 +35,7 @@
 		CDA951071B1F68130058955C /* GUMatchTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA951061B1F68130058955C /* GUMatchTurn.m */; };
 		CDCFE6F31AED2133006A20CB /* GUHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCFE6F21AED2133006A20CB /* GUHttpClient.m */; };
 		CDCFE6F41AEDA430006A20CB /* GUHttpClient.h in Copy Files */ = {isa = PBXBuildFile; fileRef = CDCFE6F11AED211C006A20CB /* GUHttpClient.h */; };
+		CDDD98751B4CA2FB00CD56E6 /* GUPurchaseVerification.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDD98741B4CA2FB00CD56E6 /* GUPurchaseVerification.m */; };
 		CDECE7B01A54461A000ADDEF /* GULeaderboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECE7AF1A54461A000ADDEF /* GULeaderboard.m */; };
 		CDECE7B51A5446A1000ADDEF /* GULeaderboardRank.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECE7B41A5446A1000ADDEF /* GULeaderboardRank.m */; };
 		CDECE7B81A54594E000ADDEF /* GULeaderboardEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECE7B71A54594E000ADDEF /* GULeaderboardEntry.m */; };
@@ -120,6 +121,8 @@
 		CDC0F6A6196FD80800670565 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		CDCFE6F11AED211C006A20CB /* GUHttpClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GUHttpClient.h; sourceTree = "<group>"; };
 		CDCFE6F21AED2133006A20CB /* GUHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUHttpClient.m; sourceTree = "<group>"; };
+		CDDD98731B4CA2EF00CD56E6 /* GUPurchaseVerification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUPurchaseVerification.h; sourceTree = "<group>"; };
+		CDDD98741B4CA2FB00CD56E6 /* GUPurchaseVerification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUPurchaseVerification.m; sourceTree = "<group>"; };
 		CDECE7AC1A5445C4000ADDEF /* GULeaderboardUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GULeaderboardUpdate.h; sourceTree = "<group>"; };
 		CDECE7AE1A5445D4000ADDEF /* GULeaderboardUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GULeaderboardUpdate.m; sourceTree = "<group>"; };
 		CDECE7AF1A54461A000ADDEF /* GULeaderboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GULeaderboard.m; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				CD0742F61969FDF1003F0BE8 /* GUGame.m */,
 				CD77CF85197F1B13006ACC0D /* GUGamer.h */,
 				CD77CF86197F1B13006ACC0D /* GUGamer.m */,
+				CDDD98731B4CA2EF00CD56E6 /* GUPurchaseVerification.h */,
+				CDDD98741B4CA2FB00CD56E6 /* GUPurchaseVerification.m */,
 				8A018FB11A2F7DEF007EF85E /* GUServer.h */,
 				8A018FB21A2F7DEF007EF85E /* GUServer.m */,
 				CDECE7AC1A5445C4000ADDEF /* GULeaderboardUpdate.h */,
@@ -351,6 +356,7 @@
 				CDEF31401987A12E00480139 /* GULoginViewController.m in Sources */,
 				CDA951071B1F68130058955C /* GUMatchTurn.m in Sources */,
 				CD33F2201A5027F400275061 /* GUDefaultRequestRetryHandler.m in Sources */,
+				CDDD98751B4CA2FB00CD56E6 /* GUPurchaseVerification.m in Sources */,
 				CD34E7DE1A50A94A00A253E0 /* NSURLRequest+GUURLRequest.m in Sources */,
 				CD34E7DB1A50995200A253E0 /* GUNoRequestRetryHandler.m in Sources */,
 				CDECE7BE1A54644D000ADDEF /* GULeaderboardUpdate.m in Sources */,

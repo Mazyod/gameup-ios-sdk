@@ -155,4 +155,12 @@
  */
 - (void)subscribePushWithDeviceToken:(NSData*)inDeviceToken toSegments:(NSArray*)segments;
 
+/**
+ Verify purchase of a given product using receipt IDs from the App Store
+
+ @param receipt Purchase receipt from App Store
+ @param productId In-App Purchase Product Id in the form of "some.purchased.product.id"
+ */
+- (void)verifyPurchase:(NSString*)receipt ofProduct:(NSString*)productId;
+
 @end

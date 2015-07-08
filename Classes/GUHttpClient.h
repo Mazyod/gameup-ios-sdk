@@ -43,7 +43,8 @@ typedef NS_ENUM(NSInteger, GURequestType)
     MATCH_POST,
     MATCH_POST_ACTION,
     LOGIN,
-    PUSH_SUBSCRIBE
+    PUSH_SUBSCRIBE,
+    PURCHASE_VERIFY_POST
 };
 
 @interface GUHttpClient : NSObject
