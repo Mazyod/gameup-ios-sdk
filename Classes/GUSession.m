@@ -14,6 +14,7 @@
  limitations under the License.
  */
 
+#import <Base64.h>
 #import "GUSession.h"
 #import "GUHttpClient.h"
 #import "GUAchievementUpdate.h"
@@ -218,12 +219,14 @@
              withRetryHandler:retryHandler];
 }
 
-- (void)verifyPurchase:(NSString*)receipt ofProduct:(NSString*)productId
+- (void)verifyPurchase:(NSData*)receipt ofProduct:(NSString*)productId
 {
+    NSString* receiptString = [[[NSString alloc] initWithData:receipt encoding:NSUTF8StringEncoding] base64EncodedString];
+
     [self sendApiRequest:PURCHASE_VERIFY_POST
            withUrlParams:@{}
               withMethod:@"POST"
-              withEntity:@{@"receipt_data" : receipt, @"product_id" : productId}];
+              withEntity:@{@"receipt_data": receiptString, @"product_id": productId}];
 }
 
 @end

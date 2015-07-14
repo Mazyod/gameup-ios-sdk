@@ -18,7 +18,7 @@
 #import "GUResponderProtocol.h"
 #import "GURequestRetryHandlerProtocol.h"
 
-static NSString *const GAMEUP_LOGIN_URL = @"https://accounts.gameup.io";
+static NSString *const GAMEUP_ACCOUNTS_URL = @"https://accounts.gameup.io";
 static NSString *const GAMEUP_API_URL = @"https://api.gameup.io";
 
 typedef NS_ENUM(NSInteger, GURequestType)

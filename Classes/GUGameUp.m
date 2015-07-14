@@ -123,7 +123,7 @@
 
 -(UIViewController*)loginThroughBrowserTo:(NSString*)loginProvider andLinkExistingToken:(NSString*)gamerToken
 {
-    NSMutableString *loginUrlPath = [[NSMutableString alloc] initWithString:GAMEUP_LOGIN_URL];
+    NSMutableString *loginUrlPath = [[NSMutableString alloc] initWithString:GAMEUP_ACCOUNTS_URL];
     [loginUrlPath appendString:[[GUHttpClient REQUEST_URLS] objectForKey:@(LOGIN)]];
     
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"GULoginStoryboard" bundle: nil];
@@ -142,7 +142,7 @@
 -(void)loginAnonymouslyWith:(NSString*)deviceId
 {
     NSDictionary* entity = @{@"id" : deviceId};
-    [GUHttpClient sendRequest:GAMEUP_LOGIN_URL
+    [GUHttpClient sendRequest:GAMEUP_ACCOUNTS_URL
                  withEndpoint:LOGIN
                 withUrlParams:@{@":type": @"anonymous"}
                    withMethod:@"POST"

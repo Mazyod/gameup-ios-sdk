@@ -120,7 +120,7 @@ static AFHTTPRequestOperationManager *NETWORK_MANAGER = nil;
 {
     NSDictionary* entity = @{@"type" : provider, @"access_token": accessToken};
     
-    [GUHttpClient sendRequest:GAMEUP_LOGIN_URL
+    [GUHttpClient sendRequest:GAMEUP_ACCOUNTS_URL
                  withEndpoint:LOGIN
                 withUrlParams:@{@":type": @"oauth2"}
                    withMethod:@"POST"

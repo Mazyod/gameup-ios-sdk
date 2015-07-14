@@ -161,6 +161,6 @@
  @param receipt Purchase receipt from App Store
  @param productId In-App Purchase Product Id in the form of "some.purchased.product.id"
  */
-- (void)verifyPurchase:(NSString*)receipt ofProduct:(NSString*)productId;
+- (void)verifyPurchase:(NSData*)receipt ofProduct:(NSString*)productId;
 
 @end
