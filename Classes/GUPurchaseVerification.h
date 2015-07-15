@@ -28,6 +28,9 @@
 /** Whether or not there was an existing record of this transaction. */
 @property(readonly) BOOL seenBefore;
 
+/** Whether or not there was an existing record of this transaction. */
+@property(readonly) BOOL purchaseProviderReachable;
+
 /** A message indicating why the transaction verification was unsuccessful or rejected, if applicable. */
 @property(readonly) NSString* message;
 

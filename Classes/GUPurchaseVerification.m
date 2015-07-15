@@ -24,6 +24,7 @@
     if (self) {
         _success = [[dictionary objectForKey:@"success"] boolValue];
         _seenBefore = [[dictionary objectForKey:@"seen_before"] boolValue];
+        _purchaseProviderReachable = [[dictionary objectForKey:@"purchase_provider_reachable"] boolValue];
         _message = [dictionary objectForKey:@"message"];
         _data = [dictionary objectForKey:@"data"];
     }
